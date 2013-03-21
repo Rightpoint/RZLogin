@@ -7,8 +7,8 @@
 //
 
 #import "RZSocialLoginManager.h"
-//#import "TWAPIManager.h"
-//#import "TWSignedRequest.h"
+#import "TWAPIManager.h"
+#import "TWSignedRequest.h"
 #import <Accounts/Accounts.h>
 
 #define kTwitterReverseAuthResponseTokenIndex       0
@@ -72,7 +72,7 @@
 //Method to login via Twitter and retrieve an oAuth token.
 - (void)loginToTwitterWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret account:(ACAccount *)account completion:(TwitterLoginCompletionBlock)completionBlock
 {
-    /*//Perform a reverse authentication for the Twitter account in order to retrieve the oAuth token. We need to do this because ACAccount objects
+    //Perform a reverse authentication for the Twitter account in order to retrieve the oAuth token. We need to do this because ACAccount objects
     //do not store oAuth tokens for Twitter accounts.
     [[TWAPIManager defaultManager] performReverseAuthForAccount:account consumerKey:consumerKey consumerSecret:consumerSecret withHandler:^(NSData *responseData, NSError *error) {
         
@@ -101,7 +101,7 @@
         {
             completionBlock(nil, nil, nil, nil, nil);
         }
-    }];*/
+    }];
 }
 
 //Method to retrieve all of the accounts of a given type from the account store.
