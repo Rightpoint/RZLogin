@@ -18,10 +18,13 @@
 @implementation RZLoginViewController
 
 //Initializer.
-- (id)initWithLoginTypes:(RZLoginTypes)anyLoginTypes facebookAppID:(NSString *)fbAppID twitterConsumerKey:(NSString *)twConsumer twitterConsumerSecret:(NSString *)twSecret loginDelegate:(id<RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate, RZSignUpViewControllerDelegate>)anyLoginDelegate
+- (id)initWithLoginTypes:(RZLoginTypes)anyLoginTypes
+           facebookAppID:(NSString *)fbAppID
+      twitterConsumerKey:(NSString *)twConsumer twitterConsumerSecret:(NSString *)twSecret
+           loginDelegate:(id<RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate, RZSignUpViewControllerDelegate>)anyLoginDelegate
 {
     if(self = [super init])
-    {
+    {            
         //Set the login delegate.
         self.loginDelegate = anyLoginDelegate;
         
