@@ -20,6 +20,8 @@
 
 @interface RZLoginEmailViewController : RZFormViewController
 
+@property (nonatomic, strong) IBOutlet UIButton *signUpButton;
+
 //Reference to the sign up controller we may present.
 @property (nonatomic, weak) RZSignUpViewController *signUpController;
 
