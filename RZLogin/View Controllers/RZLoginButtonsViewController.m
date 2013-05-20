@@ -24,9 +24,20 @@
 - (void)loginWithEmailPressed;
 - (void)signupWithEmailPressed;
 
+@property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
+
 @end
 
+
 @implementation RZLoginButtonsViewController
+
+- (void)setLoginTypes:(RZLoginTypes)loginTypes {
+    
+    _loginTypes = loginTypes;
+    
+    // set 'allow signup' flag based on login-type(s)
+    self.signupAllowed = !(loginTypes & RZLoginOptionNoSignup); // TODO: login 'options' should be completely separate from login 'type'
+}
 
 - (void)viewDidLoad
 {
@@ -39,7 +50,9 @@
     }
     
     //If Facebook login is one of the options and no consumer key or no consumer secret is provided, throw an exception.
-    if((self.loginTypes & RZLoginTypeTwitter) && !((self.twitterConsumerKey.length > 0 && self.twitterConsumerKey) && (self.twitterConsumerSecret.length > 0 && self.twitterConsumerSecret)))
+    if((self.loginTypes & RZLoginTypeTwitter)
+       && !((self.twitterConsumerKey.length > 0 && self.twitterConsumerKey)
+       && (self.twitterConsumerSecret.length > 0 && self.twitterConsumerSecret)))
     {
         [NSException raise:@"Twitter app information invalid" format:@"Please set twitterConsumerKey and twitterConsumerSecret before presenting the login controller."];
     }
@@ -75,6 +88,11 @@
         [self.emailLoginButton removeFromSuperview];
         [self.emailSignUpButton removeFromSuperview];
     }
+    if((self.loginTypes & RZLoginTypeEmail) && self.emailSignUpButton && !self.signupAllowed) {
+        // if we don't want to allow 'sign-up' (via email), remove the signup button(s)
+        [self.emailSignUpButton removeFromSuperview];
+    }
+
 }
 
 //Alert the user to a login error for social media logins such as forgetting to enable permissions or login in the Settings app.
@@ -184,7 +202,7 @@
 {
     if(self.emailLoginController != nil)
     {
-        self.emailLoginController.signUpController = self.signUpController;
+        self.emailLoginController.signUpController = (self.signupAllowed ? self.signUpController : nil);
         [self presentViewController:self.emailLoginController animated:YES completion:nil];
     }
 }

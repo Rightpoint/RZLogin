@@ -26,7 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    if( self.signUpController == nil ) {
+        // we don't want to allow the option for 'sign-up'...
+        [self.signUpButton removeFromSuperview];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -38,10 +38,15 @@
 @property (nonatomic, strong) RZSignUpViewController *signUpController;
 
 //Initializer with the following parameters:
+//
 //  anyLoginTypes: Bitwise selection of which login types should be supported (i.e. RZLoginTypeFacebook | RZLoginTypeTwitter).
 //  fbAppID: Facebook application ID if Facebook login is supported, otherwise nil.
 //  twConsumer: Twitter application consumer key if Twitter login is supported, otherwise nil.
 //  twSecret: Twitter application consumer secret if Twitter login is supported, otherwise nil.
-- (id)initWithLoginTypes:(RZLoginTypes)anyLoginTypes facebookAppID:(NSString *)fbAppID twitterConsumerKey:(NSString *)twConsumer twitterConsumerSecret:(NSString *)twSecret loginDelegate:(id<RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate>)anyLoginDelegate;
+//
+- (id)initWithLoginTypes:(RZLoginTypes)loginTypes
+           facebookAppID:(NSString *)fbAppID
+      twitterConsumerKey:(NSString *)twConsumer twitterConsumerSecret:(NSString *)twSecret
+           loginDelegate:(id<RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate>)anyLoginDelegate;
 
 @end
