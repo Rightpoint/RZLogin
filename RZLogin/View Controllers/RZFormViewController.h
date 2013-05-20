@@ -1,0 +1,37 @@
+//
+//  RZFormViewController.h
+//  RZLogin
+//
+//  Created by Joshua Leibsly on 3/21/13.
+//  Copyright (c) 2013 Raizlabs. All rights reserved.
+//
+//  This class is subclassed by RZLoginEmailViewController and RZSignUpViewController
+
+#import <UIKit/UIKit.h>
+
+//Typedef to tell us the type of key we are using to uniquely identify text fields in the form.
+typedef enum {
+    RZFormFieldKeyTypeTag,
+    RZFormFieldKeyTypePlaceholderText
+} RZFormFieldKeyType;
+
+@class RZValidationInfo;
+
+@interface RZFormViewController : UIViewController
+
+//Property to store the type of key we are using to identify text fields.
+@property (nonatomic, assign) RZFormFieldKeyType formKeyType;
+
+//Property to store the validation information for each field. The keys are the unique text field keys and the objects
+//are RZValidationInfo objects.
+@property (nonatomic, strong) NSMutableDictionary *fieldValidationInfo;
+
+//Outlet collection of all the text fields in the form.
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *loginFields;
+
+//Functions to add form validation info for the different types of keys and to validate the form.
+- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forTag:(int)tag;
+- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forPlaceholderText:(NSString *)text;
+- (NSDictionary *)validateForm;
+
+@end
