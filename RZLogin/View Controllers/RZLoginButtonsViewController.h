@@ -15,7 +15,7 @@ typedef enum {
     RZLoginTypeFacebook     = 1 << 0,
     RZLoginTypeTwitter      = 1 << 1,
     RZLoginTypeEmail        = 1 << 2,
-    RZLoginOptionNoSignup   = 1 << 3, // FIXME: shouldn't login 'options' be separate from 'type'?
+    RZLoginOptionNoSignup   = 1 << 3, // TODO: login 'options' should be completely separate from login 'type'
 } RZLoginType;
 
 typedef int RZLoginTypes;

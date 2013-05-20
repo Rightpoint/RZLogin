@@ -18,7 +18,7 @@
 @implementation RZLoginViewController
 
 //Initializer.
-- (id)initWithLoginTypes:(RZLoginTypes)anyLoginTypes
+- (id)initWithLoginTypes:(RZLoginTypes)loginTypes
            facebookAppID:(NSString *)fbAppID
       twitterConsumerKey:(NSString *)twConsumer twitterConsumerSecret:(NSString *)twSecret
            loginDelegate:(id<RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate, RZSignUpViewControllerDelegate>)anyLoginDelegate
@@ -28,7 +28,7 @@
         //Set the login delegate.
         self.loginDelegate = anyLoginDelegate;
         
-        if(anyLoginTypes & RZLoginTypeEmail)
+        if(loginTypes & RZLoginTypeEmail)
         {
             self.emailLoginController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
             self.signUpController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
@@ -38,7 +38,7 @@
         }
         
         //Check if we are using any social media logins. If so, display the login buttons controller.
-        if(anyLoginTypes & RZLoginTypeFacebook || anyLoginTypes & RZLoginTypeTwitter)
+        if(loginTypes & RZLoginTypeFacebook || loginTypes & RZLoginTypeTwitter)
         {
             self.buttonsLoginController = [[RZLoginButtonsViewController alloc] initWithNibName:@"RZLoginButtonsViewController" bundle:nil];
             
@@ -47,7 +47,7 @@
             self.buttonsLoginController.loginDelegate = self.loginDelegate;
             
             //Set the login types and any social media login keys.
-            self.buttonsLoginController.loginTypes = anyLoginTypes;
+            self.buttonsLoginController.loginTypes = loginTypes;
             self.buttonsLoginController.facebokAppID = fbAppID;
             self.buttonsLoginController.twitterConsumerKey = twConsumer;
             self.buttonsLoginController.twitterConsumerSecret = twSecret;
@@ -59,7 +59,7 @@
             [self addChildViewController:self.buttonsLoginController];
             [self.view addSubview:self.buttonsLoginController.view];
         }
-        else if(anyLoginTypes & RZLoginTypeEmail) //If we are only supporting email, go straight to the email login controller.
+        else if(loginTypes & RZLoginTypeEmail) //If we are only supporting email, go straight to the email login controller.
         {
             [self addChildViewController:self.emailLoginController];
             [self.view addSubview:self.emailLoginController.view];

@@ -24,24 +24,19 @@
 - (void)loginWithEmailPressed;
 - (void)signupWithEmailPressed;
 
-@property (nonatomic, assign, getter=isSignupAllowed) BOOL optionAllowSignup;
+@property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
 
 @end
 
 
 @implementation RZLoginButtonsViewController
 
-@synthesize loginTypes = _loginTypes;
-
 - (void)setLoginTypes:(RZLoginTypes)loginTypes {
     
     _loginTypes = loginTypes;
     
     // set 'allow signup' flag based on login-type(s)
-    self.optionAllowSignup = TRUE;
-    if( loginTypes & RZLoginOptionNoSignup ) { // FIXME: login 'options' should probably be separate from 'type'
-        self.optionAllowSignup = FALSE;
-    }
+    self.signupAllowed = !(loginTypes & RZLoginOptionNoSignup); // TODO: login 'options' should be completely separate from login 'type'
 }
 
 - (void)viewDidLoad
@@ -93,8 +88,8 @@
         [self.emailLoginButton removeFromSuperview];
         [self.emailSignUpButton removeFromSuperview];
     }
-    if((self.loginTypes & RZLoginTypeEmail) && self.emailSignUpButton && !self.optionAllowSignup) {
-        // dkopyc: if we don't want to allow 'sign-up' (via email), remove the signup button(s)
+    if((self.loginTypes & RZLoginTypeEmail) && self.emailSignUpButton && !self.signupAllowed) {
+        // if we don't want to allow 'sign-up' (via email), remove the signup button(s)
         [self.emailSignUpButton removeFromSuperview];
     }
 
@@ -207,7 +202,7 @@
 {
     if(self.emailLoginController != nil)
     {
-        self.emailLoginController.signUpController = (self.optionAllowSignup ? self.signUpController : nil);
+        self.emailLoginController.signUpController = (self.signupAllowed ? self.signUpController : nil);
         [self presentViewController:self.emailLoginController animated:YES completion:nil];
     }
 }
