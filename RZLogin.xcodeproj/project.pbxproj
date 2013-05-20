@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		032212A316F79C740068A012 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212A216F79C740068A012 /* UIKit.framework */; };
+		032212A516F79C740068A012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212A416F79C740068A012 /* Foundation.framework */; };
+		032212A716F79C740068A012 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212A616F79C740068A012 /* CoreGraphics.framework */; };
+		032212AD16F79C740068A012 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 032212AB16F79C740068A012 /* InfoPlist.strings */; };
+		032212AF16F79C740068A012 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212AE16F79C740068A012 /* main.m */; };
+		032212B316F79C740068A012 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212B216F79C740068A012 /* AppDelegate.m */; };
+		032212B516F79C740068A012 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B416F79C740068A012 /* Default.png */; };
+		032212B716F79C740068A012 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B616F79C740068A012 /* Default@2x.png */; };
+		032212B916F79C740068A012 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B816F79C740068A012 /* Default-568h@2x.png */; };
+		032212C916F7A9980068A012 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212C816F7A9980068A012 /* Accounts.framework */; };
+		032212CE16F7ED230068A012 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212CC16F7ED220068A012 /* ViewController.m */; };
+		032212CF16F7ED230068A012 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032212CD16F7ED220068A012 /* ViewController.xib */; };
+		0383A58A16F9003E003D314D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0383A58916F9003E003D314D /* Social.framework */; };
+		0383A5B816FB76BB003D314D /* RZFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5AF16FB76BA003D314D /* RZFormViewController.m */; };
+		0383A5B916FB76BB003D314D /* RZLoginButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5B116FB76BA003D314D /* RZLoginButtonsViewController.m */; };
+		0383A5BA16FB76BB003D314D /* RZLoginButtonsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5B216FB76BA003D314D /* RZLoginButtonsViewController.xib */; };
+		0383A5BB16FB76BB003D314D /* RZLoginEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5B416FB76BB003D314D /* RZLoginEmailViewController.m */; };
+		0383A5BC16FB76BB003D314D /* RZLoginEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5B516FB76BB003D314D /* RZLoginEmailViewController.xib */; };
+		0383A5BD16FB76BB003D314D /* RZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5B716FB76BB003D314D /* RZLoginViewController.m */; };
+		0383A5C116FB7744003D314D /* RZSocialLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5C016FB7744003D314D /* RZSocialLoginManager.m */; };
+		0383A5C716FB7753003D314D /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5C416FB7753003D314D /* TWAPIManager.m */; };
+		0383A5C816FB7753003D314D /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5C616FB7753003D314D /* TWSignedRequest.m */; };
+		0383A5D016FB77C1003D314D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CB16FB77C1003D314D /* NSData+Base64.m */; };
+		0383A5D116FB77C1003D314D /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CD16FB77C1003D314D /* OAuth+Additions.m */; };
+		0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CF16FB77C1003D314D /* OAuthCore.m */; };
+		0383A5D616FB7815003D314D /* RZValidationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D516FB7814003D314D /* RZValidationInfo.m */; };
+		0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D916FB79A6003D314D /* RZSignUpViewController.m */; };
+		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0322129F16F79C740068A012 /* RZLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		032212A216F79C740068A012 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		032212A416F79C740068A012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		032212A616F79C740068A012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		032212AA16F79C740068A012 /* RZLogin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RZLogin-Info.plist"; sourceTree = "<group>"; };
+		032212AC16F79C740068A012 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		032212AE16F79C740068A012 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		032212B016F79C740068A012 /* RZLogin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RZLogin-Prefix.pch"; sourceTree = "<group>"; };
+		032212B116F79C740068A012 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		032212B216F79C740068A012 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		032212B416F79C740068A012 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		032212B616F79C740068A012 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		032212B816F79C740068A012 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		032212C816F7A9980068A012 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		032212CB16F7ED220068A012 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		032212CC16F7ED220068A012 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		032212CD16F7ED220068A012 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		0383A58916F9003E003D314D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0383A5AE16FB76BA003D314D /* RZFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZFormViewController.h; path = "View Controllers/RZFormViewController.h"; sourceTree = "<group>"; };
+		0383A5AF16FB76BA003D314D /* RZFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZFormViewController.m; path = "View Controllers/RZFormViewController.m"; sourceTree = "<group>"; };
+		0383A5B016FB76BA003D314D /* RZLoginButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginButtonsViewController.h; path = "View Controllers/RZLoginButtonsViewController.h"; sourceTree = "<group>"; };
+		0383A5B116FB76BA003D314D /* RZLoginButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZLoginButtonsViewController.m; path = "View Controllers/RZLoginButtonsViewController.m"; sourceTree = "<group>"; };
+		0383A5B216FB76BA003D314D /* RZLoginButtonsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginButtonsViewController.xib; path = "View Controllers/RZLoginButtonsViewController.xib"; sourceTree = "<group>"; };
+		0383A5B316FB76BA003D314D /* RZLoginEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginEmailViewController.h; path = "View Controllers/RZLoginEmailViewController.h"; sourceTree = "<group>"; };
+		0383A5B416FB76BB003D314D /* RZLoginEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZLoginEmailViewController.m; path = "View Controllers/RZLoginEmailViewController.m"; sourceTree = "<group>"; };
+		0383A5B516FB76BB003D314D /* RZLoginEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginEmailViewController.xib; path = "View Controllers/RZLoginEmailViewController.xib"; sourceTree = "<group>"; };
+		0383A5B616FB76BB003D314D /* RZLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginViewController.h; path = "View Controllers/RZLoginViewController.h"; sourceTree = "<group>"; };
+		0383A5B716FB76BB003D314D /* RZLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZLoginViewController.m; path = "View Controllers/RZLoginViewController.m"; sourceTree = "<group>"; };
+		0383A5BF16FB7744003D314D /* RZSocialLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZSocialLoginManager.h; path = Managers/RZSocialLoginManager.h; sourceTree = "<group>"; };
+		0383A5C016FB7744003D314D /* RZSocialLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZSocialLoginManager.m; path = Managers/RZSocialLoginManager.m; sourceTree = "<group>"; };
+		0383A5C316FB7753003D314D /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWAPIManager.h; path = Managers/Twitter/TWAPIManager.h; sourceTree = "<group>"; };
+		0383A5C416FB7753003D314D /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWAPIManager.m; path = Managers/Twitter/TWAPIManager.m; sourceTree = "<group>"; };
+		0383A5C516FB7753003D314D /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWSignedRequest.h; path = Managers/Twitter/TWSignedRequest.h; sourceTree = "<group>"; };
+		0383A5C616FB7753003D314D /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWSignedRequest.m; path = Managers/Twitter/TWSignedRequest.m; sourceTree = "<group>"; };
+		0383A5CA16FB77C1003D314D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Managers/Twitter/ABOAuthCore/NSData+Base64.h"; sourceTree = "<group>"; };
+		0383A5CB16FB77C1003D314D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Managers/Twitter/ABOAuthCore/NSData+Base64.m"; sourceTree = "<group>"; };
+		0383A5CC16FB77C1003D314D /* OAuth+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OAuth+Additions.h"; path = "Managers/Twitter/ABOAuthCore/OAuth+Additions.h"; sourceTree = "<group>"; };
+		0383A5CD16FB77C1003D314D /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OAuth+Additions.m"; path = "Managers/Twitter/ABOAuthCore/OAuth+Additions.m"; sourceTree = "<group>"; };
+		0383A5CE16FB77C1003D314D /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAuthCore.h; path = Managers/Twitter/ABOAuthCore/OAuthCore.h; sourceTree = "<group>"; };
+		0383A5CF16FB77C1003D314D /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAuthCore.m; path = Managers/Twitter/ABOAuthCore/OAuthCore.m; sourceTree = "<group>"; };
+		0383A5D416FB7814003D314D /* RZValidationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZValidationInfo.h; path = "Form Validation/RZValidationInfo.h"; sourceTree = "<group>"; };
+		0383A5D516FB7814003D314D /* RZValidationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZValidationInfo.m; path = "Form Validation/RZValidationInfo.m"; sourceTree = "<group>"; };
+		0383A5D816FB79A6003D314D /* RZSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZSignUpViewController.h; path = "View Controllers/RZSignUpViewController.h"; sourceTree = "<group>"; };
+		0383A5D916FB79A6003D314D /* RZSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZSignUpViewController.m; path = "View Controllers/RZSignUpViewController.m"; sourceTree = "<group>"; };
+		0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZSignUpViewController.xib; path = "View Controllers/RZSignUpViewController.xib"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0322129C16F79C740068A012 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032212A316F79C740068A012 /* UIKit.framework in Frameworks */,
+				032212C916F7A9980068A012 /* Accounts.framework in Frameworks */,
+				032212A516F79C740068A012 /* Foundation.framework in Frameworks */,
+				0383A58A16F9003E003D314D /* Social.framework in Frameworks */,
+				032212A716F79C740068A012 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0322129616F79C740068A012 = {
+			isa = PBXGroup;
+			children = (
+				032212A816F79C740068A012 /* RZLogin */,
+				032212A116F79C740068A012 /* Frameworks */,
+				032212A016F79C740068A012 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		032212A016F79C740068A012 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0322129F16F79C740068A012 /* RZLogin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		032212A116F79C740068A012 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0383A58916F9003E003D314D /* Social.framework */,
+				032212C816F7A9980068A012 /* Accounts.framework */,
+				032212A216F79C740068A012 /* UIKit.framework */,
+				032212A416F79C740068A012 /* Foundation.framework */,
+				032212A616F79C740068A012 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		032212A816F79C740068A012 /* RZLogin */ = {
+			isa = PBXGroup;
+			children = (
+				032212B116F79C740068A012 /* AppDelegate.h */,
+				032212B216F79C740068A012 /* AppDelegate.m */,
+				032212CB16F7ED220068A012 /* ViewController.h */,
+				032212CC16F7ED220068A012 /* ViewController.m */,
+				032212CD16F7ED220068A012 /* ViewController.xib */,
+				0383A5BE16FB76C0003D314D /* View Controllers */,
+				0383A5C216FB7748003D314D /* Managers */,
+				0383A5D716FB7818003D314D /* Form Validation */,
+				032212A916F79C740068A012 /* Supporting Files */,
+			);
+			path = RZLogin;
+			sourceTree = "<group>";
+		};
+		032212A916F79C740068A012 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				032212AA16F79C740068A012 /* RZLogin-Info.plist */,
+				032212AB16F79C740068A012 /* InfoPlist.strings */,
+				032212AE16F79C740068A012 /* main.m */,
+				032212B016F79C740068A012 /* RZLogin-Prefix.pch */,
+				032212B416F79C740068A012 /* Default.png */,
+				032212B616F79C740068A012 /* Default@2x.png */,
+				032212B816F79C740068A012 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0383A5BE16FB76C0003D314D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0383A5B616FB76BB003D314D /* RZLoginViewController.h */,
+				0383A5B716FB76BB003D314D /* RZLoginViewController.m */,
+				0383A5B016FB76BA003D314D /* RZLoginButtonsViewController.h */,
+				0383A5B116FB76BA003D314D /* RZLoginButtonsViewController.m */,
+				0383A5B216FB76BA003D314D /* RZLoginButtonsViewController.xib */,
+				0383A5AE16FB76BA003D314D /* RZFormViewController.h */,
+				0383A5AF16FB76BA003D314D /* RZFormViewController.m */,
+				0383A5B316FB76BA003D314D /* RZLoginEmailViewController.h */,
+				0383A5B416FB76BB003D314D /* RZLoginEmailViewController.m */,
+				0383A5B516FB76BB003D314D /* RZLoginEmailViewController.xib */,
+				0383A5D816FB79A6003D314D /* RZSignUpViewController.h */,
+				0383A5D916FB79A6003D314D /* RZSignUpViewController.m */,
+				0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0383A5C216FB7748003D314D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0383A5C916FB7757003D314D /* Twitter */,
+				0383A5BF16FB7744003D314D /* RZSocialLoginManager.h */,
+				0383A5C016FB7744003D314D /* RZSocialLoginManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		0383A5C916FB7757003D314D /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				0383A5D316FB77C8003D314D /* ABOAuthCore */,
+				0383A5C316FB7753003D314D /* TWAPIManager.h */,
+				0383A5C416FB7753003D314D /* TWAPIManager.m */,
+				0383A5C516FB7753003D314D /* TWSignedRequest.h */,
+				0383A5C616FB7753003D314D /* TWSignedRequest.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
+		0383A5D316FB77C8003D314D /* ABOAuthCore */ = {
+			isa = PBXGroup;
+			children = (
+				0383A5CA16FB77C1003D314D /* NSData+Base64.h */,
+				0383A5CB16FB77C1003D314D /* NSData+Base64.m */,
+				0383A5CC16FB77C1003D314D /* OAuth+Additions.h */,
+				0383A5CD16FB77C1003D314D /* OAuth+Additions.m */,
+				0383A5CE16FB77C1003D314D /* OAuthCore.h */,
+				0383A5CF16FB77C1003D314D /* OAuthCore.m */,
+			);
+			name = ABOAuthCore;
+			sourceTree = "<group>";
+		};
+		0383A5D716FB7818003D314D /* Form Validation */ = {
+			isa = PBXGroup;
+			children = (
+				0383A5D416FB7814003D314D /* RZValidationInfo.h */,
+				0383A5D516FB7814003D314D /* RZValidationInfo.m */,
+			);
+			name = "Form Validation";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0322129E16F79C740068A012 /* RZLogin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 032212C216F79C740068A012 /* Build configuration list for PBXNativeTarget "RZLogin" */;
+			buildPhases = (
+				0322129B16F79C740068A012 /* Sources */,
+				0322129C16F79C740068A012 /* Frameworks */,
+				0322129D16F79C740068A012 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RZLogin;
+			productName = RZLogin;
+			productReference = 0322129F16F79C740068A012 /* RZLogin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0322129716F79C740068A012 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Raizlabs;
+			};
+			buildConfigurationList = 0322129A16F79C740068A012 /* Build configuration list for PBXProject "RZLogin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0322129616F79C740068A012;
+			productRefGroup = 032212A016F79C740068A012 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0322129E16F79C740068A012 /* RZLogin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0322129D16F79C740068A012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032212AD16F79C740068A012 /* InfoPlist.strings in Resources */,
+				032212B516F79C740068A012 /* Default.png in Resources */,
+				032212B716F79C740068A012 /* Default@2x.png in Resources */,
+				032212B916F79C740068A012 /* Default-568h@2x.png in Resources */,
+				032212CF16F7ED230068A012 /* ViewController.xib in Resources */,
+				0383A5BA16FB76BB003D314D /* RZLoginButtonsViewController.xib in Resources */,
+				0383A5BC16FB76BB003D314D /* RZLoginEmailViewController.xib in Resources */,
+				0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0322129B16F79C740068A012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032212AF16F79C740068A012 /* main.m in Sources */,
+				032212B316F79C740068A012 /* AppDelegate.m in Sources */,
+				032212CE16F7ED230068A012 /* ViewController.m in Sources */,
+				0383A5B816FB76BB003D314D /* RZFormViewController.m in Sources */,
+				0383A5B916FB76BB003D314D /* RZLoginButtonsViewController.m in Sources */,
+				0383A5BB16FB76BB003D314D /* RZLoginEmailViewController.m in Sources */,
+				0383A5BD16FB76BB003D314D /* RZLoginViewController.m in Sources */,
+				0383A5C116FB7744003D314D /* RZSocialLoginManager.m in Sources */,
+				0383A5C716FB7753003D314D /* TWAPIManager.m in Sources */,
+				0383A5C816FB7753003D314D /* TWSignedRequest.m in Sources */,
+				0383A5D016FB77C1003D314D /* NSData+Base64.m in Sources */,
+				0383A5D116FB77C1003D314D /* OAuth+Additions.m in Sources */,
+				0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */,
+				0383A5D616FB7815003D314D /* RZValidationInfo.m in Sources */,
+				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		032212AB16F79C740068A012 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				032212AC16F79C740068A012 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		032212C016F79C740068A012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		032212C116F79C740068A012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		032212C316F79C740068A012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RZLogin/RZLogin-Prefix.pch";
+				INFOPLIST_FILE = "RZLogin/RZLogin-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		032212C416F79C740068A012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RZLogin/RZLogin-Prefix.pch";
+				INFOPLIST_FILE = "RZLogin/RZLogin-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0322129A16F79C740068A012 /* Build configuration list for PBXProject "RZLogin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				032212C016F79C740068A012 /* Debug */,
+				032212C116F79C740068A012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		032212C216F79C740068A012 /* Build configuration list for PBXNativeTarget "RZLogin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				032212C316F79C740068A012 /* Debug */,
+				032212C416F79C740068A012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0322129716F79C740068A012 /* Project object */;
+}
