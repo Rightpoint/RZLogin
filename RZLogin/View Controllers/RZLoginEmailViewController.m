@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // Any custom initialization goes here.
     }
     return self;
 }
@@ -26,11 +26,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    // remove the sign-up button depending on options
     if( self.signUpController == nil ) {
-        // we don't want to allow the option for 'sign-up'...
         [self.signUpButton removeFromSuperview];
     }
+    
+    // FIXME: determine whether or not we were presented 'modally'...
+    // and remove the 'cancel' button if we were not (since we have 'back' button)
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,12 +44,12 @@
 
 - (IBAction)loginPressed
 {
-    //validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
-    //text in the fields. It returns nil if the form is not valid.
+    // validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
+    // text in the fields -- it returns nil if the form is not valid.
     NSDictionary *formDict = [self validateForm];
     if(formDict != nil)
     {
-        //Notify the delegate that it should process the login information.
+        // Notify the delegate that it should process the login information.
         [self.loginDelegate loginPressedWithFormInformation:formDict];
     }
     else
@@ -55,10 +58,10 @@
     }
 }
 
-//A cancel button will only be present and connected to this outlet if this controller is presented modally.
+// A cancel button will only be present and connected to this outlet if this controller is presented modally.
 - (IBAction)cancelPressed
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil]; // note FIXME above, in viewDidLoad
 }
 
 - (IBAction)signUpPressed

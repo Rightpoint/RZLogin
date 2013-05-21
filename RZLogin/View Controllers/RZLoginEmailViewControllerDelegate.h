@@ -5,12 +5,15 @@
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
+#import "RZValidationInfo.h"
 #import <Foundation/Foundation.h>
 
 // RZLogin: to add support for login via email (with optional sign-up form),
 // simply implement the following protocol in the 'delegate' for RZLoginViewController
 //
 @protocol RZLoginEmailViewControllerDelegate <NSObject>
+
+@property (copy, readonly) ValidationBlock loginPasswordValidator;
 
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;
 

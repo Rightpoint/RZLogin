@@ -49,22 +49,9 @@
     RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"RZLoginViewController" bundle:nil];
     loginController.delegate = self;
     
+    // FIXME: add a block-property to RZLoginEmailViewController protocol for the sign-up view-controller too
+    // (i.e. just like we have now for the email password validator)
     //
-    // FIXME: this 'form-validation' stuff doesn't appear to be working (for email-login and sign-up forms)
-    //
-    
-    // validate the email login fields with placeholder text keys
-    [loginController.emailLoginViewController setFormKeyType:RZFormFieldKeyTypePlaceholderText];
-    
-    // validate email
-    [loginController.emailLoginViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
-    
-    // validate password with a block
-    [loginController.emailLoginViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str){
-        return [str isEqualToString:@"password"];
-    }] forPlaceholderText:@"Password"];
-    
-    
     // validate the sign up fields with their tags as their identifying keys
     [loginController.signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
     
@@ -139,6 +126,15 @@
 
 #pragma -
 #pragma mark - RZLoginEmailViewControllerDelegate
+
+- (ValidationBlock)loginPasswordValidator {
+    
+    ValidationBlock passwordValidator = ^BOOL(NSString *str) {
+        
+        return [str isEqualToString:@"password"]; // note: this would of course be replaced by your own validator ;)
+    };
+    return passwordValidator;
+}
 
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo
 {

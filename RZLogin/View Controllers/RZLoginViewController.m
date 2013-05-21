@@ -98,6 +98,16 @@
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
         }
         self.emailLoginViewController.loginDelegate = self.delegate; // in any case, use the same delegate
+        
+        // we will validate the email login fields using placeholder text keys
+        [self.emailLoginViewController setFormKeyType:RZFormFieldKeyTypePlaceholderText];
+        
+        // validate email using standard email-validator
+        [self.emailLoginViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
+        
+        // validate password with a block
+        ValidationBlock passwordValidator = ((id<RZLoginEmailViewControllerDelegate>)self.delegate).loginPasswordValidator;
+        [self.emailLoginViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:passwordValidator] forPlaceholderText:@"Password"];
 
         if( self.isSignupAllowed ) {
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
