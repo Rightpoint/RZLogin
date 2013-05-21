@@ -8,18 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RZFormViewController.h"
-
-//This protocol is implemented by the class which will handle sign ups.
-@protocol RZSignUpViewControllerDelegate
-
-//This method will be called when the signup form is submitted with valid information.
-- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo;
-
-@end
+#import "RZLoginEmailViewControllerDelegate.h"
 
 @interface RZSignUpViewController : RZFormViewController
 
-@property (nonatomic, weak) id<RZSignUpViewControllerDelegate> loginDelegate;
+@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> loginDelegate;
 
 - (IBAction)signUpPressed;
 - (IBAction)cancelPressed;

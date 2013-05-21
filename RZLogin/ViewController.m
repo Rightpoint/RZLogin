@@ -2,7 +2,6 @@
 //  ViewController.m
 //  RZLogin
 //
-//  Created by Joshua Leibsly on 3/18/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
@@ -10,9 +9,16 @@
 #import "RZLoginViewController.h"
 #import "RZValidationInfo.h"
 
-@interface ViewController () <RZLoginButtonsViewControllerDelegate, RZLoginEmailViewControllerDelegate, RZSignUpViewControllerDelegate>
+// to support all three login-types, impl all three protocols
+//
+@interface ViewController () <RZLoginEmailViewControllerDelegate, RZLoginFacebookViewControllerDelegate, RZLoginTwitterViewControllerDelegate>
+
+// or, to support email-login only... impl only a single protocol
+//
+// @interface ViewController () <RZLoginEmailViewControllerDelegate>
 
 @end
+
 
 @implementation ViewController
 
@@ -20,7 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // any custom initialization goes here...
     }
     return self;
 }
@@ -28,77 +34,112 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
-//Display sample login controller.
-- (void)loginPressed
+// display sample login controller; using default XIB with plain buttons
+//
+- (IBAction)loginUsingDefaultXIB:(id)sender;
 {
-    //Initialize with all login types and test social media keys.
-    RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithLoginTypes:RZLoginTypeFacebook | RZLoginTypeTwitter | RZLoginTypeEmail
-                                                                                 facebookAppID:@"351055245000574"
-                                                                            twitterConsumerKey:@"oZfeQ3lZtezzTqRWzjG0A"
-                                                                         twitterConsumerSecret:@"wSF4V5MO1hMzJiANpBbUTh3diIuadtEihfjYYTC6Y"
-                                                                                 loginDelegate:self];
+    // create a login view-controller (with default configuration)
+    // note the supported login-types depend on which protocol(s) are implemented by the delegate (self)
+    //
+    RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"RZLoginViewController" bundle:nil];
+    loginController.delegate = self;
     
-    //Validate the email login fields with placeholder text keys.
-    [loginController.emailLoginController setFormKeyType:RZFormFieldKeyTypePlaceholderText];
+    //
+    // FIXME: this 'form-validation' stuff doesn't appear to be working (for email-login and sign-up forms)
+    //
     
-    //Validate email.
-    [loginController.emailLoginController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
+    // validate the email login fields with placeholder text keys
+    [loginController.emailLoginViewController setFormKeyType:RZFormFieldKeyTypePlaceholderText];
     
-    //Validate password with a block.
-    [loginController.emailLoginController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str){
+    // validate email
+    [loginController.emailLoginViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
+    
+    // validate password with a block
+    [loginController.emailLoginViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str){
         return [str isEqualToString:@"password"];
     }] forPlaceholderText:@"Password"];
     
     
-    //Validate the sign up fields with their tags as their identifying keys.
-    [loginController.signUpController setFormKeyType:RZFormFieldKeyTypeTag];
+    // validate the sign up fields with their tags as their identifying keys
+    [loginController.signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
     
-    //Validate email.
-    [loginController.signUpController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forTag:1];
+    // validate email
+    [loginController.signUpViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forTag:1];
     
-    //Validate that the password fields match.
-    [loginController.signUpController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str) {
+    // validate that the password fields match
+    [loginController.signUpViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str) {
         
-        NSString *prevPasswordFieldText = [(UITextField *)[loginController.signUpController.view viewWithTag:2] text];
+        NSString *prevPasswordFieldText = [(UITextField *)[loginController.signUpViewController.view viewWithTag:2] text];
         return [str isEqualToString:prevPasswordFieldText];
-    }] forTag:3];
+    }]
+                                                     forTag:3];
+
+    // ok, simply present our login v/c
+    [self.navigationController pushViewController:loginController animated:YES];
+}
+
+// display another sample login controller; using a custom XIB with a background image (and no 'twitter' button)
+//
+- (IBAction)loginUsingCustomXIB:(id)sender;
+{
+    RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
+    loginController.delegate = self;
     
-    [self presentViewController:loginController animated:YES completion:nil];
+    [self.navigationController pushViewController:loginController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - RZLoginButtonsViewControllerDelegate
 
-- (void)didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userID:(NSString *)userID
+#pragma -
+#pragma mark - RZLoginFacebookViewControllerDelegate
+
+- (NSString *)facebookAppId {
+    
+    return @"351055245000574";
+}
+
+- (void)didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId
 {
-    NSLog(@"%@ - %@", fullName, fbToken);
+    NSLog(@"%s: %@ - %@", __FUNCTION__, fullName, fbToken);
 }
 
-- (void)didLoginWithTwitterWithToken:(NSString *)twitterToken tokenSecret:(NSString *)tokenSecret username:(NSString *)username userID:(NSString *)userID
+
+#pragma -
+#pragma mark - RZLoginFacebookViewControllerDelegate
+
+- (NSString *)twitterConsumerKey {
+    
+    return @"oZfeQ3lZtezzTqRWzjG0A";
+}
+
+- (NSString *)twitterConsumerSecret {
+    
+    return @"wSF4V5MO1hMzJiANpBbUTh3diIuadtEihfjYYTC6Y";
+}
+
+- (void)didLoginWithTwitterWithToken:(NSString *)twitterToken tokenSecret:(NSString *)tokenSecret username:(NSString *)username userId:(NSString *)userId
 {
-    NSLog(@"%@ - %@ : %@", username, twitterToken, tokenSecret);
+    NSLog(@"%s: %@ - %@ : %@", __FUNCTION__, username, twitterToken, tokenSecret);
 }
 
+
+#pragma -
 #pragma mark - RZLoginEmailViewControllerDelegate
 
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo
 {
-    
+    NSLog(@"%s: %@", __FUNCTION__, formInfo);
 }
-
-#pragma mark - RZSignUpViewControllerDelegate
 
 - (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo
 {
-    
+    NSLog(@"%s: %@", __FUNCTION__, formInfo);
 }
 
 @end
