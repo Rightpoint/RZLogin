@@ -93,10 +93,11 @@
         //
         // init email/sign-up view-controllers if we're supporting login via email...
         //
-        // TODO: allow specifying alternate (custom) XIBs for the email and sign-up view-controllers
-        //
-        self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
-        self.emailLoginViewController.loginDelegate = self.delegate;
+        if( self.emailLoginViewController == nil ) {
+            // if no custom v/c has already been specified, allocate the 'default' login-with-email v/c
+            self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
+        }
+        self.emailLoginViewController.loginDelegate = self.delegate; // in any case, use the same delegate
 
         if( self.isSignupAllowed ) {
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
@@ -183,13 +184,21 @@
 // login with Email button action
 - (IBAction)loginWithEmailAction:(id)sender {
 
-    [self presentViewController:self.emailLoginViewController animated:YES completion:nil];
+    if( self.presentViewsAsModal ) {
+        [self presentViewController:self.emailLoginViewController animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:self.emailLoginViewController animated:YES];
+    }
 }
 
 // signup with email button action
 - (IBAction)signupWithEmailAction:(id)sender {
 
-    [self presentViewController:self.signUpViewController animated:YES completion:nil];
+    if( self.presentViewsAsModal ) {
+        [self presentViewController:self.signUpViewController animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:self.signUpViewController animated:YES];
+    }
 }
 
 // login with Facebook button action

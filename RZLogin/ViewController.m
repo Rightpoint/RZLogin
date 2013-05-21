@@ -5,9 +5,12 @@
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
-#import "ViewController.h"
 #import "RZLoginViewController.h"
 #import "RZValidationInfo.h"
+
+#import "ViewController.h"
+#import "MyCustomLoginViewController.h"
+#import "MyCustomLoginEmailViewController.h"
 
 // to support all three login-types, impl all three protocols
 //
@@ -77,6 +80,7 @@
                                                      forTag:3];
 
     // ok, simply present our login v/c
+    loginController.presentViewsAsModal = YES; // note for the 'default' example, we'll present views modally -- since default (email) XIB has 'cancel' button
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
@@ -84,9 +88,13 @@
 //
 - (IBAction)loginUsingCustomXIB:(id)sender;
 {
-    RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
+    MyCustomLoginViewController *loginController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
     loginController.delegate = self;
     
+    // for this example, let's use a customized email-login view controller (and XIB) too ;)
+    loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
+
+    loginController.presentViewsAsModal = NO; // note present views with 'push' instead, since there's no 'cancel' button in sub-flow (e.g. 'email')
     [self.navigationController pushViewController:loginController animated:YES];
 }
 

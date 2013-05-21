@@ -35,7 +35,11 @@
 		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
 		6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65295669174ABDA8000CFA32 /* RZLoginViewController.xib */; };
 		6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */; };
-		6529566E174ACAB2000CFA32 /* fort-funston.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6529566D174ACAB2000CFA32 /* fort-funston.jpg */; };
+		65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */; };
+		6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */; };
+		6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */; };
+		65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */; };
+		65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,9 +88,15 @@
 		65295668174AB65A000CFA32 /* RZLoginFacebookViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginFacebookViewControllerDelegate.h; path = "View Controllers/RZLoginFacebookViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295669174ABDA8000CFA32 /* RZLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginViewController.xib; path = "View Controllers/RZLoginViewController.xib"; sourceTree = "<group>"; };
 		6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginViewController.xib; sourceTree = "<group>"; };
-		6529566D174ACAB2000CFA32 /* fort-funston.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fort-funston.jpg"; sourceTree = "<group>"; };
 		6529566F174AD0C9000CFA32 /* RZLoginTwitterViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginTwitterViewControllerDelegate.h; path = "View Controllers/RZLoginTwitterViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295670174BC128000CFA32 /* RZLoginEmailViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZLoginEmailViewControllerDelegate.h; path = "View Controllers/RZLoginEmailViewControllerDelegate.h"; sourceTree = "<group>"; };
+		65295671174BF0C0000CFA32 /* MyCustomLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginViewController.h; sourceTree = "<group>"; };
+		65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginViewController.m; sourceTree = "<group>"; };
+		65295678174BF6A5000CFA32 /* MyCustomLoginEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginEmailViewController.h; sourceTree = "<group>"; };
+		65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginEmailViewController.m; sourceTree = "<group>"; };
+		6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginEmailViewController.xib; sourceTree = "<group>"; };
+		6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_1.jpg; sourceTree = "<group>"; };
+		65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +152,14 @@
 				032212CB16F7ED220068A012 /* ViewController.h */,
 				032212CC16F7ED220068A012 /* ViewController.m */,
 				032212CD16F7ED220068A012 /* ViewController.xib */,
+				65295671174BF0C0000CFA32 /* MyCustomLoginViewController.h */,
+				65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */,
 				6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */,
-				6529566D174ACAB2000CFA32 /* fort-funston.jpg */,
+				65295678174BF6A5000CFA32 /* MyCustomLoginEmailViewController.h */,
+				65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */,
+				6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */,
+				6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */,
+				65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */,
 				0383A5BE16FB76C0003D314D /* View Controllers */,
 				0383A5C216FB7748003D314D /* Managers */,
 				0383A5D716FB7818003D314D /* Form Validation */,
@@ -291,7 +307,9 @@
 				0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */,
 				6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */,
 				6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */,
-				6529566E174ACAB2000CFA32 /* fort-funston.jpg in Resources */,
+				6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */,
+				65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */,
+				65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +334,8 @@
 				0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */,
 				0383A5D616FB7815003D314D /* RZValidationInfo.m in Sources */,
 				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
+				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
+				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

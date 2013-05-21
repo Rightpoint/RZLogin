@@ -97,7 +97,7 @@
 					<object class="IBUILabel" id="559928171">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{63, 56}, {43, 21}}</string>
+						<string key="NSFrame">{{6, 56}, {100, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="636338692"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -114,6 +114,7 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUITextAlignment">2</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="668363731">
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
@@ -128,7 +129,7 @@
 					<object class="IBUILabel" id="697096975">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{31, 100}, {75, 21}}</string>
+						<string key="NSFrame">{{6, 100}, {100, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="694396488"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -141,6 +142,7 @@
 						<reference key="IBUITextColor" ref="118684388"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUITextAlignment">2</int>
 						<reference key="IBUIFontDescription" ref="668363731"/>
 						<reference key="IBUIFont" ref="239981672"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -212,8 +214,9 @@
 					<object class="IBUIButton" id="252078013">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{120, 252}, {81, 44}}</string>
+						<string key="NSFrame">{{110, 267}, {100, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

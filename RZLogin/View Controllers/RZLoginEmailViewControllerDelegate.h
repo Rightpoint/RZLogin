@@ -14,8 +14,9 @@
 
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;
 
-@optional // if sign-up is allowed... impl the following method too in your delegate
+@optional
 
+// if sign-up is allowed... impl the following method too in your delegate
 - (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo;
 
 @end
