@@ -26,8 +26,8 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 - (BOOL)validateWithString:(NSString *)str;
 
 // convenience constructors
-+ (RZValidator *)validatorWithInfo:(NSDictionary *)anyValidationInfo;
-+ (RZValidator *)validatorWithBlock:(ValidationBlock)anyValidationBlock;
++ (RZValidator *)validatorWithInfo:(NSDictionary *)validationInfo;
++ (RZValidator *)validatorWithBlock:(ValidationBlock)validationBlock;
 + (RZValidator *)isValidEmailAddress;
 + (RZValidator *)isNotEmpty;
 

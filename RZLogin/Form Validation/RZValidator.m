@@ -94,14 +94,14 @@ typedef enum {
 
 #pragma mark - Convenience constructors
 
-+ (RZValidator *)validatorWithInfo:(NSDictionary *)anyValidationInfo
++ (RZValidator *)validatorWithInfo:(NSDictionary *)validationInfo
 {
-    return [[self alloc] initWithValidationInfo:anyValidationInfo];
+    return [[self alloc] initWithValidationInfo:validationInfo];
 }
 
-+ (RZValidator *)validatorWithBlock:(ValidationBlock)anyValidationBlock
++ (RZValidator *)validatorWithBlock:(ValidationBlock)validationBlock
 {
-    return [[self alloc] initWithValidationBlock:anyValidationBlock];
+    return [[self alloc] initWithValidationBlock:validationBlock];
 }
 
 + (RZValidator *)isValidEmailAddress
