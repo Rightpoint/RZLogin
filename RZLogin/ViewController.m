@@ -41,11 +41,11 @@
 #pragma mark - example usage
 
 // display sample login controller; using the default, included XIBs with plain buttons
-- (IBAction)loginUsingDefaultXIB:(id)sender;
+- (IBAction)loginUsingDefaultXIB:(id)sender
 {
     // create a login view-controller (with default configuration)
     // note the supported login-types depend on which protocol(s) are implemented by the delegate (self)
-    RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"RZLoginViewController" bundle:nil];
+    RZLoginViewController *loginController = [[RZLoginViewController alloc] init];
     loginController.delegate = self;
         
     // FIXME: validate that the password fields match
@@ -64,7 +64,7 @@
 
 // display another sample login controller;
 // using a custom XIB with a background image (and no 'twitter' button)
-- (IBAction)loginUsingCustomXIB:(id)sender;
+- (IBAction)loginUsingCustomXIB:(id)sender
 {
     MyCustomLoginViewController *loginController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
     loginController.delegate = self;
@@ -95,7 +95,7 @@
 }
 
 
-#pragma mark - RZLoginFacebookViewControllerDelegate
+#pragma mark - RZLoginTwitterViewControllerDelegate
 
 - (NSString *)twitterConsumerKey {
     

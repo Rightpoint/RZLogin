@@ -15,7 +15,7 @@
 
 @interface RZLoginViewController : UIViewController
 
-// outlets to all of the different login/sign-up buttons (note: all are optional)
+// outlets to login and sign-up buttons 
 @property (nonatomic, strong) IBOutlet UIButton *facebookLoginButton;
 @property (nonatomic, strong) IBOutlet UIButton *twitterLoginButton;
 @property (nonatomic, strong) IBOutlet UIButton *emailSignUpButton;
@@ -31,7 +31,14 @@
 @property (nonatomic, assign, getter=isForgotPasswordAllowed) BOOL forgotPasswordAllowed;
 @property (nonatomic, assign, getter=shouldPresentViewsAsModal) BOOL presentViewsAsModal; // else, present via 'push' onto nav-controller
 
-@property (nonatomic, weak) id delegate; // this delegate *may* conform to one or more of the RZLoginXXXViewControllerDelegate protocols
+// the delegate, which (depending on which login-types your app wishes to support),
+// must conform to one or more of the following protocols:
+// 
+//      RZLoginEmailViewControllerDelegate -- for login with an email-address and password,
+//      RZFacebookViewControllerDelegate   -- for login via Facebook account,
+//      RZTwitterViewControllerDelegate    -- for login via Twitter account.
+//
+@property (nonatomic, weak) id delegate; 
 
 @property (nonatomic, strong) RZLoginEmailViewController *emailLoginViewController;
 @property (nonatomic, strong) RZSignUpViewController *signUpViewController;

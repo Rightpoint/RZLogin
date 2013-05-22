@@ -25,6 +25,11 @@
 
 @implementation RZLoginViewController
 
+-(id) init
+{
+    return [self initWithNibName:@"RZLoginViewController" bundle:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -277,13 +282,13 @@
 - (IBAction)loginWithFacebookAction:(id)sender {
     
     [[RZSocialLoginManager defaultManager] loginToFacebookWithAppID:self.facebookAppId
-                                                         completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error) {
+                                                         completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error)
+    {
         if(token)
         {
             [((NSObject<RZLoginFacebookViewControllerDelegate> *) self.delegate) didLoginWithFacebookWithToken:token
                                                                                                       fullName:fullName
                                                                                                         userId:userId];
-            
         } else {       
             [self showAlertForError:error socialNetwork:@"Facebook"];
         }
@@ -293,7 +298,9 @@
 // login with Twitter button action
 - (IBAction)loginWithTwitterAction:(id)sender {
     
-    [[RZSocialLoginManager defaultManager] getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierTwitter options:0 completionBlock:^(NSArray *accounts, NSError *error) {
+    [[RZSocialLoginManager defaultManager] getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierTwitter
+                                                                       options:0
+                                                               completionBlock:^(NSArray *accounts, NSError *error) {
         
         // if there is more than one Twitter account, present an action sheet
         // for the user to choose the account they would like to sign in with
