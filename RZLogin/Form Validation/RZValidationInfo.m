@@ -104,7 +104,6 @@ typedef enum {
     return [[self alloc] initWithValidationBlock:anyValidationBlock];
 }
 
-
 + (RZValidationInfo *)emailValidationInfo
 {
     //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
@@ -117,6 +116,11 @@ typedef enum {
                             @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     
     return [[self alloc] initWithValidationInfo:@{kFieldValidationRegexKey : emailRegEx}];
+}
+
++ (RZValidationInfo *)isNotEmptyValidationInfo
+{
+    return [[self alloc] initWithValidationInfo:@{kFieldValidationMinCharsKey : @"1"}];
 }
 
 @end

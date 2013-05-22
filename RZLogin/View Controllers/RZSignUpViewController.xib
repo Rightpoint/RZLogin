@@ -34,7 +34,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITextField" id="770992420">
@@ -42,7 +42,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{151, 50}, {149, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="428714131"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -80,7 +79,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{151, 88}, {149, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="80986446"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -110,7 +108,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{151, 126}, {149, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="304193954"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -140,7 +137,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 53}, {123, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="770992420"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -173,7 +169,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 91}, {123, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="175360769"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -195,7 +190,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 129}, {123, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="43879435"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -217,7 +211,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{151, 191}, {149, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -252,7 +245,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 191}, {109, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="710774771"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -272,8 +264,6 @@
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="269121825"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -313,33 +303,33 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">loginFields</string>
+						<string key="label">formFields</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="770992420"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
-					<int key="connectionID">20</int>
+					<int key="connectionID">27</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">loginFields</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="175360769"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
-						<bool key="addsContentToExistingCollection">NO</bool>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">loginFields</string>
+						<string key="label">formFields</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="43879435"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">NO</bool>
 					</object>
-					<int key="connectionID">22</int>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">formFields</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="175360769"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">NO</bool>
+					</object>
+					<int key="connectionID">29</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -457,7 +447,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

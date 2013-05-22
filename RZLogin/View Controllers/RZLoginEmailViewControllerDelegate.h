@@ -13,13 +13,18 @@
 //
 @protocol RZLoginEmailViewControllerDelegate <NSObject>
 
-@property (copy, readonly) ValidationBlock loginPasswordValidator;
-
-- (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;
+- (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;       // auth the entered email-address/password here in your delegate
 
 @optional
 
-// if sign-up is allowed... impl the following method too in your delegate
-- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo;
+// optional validators for email-address and password fields on login form
+@property (nonatomic, readonly, strong) RZValidationInfo *loginEmailAddressFieldValidator;  // defaults to 'is a valid email address'
+@property (nonatomic, readonly, strong) RZValidationInfo *loginPasswordFieldValidator;      // defaults to 'is non-empty'
+
+// optional validators for email-address and password fields on sign-up form
+@property (nonatomic, readonly, strong) RZValidationInfo *signUpEmailAddressFieldValidator; // defaults to 'is a valid email address'
+@property (nonatomic, readonly, strong) RZValidationInfo *signUpPasswordFieldValidator;     // defaults to 'is non-empty'
+
+- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo;      // if sign-up is allowed, also impl this method in your delegate
 
 @end

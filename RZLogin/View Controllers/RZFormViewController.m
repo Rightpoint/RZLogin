@@ -62,7 +62,7 @@
     NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
     
     //Iterate through the text fields.
-    for (UITextField *field in self.loginFields)
+    for (UITextField *field in self.formFields)
     {
         RZValidationInfo *validationInfo = nil;
         id key = nil;

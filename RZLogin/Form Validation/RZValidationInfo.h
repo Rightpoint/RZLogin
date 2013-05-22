@@ -29,5 +29,6 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 + (RZValidationInfo *)validationInfoWithDict:(NSDictionary *)anyValidationInfo;
 + (RZValidationInfo *)validationInfoWithBlock:(ValidationBlock)anyValidationBlock;
 + (RZValidationInfo *)emailValidationInfo;
++ (RZValidationInfo *)isNotEmptyValidationInfo;
 
 @end

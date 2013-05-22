@@ -127,18 +127,68 @@
 #pragma -
 #pragma mark - RZLoginEmailViewControllerDelegate
 
-- (ValidationBlock)loginPasswordValidator {
-    
-    ValidationBlock passwordValidator = ^BOOL(NSString *str) {
-        
-        return [str isEqualToString:@"password"]; // note: this would of course be replaced by your own validator ;)
-    };
-    return passwordValidator;
-}
-
+//
+// this method is invoked when the 'login' button is pressed, so
+// you should authenticate the username/email-address and password values from the formInfo here
+//
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
+}
+
+
+// optional validator for email-address field on login form
+- (RZValidationInfo *)loginEmailAddressFieldValidator {
+    
+    ValidationBlock validationBlock = ^BOOL(NSString *str) {
+        
+        return YES; 
+    };
+    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+}
+
+// optional validator for password field on login form
+- (RZValidationInfo *)loginPasswordFieldValidator {
+    
+    ValidationBlock validationBlock = ^BOOL(NSString *str) {
+        
+        return YES;
+    };
+    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+}
+
+// optional validator for email-address field on sign-up form
+- (RZValidationInfo *)signUpEmailAddressFieldValidator {
+    
+    ValidationBlock validationBlock = ^BOOL(NSString *str) {
+    
+        //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
+        NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+            @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+            @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+            @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+            @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+            @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+            @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        
+        NSPredicate *regexPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+        if(![regexPredicate evaluateWithObject:str])
+        {
+            return NO;
+            
+        } else {
+            // check if email-address is already in-use...
+            return ![str isEqualToString:@"test@test.com"];
+        }
+    };
+    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+}
+
+// optional validator for password field on sign-up form
+- (RZValidationInfo *)signUpPasswordFieldValidator {
+    
+    // example: password must be between 4 and 8 digits long and include at least one numeric digit
+    return [RZValidationInfo validationInfoWithDict:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
 }
 
 - (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo

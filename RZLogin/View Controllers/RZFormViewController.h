@@ -19,15 +19,15 @@ typedef enum {
 
 @interface RZFormViewController : UIViewController
 
-//Property to store the type of key we are using to identify text fields.
+// the type of key we are using to identify text fields.
 @property (nonatomic, assign) RZFormFieldKeyType formKeyType;
 
-//Property to store the validation information for each field. The keys are the unique text field keys and the objects
-//are RZValidationInfo objects.
+// The validation information for each field.
+// Note the keys are the unique text field keys and the objects are RZValidationInfo objects.
 @property (nonatomic, strong) NSMutableDictionary *fieldValidationInfo;
 
-//Outlet collection of all the text fields in the form.
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *loginFields;
+// Outlet collection of all the text fields in the form.
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *formFields;
 
 //Functions to add form validation info for the different types of keys and to validate the form.
 - (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forTag:(int)tag;
