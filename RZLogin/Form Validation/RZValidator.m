@@ -1,12 +1,12 @@
 //
-//  RZValidationInfo.m
+//  RZValidator.m
 //  RZLogin
 //
 //  Created by Joshua Leibsly on 3/21/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
-#import "RZValidationInfo.h"
+#import "RZValidator.h"
 
 //Typedef to identify whether we are validation with a dictionary or a block.
 typedef enum {
@@ -14,7 +14,7 @@ typedef enum {
     RZValidationTypeDictionary
 } RZValidationType;
 
-@interface RZValidationInfo ()
+@interface RZValidator ()
 
 //Store the validation type and the info dictionary or block.
 @property (nonatomic, assign) RZValidationType validationType;
@@ -23,36 +23,36 @@ typedef enum {
 
 @end
 
-@implementation RZValidationInfo
+@implementation RZValidator
 
-//Constructor with a dictionary of validation information.
-- (id)initWithValidationInfo:(NSDictionary *)anyValidationInfo
+// constructor that accepts a dictionary of validation information
+- (id)initWithValidationInfo:(NSDictionary *)validationInfo
 {
     if(self = [super init])
     {
         self.validationType = RZValidationTypeDictionary;
-        self.validationInfo = anyValidationInfo;
+        self.validationInfo = validationInfo;
     }
     
     return self;
 }
 
-//Constructor with a validation block.
-- (id)initWithValidationBlock:(ValidationBlock)anyValidationBlock
+// constructor that accepts a validation block
+- (id)initWithValidationBlock:(ValidationBlock)validationBlock
 {
     if(self = [super init])
     {
         self.validationType = RZValidationTypeBlock;
-        self.validationBlock = anyValidationBlock;
+        self.validationBlock = validationBlock;
     }
     
     return self;
 }
 
-//Function to validate a given string.
+// validates a given string against the receiver (validator)
 - (BOOL)validateWithString:(NSString *)str
 {
-    //If the validation type is a dictionary, iterate through the keys and validate appropriately..
+    // if validation type is a dictionary, iterate through the keys and validate appropriately...
     if(self.validationType == RZValidationTypeDictionary)
     {
         NSArray *allKeys = [self.validationInfo allKeys];
@@ -83,28 +83,28 @@ typedef enum {
                 }
             }
         }
-    }
-    else if(self.validationType == RZValidationTypeBlock) //If the validation uses a block, pass the string to the block and return the result.
-    {
+        
+    } else if(self.validationType == RZValidationTypeBlock)  {
+        
+        // if the validator uses a block, pass the string to the block and return the result
         return self.validationBlock(str);
     }
-    
     return YES;
 }
 
 #pragma mark - Convenience constructors
 
-+ (RZValidationInfo *)validationInfoWithDict:(NSDictionary *)anyValidationInfo
++ (RZValidator *)validatorWithInfo:(NSDictionary *)anyValidationInfo
 {
     return [[self alloc] initWithValidationInfo:anyValidationInfo];
 }
 
-+ (RZValidationInfo *)validationInfoWithBlock:(ValidationBlock)anyValidationBlock
++ (RZValidator *)validatorWithBlock:(ValidationBlock)anyValidationBlock
 {
     return [[self alloc] initWithValidationBlock:anyValidationBlock];
 }
 
-+ (RZValidationInfo *)emailValidationInfo
++ (RZValidator *)isValidEmailAddress
 {
     //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
     NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -118,7 +118,7 @@ typedef enum {
     return [[self alloc] initWithValidationInfo:@{kFieldValidationRegexKey : emailRegEx}];
 }
 
-+ (RZValidationInfo *)isNotEmptyValidationInfo
++ (RZValidator *)isNotEmpty
 {
     return [[self alloc] initWithValidationInfo:@{kFieldValidationMinCharsKey : @"1"}];
 }

@@ -102,7 +102,7 @@
 // since these RZLoginEmailViewControllerDelegate properties are optional,
 // these local convenience getters check if implemented; else return nil
 //
-- (RZValidationInfo *)loginEmailAddressFieldValidator {
+- (RZValidator *)loginEmailAddressFieldValidator {
     
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginEmailAddressFieldValidator;
@@ -111,7 +111,7 @@
     }
 }
 
-- (RZValidationInfo *)loginPasswordFieldValidator {
+- (RZValidator *)loginPasswordFieldValidator {
     
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginPasswordFieldValidator;
@@ -120,7 +120,7 @@
     }
 }
 
-- (RZValidationInfo *)signUpEmailAddressFieldValidator {
+- (RZValidator *)signUpEmailAddressFieldValidator {
     
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpEmailAddressFieldValidator;
@@ -129,7 +129,7 @@
     }
 }
 
-- (RZValidationInfo *)signUpPasswordFieldValidator {
+- (RZValidator *)signUpPasswordFieldValidator {
     
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpPasswordFieldValidator;
@@ -182,16 +182,16 @@
         
         // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
         if( [self loginEmailAddressFieldValidator] != nil ) {
-            [self.emailLoginViewController addFormValidationInfo:[self loginEmailAddressFieldValidator] forPlaceholderText:@"Email"];
+            [self.emailLoginViewController addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
         } else {
-            [self.emailLoginViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
+            [self.emailLoginViewController addValidator:[RZValidator isValidEmailAddress] forFieldWithPlaceholderText:@"Email"];
         }
         
         // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
         if( [self loginPasswordFieldValidator] != nil ) {
-            [self.emailLoginViewController addFormValidationInfo:[self loginPasswordFieldValidator] forPlaceholderText:@"Password"];
+            [self.emailLoginViewController addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:@"Password"];
         } else {
-            [self.emailLoginViewController addFormValidationInfo:[RZValidationInfo isNotEmptyValidationInfo] forPlaceholderText:@"Password"];
+            [self.emailLoginViewController addValidator:[RZValidator isNotEmpty] forFieldWithPlaceholderText:@"Password"];
         }
 
         if( self.isSignupAllowed ) {
@@ -204,16 +204,16 @@
             
             // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
             if( [self signUpEmailAddressFieldValidator] != nil ) {
-                [self.signUpViewController addFormValidationInfo:[self signUpEmailAddressFieldValidator] forPlaceholderText:@"Email"];
+                [self.signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
             } else {
-                [self.signUpViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forPlaceholderText:@"Email"];
+                [self.signUpViewController addValidator:[RZValidator isValidEmailAddress] forFieldWithPlaceholderText:@"Email"];
             }
             
             // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
             if( [self signUpPasswordFieldValidator] != nil ) {
-                [self.signUpViewController addFormValidationInfo:[self signUpPasswordFieldValidator] forPlaceholderText:@"Password"];
+                [self.signUpViewController addValidator:[self signUpPasswordFieldValidator] forFieldWithPlaceholderText:@"Password"];
             } else {
-                [self.signUpViewController addFormValidationInfo:[RZValidationInfo isNotEmptyValidationInfo] forPlaceholderText:@"Password"];
+                [self.signUpViewController addValidator:[RZValidator isNotEmpty] forFieldWithPlaceholderText:@"Password"];
             }
 
         } else {

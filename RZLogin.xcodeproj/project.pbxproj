@@ -30,7 +30,7 @@
 		0383A5D016FB77C1003D314D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CB16FB77C1003D314D /* NSData+Base64.m */; };
 		0383A5D116FB77C1003D314D /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CD16FB77C1003D314D /* OAuth+Additions.m */; };
 		0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5CF16FB77C1003D314D /* OAuthCore.m */; };
-		0383A5D616FB7815003D314D /* RZValidationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D516FB7814003D314D /* RZValidationInfo.m */; };
+		0383A5D616FB7815003D314D /* RZValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D516FB7814003D314D /* RZValidator.m */; };
 		0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D916FB79A6003D314D /* RZSignUpViewController.m */; };
 		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
 		6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65295669174ABDA8000CFA32 /* RZLoginViewController.xib */; };
@@ -80,8 +80,8 @@
 		0383A5CD16FB77C1003D314D /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OAuth+Additions.m"; path = "Managers/Twitter/ABOAuthCore/OAuth+Additions.m"; sourceTree = "<group>"; };
 		0383A5CE16FB77C1003D314D /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OAuthCore.h; path = Managers/Twitter/ABOAuthCore/OAuthCore.h; sourceTree = "<group>"; };
 		0383A5CF16FB77C1003D314D /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OAuthCore.m; path = Managers/Twitter/ABOAuthCore/OAuthCore.m; sourceTree = "<group>"; };
-		0383A5D416FB7814003D314D /* RZValidationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZValidationInfo.h; path = "Form Validation/RZValidationInfo.h"; sourceTree = "<group>"; };
-		0383A5D516FB7814003D314D /* RZValidationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZValidationInfo.m; path = "Form Validation/RZValidationInfo.m"; sourceTree = "<group>"; };
+		0383A5D416FB7814003D314D /* RZValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZValidator.h; path = "Form Validation/RZValidator.h"; sourceTree = "<group>"; };
+		0383A5D516FB7814003D314D /* RZValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZValidator.m; path = "Form Validation/RZValidator.m"; sourceTree = "<group>"; };
 		0383A5D816FB79A6003D314D /* RZSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZSignUpViewController.h; path = "View Controllers/RZSignUpViewController.h"; sourceTree = "<group>"; };
 		0383A5D916FB79A6003D314D /* RZSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZSignUpViewController.m; path = "View Controllers/RZSignUpViewController.m"; sourceTree = "<group>"; };
 		0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZSignUpViewController.xib; path = "View Controllers/RZSignUpViewController.xib"; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 		0383A5D716FB7818003D314D /* Form Validation */ = {
 			isa = PBXGroup;
 			children = (
-				0383A5D416FB7814003D314D /* RZValidationInfo.h */,
-				0383A5D516FB7814003D314D /* RZValidationInfo.m */,
+				0383A5D416FB7814003D314D /* RZValidator.h */,
+				0383A5D516FB7814003D314D /* RZValidator.m */,
 			);
 			name = "Form Validation";
 			sourceTree = "<group>";
@@ -332,7 +332,7 @@
 				0383A5D016FB77C1003D314D /* NSData+Base64.m in Sources */,
 				0383A5D116FB77C1003D314D /* OAuth+Additions.m in Sources */,
 				0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */,
-				0383A5D616FB7815003D314D /* RZValidationInfo.m in Sources */,
+				0383A5D616FB7815003D314D /* RZValidator.m in Sources */,
 				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
 				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
 				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,

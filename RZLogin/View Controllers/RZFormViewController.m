@@ -7,7 +7,7 @@
 //
 
 #import "RZFormViewController.h"
-#import "RZValidationInfo.h"
+#import "RZValidator.h"
 
 #define kDefaultFormKeyType RZFormFieldKeyTypePlaceholderText
 
@@ -23,7 +23,7 @@
     if (self)
     {
         // Initialize the validation info dictionary.
-        self.fieldValidationInfo = [[NSMutableDictionary alloc] init];
+        self.fieldValidators = [[NSMutableDictionary alloc] init];
         
         // Set the default form key type.
         self.formKeyType = kDefaultFormKeyType;
@@ -37,21 +37,21 @@
 }
 
 // add form validation info for a text-field with a given tag
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forTag:(int)tag
+- (void)addValidator:(RZValidator *)validator forFieldWithTag:(int)tag
 {
     //Only add the info if it exists.
-    if(validationInfo != nil)
+    if(validator != nil)
     {
-        [self.fieldValidationInfo setObject:validationInfo forKey:[NSNumber numberWithInt:tag]];
+        [self.fieldValidators setObject:validator forKey:[NSNumber numberWithInt:tag]];
     }
 }
 
 // add form validation info for a text-field with given placeholder text
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forPlaceholderText:(NSString *)text
+- (void)addValidator:(RZValidator *)validator forFieldWithPlaceholderText:(NSString *)text
 {
-    if(text != nil && validationInfo != nil)
+    if(text != nil && validator != nil)
     {
-        [self.fieldValidationInfo setObject:validationInfo forKey:text];
+        [self.fieldValidators setObject:validator forKey:text];
     }
 }
 
@@ -64,7 +64,7 @@
     // iterate through the text-fields...
     for (UITextField *field in self.formFields)
     {
-        RZValidationInfo *validationInfo = nil;
+        RZValidator *validator = nil;
         id key = nil;
         
         // get the key for the text-field
@@ -79,8 +79,8 @@
         
         // Look-up the validation info for this field. If the string is not valid, return nil.
         // If the validation info for this field does not exist, it does not need to be validated.
-        validationInfo = [self.fieldValidationInfo objectForKey:key];
-        if(validationInfo != nil && ![validationInfo validateWithString:field.text])
+        validator = [self.fieldValidators objectForKey:key];
+        if(validator != nil && ![validator validateWithString:field.text])
         {
             return nil; // invalid, we're done
         }

@@ -6,7 +6,7 @@
 //
 
 #import "RZLoginViewController.h"
-#import "RZValidationInfo.h"
+#import "RZValidator.h"
 
 #import "ViewController.h"
 #import "MyCustomLoginViewController.h"
@@ -49,12 +49,12 @@
     loginController.delegate = self;
         
     // FIXME: validate that the password fields match
-    [loginController.signUpViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str) {
+    [loginController.signUpViewController addValidator:[RZValidator validatorWithBlock:^(NSString *str) {
         
         NSString *prevPasswordFieldText = [(UITextField *)[loginController.signUpViewController.view viewWithTag:2] text];
         return [str isEqualToString:prevPasswordFieldText];
     }]
-                                                     forTag:3];
+                                                     forFieldWithTag:3];
 
     // ok, simply present our login view-controller...
     // note for the 'default' example here, we'll present views *modally* (since our default email-login XIB shows a 'cancel' button)
@@ -131,27 +131,27 @@
 
 
 // optional validator for email-address field on login form
-- (RZValidationInfo *)loginEmailAddressFieldValidator {
+- (RZValidator *)loginEmailAddressFieldValidator {
     
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
         
         return YES; 
     };
-    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+    return [RZValidator validatorWithBlock:validationBlock];
 }
 
 // optional validator for password field on login form
-- (RZValidationInfo *)loginPasswordFieldValidator {
+- (RZValidator *)loginPasswordFieldValidator {
     
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
         
         return YES;
     };
-    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+    return [RZValidator validatorWithBlock:validationBlock];
 }
 
 // optional validator for email-address field on sign-up form
-- (RZValidationInfo *)signUpEmailAddressFieldValidator {
+- (RZValidator *)signUpEmailAddressFieldValidator {
     
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
     
@@ -175,14 +175,14 @@
             return ![str isEqualToString:@"test@test.com"];
         }
     };
-    return [RZValidationInfo validationInfoWithBlock:validationBlock];
+    return [RZValidator validatorWithBlock:validationBlock];
 }
 
 // optional validator for password field on sign-up form
-- (RZValidationInfo *)signUpPasswordFieldValidator {
+- (RZValidator *)signUpPasswordFieldValidator {
     
     // this example: password must be between 4 and 8 digits long and include at least one numeric digit
-    return [RZValidationInfo validationInfoWithDict:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
+    return [RZValidator validatorWithInfo:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
 }
 
 
