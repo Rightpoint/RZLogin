@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSArray *twitterAccounts;
 
 // note these properties are all fetched from the delegate
-// (per protocols that it implements for each login-type supported)
+// (i.e. per protocols that it implements for each login-type supported)
 @property (nonatomic, readonly, strong) NSString *facebookAppId; 
 @property (nonatomic, readonly, strong) NSString *twitterConsumerKey;
 @property (nonatomic, readonly, strong) NSString *twitterConsumerSecret;
@@ -61,6 +61,39 @@
 - (BOOL)supportsLoginTypeTwitter {
     
     return [self.delegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
+}
+
+
+#pragma mark - login info properties
+
+// note we defer to the delegate's impl for each of these properties,
+// depending on which login-type protocol(s) it chooses to implement.
+//
+- (NSString *)facebookAppId {
+    
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginFacebookViewControllerDelegate>) self.delegate).facebookAppId;
+    } else {
+        return nil;
+    }
+}
+
+- (NSString *)twitterConsumerKey {
+    
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerKey;
+    } else {
+        return nil;
+    }
+}
+
+- (NSString *)twitterConsumerSecret {
+    
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerSecret;
+    } else {
+        return nil;
+    }
 }
 
 
@@ -194,39 +227,6 @@
             [self addChildViewController:self.emailLoginViewController];
             [self.view addSubview:self.emailLoginViewController.view];
         }
-    }
-}
-
-
-#pragma mark - login info properties
-
-// note we defer to the delegate's impl for each of these properties,
-// depending on which login-type protocol(s) it chooses to implement.
-//
-- (NSString *)facebookAppId {
-    
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginFacebookViewControllerDelegate>) self.delegate).facebookAppId;
-    } else {
-        return nil;
-    }
-}
-
-- (NSString *)twitterConsumerKey {
-    
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerKey;
-    } else {
-        return nil;
-    }
-}
-
-- (NSString *)twitterConsumerSecret {
-    
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerSecret;
-    } else {
-        return nil;
     }
 }
 

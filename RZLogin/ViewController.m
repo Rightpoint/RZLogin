@@ -72,7 +72,7 @@
     // for this example, let's also use a customized email-login view controller (and XIB) too ;)
     loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
 
-    loginController.presentViewsAsModal = NO; // note present views with 'push' instead, since there's no 'cancel' button in sub-flow (e.g. 'email')
+    loginController.presentViewsAsModal = NO; // note present views with 'push' instead, since there's no 'cancel' button in our (custom) email-login form
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
