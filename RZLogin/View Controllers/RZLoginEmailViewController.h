@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *signUpButton;
 
-// reference to the sign up controller we may present if 'sign-up' is clicked
+// reference to the sign-up controller we may present if 'sign-up' is clicked
 @property (nonatomic, weak) RZSignUpViewController *signUpController;
 
 @property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> loginDelegate;

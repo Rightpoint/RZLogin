@@ -37,21 +37,25 @@
 
 - (IBAction)signUpPressed
 {
-    //validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
-    //text in the fields. It returns nil if the form is not valid.
+    // validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
+    // text in the fields. It returns nil if the form is not valid.
     NSDictionary *formDict = [self validateForm];
     if(formDict != nil)
     {
-        //Notify the delegate that it should process the login information.
+        // form fields are valid: so notify the delegate that it should process the login information
         [self.loginDelegate signUpPressedWithFormInformation:formDict];
     }
     else
     {
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Invalid sign up information." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:@"Invalid sign up information."
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
     }
 }
 
-//A cancel button will only be present and connected to this outlet if this controller is presented modally.
+// A cancel button will only be present and connected to this outlet if this controller is presented modally.
 - (IBAction)cancelPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];

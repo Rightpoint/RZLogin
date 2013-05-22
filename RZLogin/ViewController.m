@@ -12,11 +12,10 @@
 #import "MyCustomLoginViewController.h"
 #import "MyCustomLoginEmailViewController.h"
 
-// to support all three login-types, impl all three protocols
-//
+// example: to support all three login-types, implement all three protocols
 @interface ViewController () <RZLoginEmailViewControllerDelegate, RZLoginFacebookViewControllerDelegate, RZLoginTwitterViewControllerDelegate>
 
-// or, to support email-login only... impl only a single protocol
+// alternately, to support email-login only... implement only the single protocol, for example:
 //
 // @interface ViewController () <RZLoginEmailViewControllerDelegate>
 
@@ -39,26 +38,17 @@
     [super viewDidLoad];
 }
 
-// display sample login controller; using default XIB with plain buttons
-//
+#pragma mark - example usage
+
+// display sample login controller; using the default, included XIBs with plain buttons
 - (IBAction)loginUsingDefaultXIB:(id)sender;
 {
     // create a login view-controller (with default configuration)
     // note the supported login-types depend on which protocol(s) are implemented by the delegate (self)
-    //
     RZLoginViewController *loginController = [[RZLoginViewController alloc] initWithNibName:@"RZLoginViewController" bundle:nil];
     loginController.delegate = self;
-    
-    // FIXME: add a block-property to RZLoginEmailViewController protocol for the sign-up view-controller too
-    // (i.e. just like we have now for the email password validator)
-    //
-    // validate the sign up fields with their tags as their identifying keys
-    [loginController.signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
-    
-    // validate email
-    [loginController.signUpViewController addFormValidationInfo:[RZValidationInfo emailValidationInfo] forTag:1];
-    
-    // validate that the password fields match
+        
+    // FIXME: validate that the password fields match
     [loginController.signUpViewController addFormValidationInfo:[RZValidationInfo validationInfoWithBlock:^(NSString *str) {
         
         NSString *prevPasswordFieldText = [(UITextField *)[loginController.signUpViewController.view viewWithTag:2] text];
@@ -66,19 +56,20 @@
     }]
                                                      forTag:3];
 
-    // ok, simply present our login v/c
-    loginController.presentViewsAsModal = YES; // note for the 'default' example, we'll present views modally -- since default (email) XIB has 'cancel' button
+    // ok, simply present our login view-controller...
+    // note for the 'default' example here, we'll present views *modally* (since our default email-login XIB shows a 'cancel' button)
+    loginController.presentViewsAsModal = YES;
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
-// display another sample login controller; using a custom XIB with a background image (and no 'twitter' button)
-//
+// display another sample login controller;
+// using a custom XIB with a background image (and no 'twitter' button)
 - (IBAction)loginUsingCustomXIB:(id)sender;
 {
     MyCustomLoginViewController *loginController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
     loginController.delegate = self;
     
-    // for this example, let's use a customized email-login view controller (and XIB) too ;)
+    // for this example, let's also use a customized email-login view controller (and XIB) too ;)
     loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
 
     loginController.presentViewsAsModal = NO; // note present views with 'push' instead, since there's no 'cancel' button in sub-flow (e.g. 'email')
@@ -91,7 +82,6 @@
 }
 
 
-#pragma -
 #pragma mark - RZLoginFacebookViewControllerDelegate
 
 - (NSString *)facebookAppId {
@@ -105,7 +95,6 @@
 }
 
 
-#pragma -
 #pragma mark - RZLoginFacebookViewControllerDelegate
 
 - (NSString *)twitterConsumerKey {
@@ -124,14 +113,18 @@
 }
 
 
-#pragma -
 #pragma mark - RZLoginEmailViewControllerDelegate
 
-//
-// this method is invoked when the 'login' button is pressed, so
-// you should authenticate the username/email-address and password values from the formInfo here
-//
+// Invoked when the 'login' button is pressed, so you would authenticate
+// the username/email-address and password values from the formInfo here.
 - (void)loginPressedWithFormInformation:(NSDictionary *)formInfo
+{
+    NSLog(@"%s: %@", __FUNCTION__, formInfo);
+}
+
+// Invoked when the 'sign-up' button is pressed from the (optional) sign-up form, so you would
+// implement here whatever business-logic is required to sign-up a new user for your application.
+- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
 }
@@ -162,7 +155,8 @@
     
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
     
-        //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
+        // first check if email-address is valid format...
+        // regex expression is from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
         NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
             @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
             @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
@@ -177,7 +171,7 @@
             return NO;
             
         } else {
-            // check if email-address is already in-use...
+            // example: do business-logic check to see if email-address is already in-use...
             return ![str isEqualToString:@"test@test.com"];
         }
     };
@@ -187,13 +181,9 @@
 // optional validator for password field on sign-up form
 - (RZValidationInfo *)signUpPasswordFieldValidator {
     
-    // example: password must be between 4 and 8 digits long and include at least one numeric digit
+    // this example: password must be between 4 and 8 digits long and include at least one numeric digit
     return [RZValidationInfo validationInfoWithDict:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
 }
 
-- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo
-{
-    NSLog(@"%s: %@", __FUNCTION__, formInfo);
-}
 
 @end

@@ -14,9 +14,11 @@
 // stores the list of Twitter accounts on the device for use with the account selection action sheet
 @property (nonatomic, strong) NSArray *twitterAccounts;
 
-@property (nonatomic, strong) NSString *facebookAppId; // note fetched from delegate (if it impls the proper protocol)
-@property (nonatomic, strong) NSString *twitterConsumerKey;
-@property (nonatomic, strong) NSString *twitterConsumerSecret;
+// note these properties are all fetched from the delegate
+// (per protocols that it implements for each login-type supported)
+@property (nonatomic, readonly, strong) NSString *facebookAppId; 
+@property (nonatomic, readonly, strong) NSString *twitterConsumerKey;
+@property (nonatomic, readonly, strong) NSString *twitterConsumerSecret;
 
 @end
 
@@ -26,9 +28,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // any further init goes here...
-        
+    if (self) {        
         // set defaults for login-options
         self.signupAllowed = YES;
         self.forgotPasswordAllowed = NO;
@@ -38,29 +38,29 @@
 }
 
 
-#pragma mark -
 #pragma mark - login type properties
 
+// note these properties are readonly, since they're based on which protocol(s) our delegate chooses to implement
+// i.e. for each 'type' of login the client-application wants to support
 //
-// note these properties are readonly: based on which protocol(s) our delegate chooses to implement
-//
-
 - (BOOL)supportsLoginTypeEmail {
     
-    return( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)] );
+    return [self.delegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeFacebook {
     
-    return( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] );
+    return [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeTwitter {
-
-    return( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)] );
+    
+    return [self.delegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
 }
 
-//
+
+#pragma mark - validators for login with email and signup forms
+
 // since these RZLoginEmailViewControllerDelegate properties are optional,
 // these local convenience getters check if implemented; else return nil
 //
@@ -101,7 +101,6 @@
 }
 
 
-#pragma mark -
 #pragma mark - UIViewController methods
 
 - (void)configureView {
@@ -131,7 +130,8 @@
     
     if( [self supportsLoginTypeEmail] ) {
         //
-        // init email/sign-up view-controllers if we're supporting login via email...
+        // if we're supporting login via email, init our email-login and sign-up view-controllers
+        // note we also wire-up any form field validators (optionally specified by our delegate)
         //
         if( self.emailLoginViewController == nil ) {
             // if no custom v/c has already been specified, allocate the 'default' login-with-email v/c
@@ -157,6 +157,7 @@
         }
 
         if( self.isSignupAllowed ) {
+            // if sign-up is allowed, create and configure its view-controller too; note also it shares the same delegate
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
             self.signUpViewController.loginDelegate = self.delegate;
             
@@ -180,7 +181,7 @@
         } else {
             self.signUpViewController = nil;
         }
-        self.emailLoginViewController.signUpController = self.signUpViewController;
+        self.emailLoginViewController.signUpController = self.signUpViewController; // finally, attach it
         
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
             // if we're ONLY supporting login via email...
@@ -192,16 +193,15 @@
 }
 
 
-#pragma mark -
 #pragma mark - login info properties
 
 // note we defer to the delegate's impl for each of these properties,
 // depending on which login-type protocol(s) it chooses to implement.
-
+//
 - (NSString *)facebookAppId {
     
-    if( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)]) {
-        return ((NSObject<RZLoginFacebookViewControllerDelegate> *) self.delegate).facebookAppId;
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginFacebookViewControllerDelegate>) self.delegate).facebookAppId;
     } else {
         return nil;
     }
@@ -209,8 +209,8 @@
 
 - (NSString *)twitterConsumerKey {
     
-    if( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)]) {
-        return ((NSObject<RZLoginTwitterViewControllerDelegate> *) self.delegate).twitterConsumerKey;
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerKey;
     } else {
         return nil;
     }
@@ -218,15 +218,14 @@
 
 - (NSString *)twitterConsumerSecret {
     
-    if( [((NSObject *)self.delegate) conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)]) {
-        return ((NSObject<RZLoginTwitterViewControllerDelegate> *) self.delegate).twitterConsumerSecret;
+    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerSecret;
     } else {
         return nil;
     }
 }
 
 
-#pragma mark -
 #pragma mark - error alert
 
 - (void)showAlertForError:(NSError *)error socialNetwork:(NSString *)socialNetworkName
@@ -252,7 +251,6 @@
 }
 
 
-#pragma mark -
 #pragma mark - button actions
 
 // login with Email button action
@@ -355,7 +353,6 @@
 }
 
 
-#pragma -
 #pragma mark - UIActionSheetDelegate
 
 // called when the user selects a Twitter account to sign-in with from the action sheet

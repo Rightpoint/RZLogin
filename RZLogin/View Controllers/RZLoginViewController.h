@@ -22,12 +22,11 @@
 @property (nonatomic, strong) IBOutlet UIButton *emailLoginButton;
 
 // properties for login-types supported
-// note: these are specified by means of which PROTOCOLS are implemented by your delegate, below
 @property (nonatomic, readonly) BOOL supportsLoginTypeEmail;
 @property (nonatomic, readonly) BOOL supportsLoginTypeFacebook;
 @property (nonatomic, readonly) BOOL supportsLoginTypeTwitter;
 
-// properties for various login options
+// properties for various login options; note some apply to only certain login-types
 @property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
 @property (nonatomic, assign, getter=isForgotPasswordAllowed) BOOL forgotPasswordAllowed;
 @property (nonatomic, assign, getter=shouldPresentViewsAsModal) BOOL presentViewsAsModal; // else, present via 'push' onto nav-controller
