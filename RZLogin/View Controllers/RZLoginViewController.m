@@ -2,6 +2,7 @@
 //  RZLoginViewController.m
 //  RZLogin
 //
+//  Created by Joshua Leibsly on 3/18/13. Contributions and refactor by Daniel Kopyc on 5/20/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
@@ -49,17 +50,14 @@
 // i.e. for each 'type' of login the client-application wants to support
 //
 - (BOOL)supportsLoginTypeEmail {
-    
     return [self.delegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeFacebook {
-    
     return [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeTwitter {
-    
     return [self.delegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
 }
 
@@ -88,7 +86,6 @@
 }
 
 - (NSString *)twitterConsumerSecret {
-    
     if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
         return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerSecret;
     } else {
@@ -103,7 +100,6 @@
 // these local convenience getters check if implemented; else return nil
 //
 - (RZValidator *)loginEmailAddressFieldValidator {
-    
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginEmailAddressFieldValidator;
     } else {
@@ -112,7 +108,6 @@
 }
 
 - (RZValidator *)loginPasswordFieldValidator {
-    
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginPasswordFieldValidator;
     } else {
@@ -121,7 +116,6 @@
 }
 
 - (RZValidator *)signUpEmailAddressFieldValidator {
-    
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpEmailAddressFieldValidator;
     } else {
@@ -130,7 +124,6 @@
 }
 
 - (RZValidator *)signUpPasswordFieldValidator {
-    
     if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
         return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpPasswordFieldValidator;
     } else {
@@ -142,7 +135,7 @@
 #pragma mark - UIViewController methods
 
 - (void)configureView {
-    
+    //
     // configure view appropriately, depending on which login-types we support...
     //
     if( ![self supportsLoginTypeFacebook] ) {

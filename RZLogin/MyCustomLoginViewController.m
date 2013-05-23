@@ -2,6 +2,7 @@
 //  MyCustomLoginViewController.m
 //  RZLogin
 //
+//  Created by Daniel Kopyc on 5/20/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
@@ -35,15 +36,12 @@
                           delay:0.1f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
                      animations:^{
-                         self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x,
-                                                                     self.backgroundImageView.frame.origin.y,
+                         self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x - 100,
+                                                                     self.backgroundImageView.frame.origin.y - 50,
                                                                      self.backgroundImageView.frame.size.width * 2,
                                                                      self.backgroundImageView.frame.size.height * 2);
                      }
-                     completion:^(BOOL finished){
-                         // nothing to do here
-                     }];
-
+                     completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

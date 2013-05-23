@@ -2,6 +2,7 @@
 //  ViewController.m
 //  RZLogin
 //
+//  Created by Joshua Leibsly on 3/18/13. Contributions and refactor by Daniel Kopyc on 5/20/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
 
