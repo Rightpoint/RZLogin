@@ -133,45 +133,26 @@
 // optional validator for email-address field on login form
 - (RZValidator *)loginEmailAddressFieldValidator {
     
-    return [RZValidator emailAddressValidator];
+    return [RZValidator notEmptyValidator];
 }
 
 // optional validator for password field on login form
 - (RZValidator *)loginPasswordFieldValidator {
     
+    // example usage of a custom validation-block (and failure message) when specifying a validator
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
         
-        return YES;
+        return ([str length] > 0); // any *attempted* password is okay, if not empty
     };
-    return [RZValidator validatorWithBlock:validationBlock];
+    RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
+    validator.localizedViolationString = @"Password field must not be empty."; // RZValidatorLocalizedString(@"password field must not be empty", @"Password field must not be empty.");
+    return validator;
 }
 
 // optional validator for email-address field on sign-up form
 - (RZValidator *)signUpEmailAddressFieldValidator {
     
-    ValidationBlock validationBlock = ^BOOL(NSString *str) {
-    
-        // first check if email-address is valid format...
-        // regex expression is from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
-        NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
-            @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-            @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-            @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-            @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-            @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-            @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-        
-        NSPredicate *regexPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
-        if(![regexPredicate evaluateWithObject:str])
-        {
-            return NO;
-            
-        } else {
-            // example: do business-logic check to see if email-address is already in-use...
-            return ![str isEqualToString:@"test@test.com"];
-        }
-    };
-    return [RZValidator validatorWithBlock:validationBlock];
+    return [RZValidator emailAddressValidator];
 }
 
 // optional validator for password field on sign-up form

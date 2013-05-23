@@ -122,7 +122,9 @@ typedef enum {
 
 + (RZValidator *)notEmptyValidator
 {
-    return [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
+    RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
+    validator.localizedViolationString = @"Field must not be empty."; // RZValidatorLocalizedString(@"field must not be empty", @"Field must not be empty.");
+    return validator;
 }
 
 @end
