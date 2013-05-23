@@ -93,17 +93,18 @@
     NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
     for (UITextField *field in self.formFields)
     {
-        // get the key for the text-field
-        id key = nil;
-        if(self.formKeyType == RZFormFieldKeyTypeTag)
-        {
-            key = [NSNumber numberWithInt:field.tag];
-        }
-        else if(self.formKeyType == RZFormFieldKeyTypePlaceholderText)
-        {
-            key = field.placeholder;
-        }
-        [formDict setObject:field.text forKey:key];
+//        // get the key for the text-field
+//        id key = nil;
+//        if(self.formKeyType == RZFormFieldKeyTypeTag)
+//        {
+//            key = [NSNumber numberWithInt:field.tag];
+//        }
+//        else if(self.formKeyType == RZFormFieldKeyTypePlaceholderText)
+//        {
+//            key = field.placeholder;
+//        }
+//        [formDict setObject:field.text forKey:key];
+        [formDict setObject:field.text forKey:field.placeholder];
     }
     return formDict;
 }

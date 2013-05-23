@@ -116,15 +116,23 @@ typedef enum {
                             @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationRegexKey: emailRegEx}];
-    validator.localizedViolationString = @"Email address does not appear to be in the correct format."; // RZValidatorLocalizedString(@"invalid email address", @"Email address does not appear to be in the correct format.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"invalid email address", @"Please enter a valid email address.");
     return validator;
 }
 
 + (RZValidator *)notEmptyValidator
 {
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
-    validator.localizedViolationString = @"Field must not be empty."; // RZValidatorLocalizedString(@"field must not be empty", @"Field must not be empty.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"field must not be empty", @"Field must not be empty.");
     return validator;
 }
 
++ (RZValidator *)notEmptyValidatorForFieldName:(NSString *)fieldName
+{
+    RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
+    validator.localizedViolationString = [NSString stringWithFormat:
+                                          RZValidatorLocalizedString(@"%@ must not be empty", @"%@ must not be empty."), fieldName];
+    return validator;
+}
+                                      
 @end

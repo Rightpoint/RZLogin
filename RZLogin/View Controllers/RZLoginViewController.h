@@ -5,8 +5,9 @@
 //  RZLoginViewController is a UIViewController that encapsulates functionality for a "user login" experience, and allows them
 //  to choose between several supported login 'types' (e.g. login with an email-address/password; login with Facebook or Twitter, etc.)
 //
-//  This class can be sub-classed to override defaults or implement custom functionality; the use of alternate NIB/XIB files also allows
-//  for complete customization of all of the login views. Please refer to the examples in this project for details.
+//  This class can be sub-classed to override defaults or implement custom functionality;
+//  the use of alternate NIB/XIB files also allows for complete customization of all of the login views.
+//  Please also refer to the examples in this project for details.
 //
 //  The delegate, which (depending on which login-types your app wishes to support),
 //  must conform to one or more of the following protocols:
@@ -54,10 +55,16 @@
 //  ---------------------------------------------------------------------------------
 //  Further notes on the RZLoginEmailViewController and RZSignUpViewController forms:
 //
-//  In addition, note that if you're going to customize either the email login or sign-up forms, you should be aware of
-//  the |formFields| IBOutletCollection, and the action methods required when creating a custom XIB for those forms.
-//  For those forms, each text-field should also have either a unique placeholder-text value or a unique view 'tag',
-//  since these are used by the form-field validators (RZValidator).
+//  In addition, note that if you're going to customize either the email login or sign-up forms,
+//  you should be aware of the following points:
+//
+//  1. The |formFields| IBOutletCollection, which should include each of the UITextFields in the form
+//     (i.e. the emailField, passwordField, and passwordField, as appropriate).
+//  2. The action method for each button should also be wired-up when creating a custom XIB for these forms.
+//  3. Each text-field should also have either a unique placeholder-text value or a unique view 'tag',
+//     since these are used by the form-field validators (RZValidator).
+//  4. The 'sign-up' form requires that the first password field has a 'tag' of '2'; and the second a tag of '3'
+//     (used by the validator to ensure that the password is correctly entered twice by the user).
 //
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //

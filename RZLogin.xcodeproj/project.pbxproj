@@ -40,6 +40,7 @@
 		6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */; };
 		65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */; };
 		65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */; };
+		65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginEmailViewController.xib; sourceTree = "<group>"; };
 		6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_1.jpg; sourceTree = "<group>"; };
 		65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_2.jpg; sourceTree = "<group>"; };
+		65295687174E910E000CFA32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RZValidatorLocalizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				032212B416F79C740068A012 /* Default.png */,
 				032212B616F79C740068A012 /* Default@2x.png */,
 				032212B816F79C740068A012 /* Default-568h@2x.png */,
+				65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */,
 				65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */,
 				65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */,
+				65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +352,14 @@
 				032212AC16F79C740068A012 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65295687174E910E000CFA32 /* en */,
+			);
+			name = RZValidatorLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

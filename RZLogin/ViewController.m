@@ -48,14 +48,6 @@
     RZLoginViewController *loginController = [[RZLoginViewController alloc] init];
     loginController.delegate = self;
         
-    // FIXME: validate that the password fields match
-    [loginController.signUpViewController addValidator:[RZValidator validatorWithBlock:^(NSString *str) {
-        
-        NSString *prevPasswordFieldText = [(UITextField *)[loginController.signUpViewController.view viewWithTag:2] text];
-        return [str isEqualToString:prevPasswordFieldText];
-    }]
-                                                     forFieldWithTag:3];
-
     // ok, simply present our login view-controller...
     // note for the 'default' example here, we'll present views *modally* (since our default email-login XIB shows a 'cancel' button)
     loginController.presentViewsAsModal = YES;
@@ -133,7 +125,7 @@
 // optional validator for email-address field on login form
 - (RZValidator *)loginEmailAddressFieldValidator {
     
-    return [RZValidator notEmptyValidator];
+    return [RZValidator notEmptyValidatorForFieldName:@"Email address"];
 }
 
 // optional validator for password field on login form
@@ -145,7 +137,7 @@
         return ([str length] > 0); // any *attempted* password is okay, if not empty
     };
     RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
-    validator.localizedViolationString = @"Password field must not be empty."; // RZValidatorLocalizedString(@"password field must not be empty", @"Password field must not be empty.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"password field must not be empty", @"Password field must not be empty.");
     return validator;
 }
 
@@ -160,7 +152,8 @@
     
     // this example: password must be between 4 and 8 digits long and include at least one numeric digit    
     RZValidator *validator = [[RZValidator alloc] initWithValidationConditions:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
-    validator.localizedViolationString = @"Password must be between 4 and 8 digits long, and include at least one numeric digit."; // RZValidatorLocalizedString(@"invalid email address", @"Email address does not appear to be in the correct format.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"password strength:4-8/1",
+                                                                    @"Password must be between 4 and 8 digits long, and include at least one numeric digit.");
     return validator;
 }
 
