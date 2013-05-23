@@ -55,12 +55,10 @@
     }
 }
 
-// Method to validate the entire form. If the form is valid, returns a key-value dictionary
-// containing all form-field keys and their corresponding values. If the form is invalid, returns nil.
-- (NSDictionary *)validateForm
-{
-    NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
-    
+// Method to validate the entire form. If the form is valid, returns null.
+// If any fields are invalid, returns the first validator that failed.
+- (RZValidator *)validateForm
+{    
     // iterate through the text-fields...
     for (UITextField *field in self.formFields)
     {
@@ -82,14 +80,32 @@
         validator = [self.fieldValidators objectForKey:key];
         if(validator != nil && ![validator validateWithString:field.text])
         {
-            return nil; // invalid, we're done
-        }
-        else
-        {
-            [formDict setObject:field.text forKey:key];
+            return validator; // invalid, we're done
         }
     }
-    return formDict; // ok, everything's valid
+    return nil; // ok, everything's valid
+}
+
+// returns a dictionary of all form-field keys and their corresponding values
+- (NSDictionary *)formKeysAndValues
+{
+    // iterate through the text-fields... build dictionary
+    NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
+    for (UITextField *field in self.formFields)
+    {
+        // get the key for the text-field
+        id key = nil;
+        if(self.formKeyType == RZFormFieldKeyTypeTag)
+        {
+            key = [NSNumber numberWithInt:field.tag];
+        }
+        else if(self.formKeyType == RZFormFieldKeyTypePlaceholderText)
+        {
+            key = field.placeholder;
+        }
+        [formDict setObject:field.text forKey:key];
+    }
+    return formDict;
 }
 
 - (void)didReceiveMemoryWarning

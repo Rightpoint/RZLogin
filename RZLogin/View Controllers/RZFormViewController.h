@@ -29,10 +29,15 @@ typedef enum {
 // an outlet-collection of all the text fields in the form
 @property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *formFields;
 
-// methods to add form validation info for the different types of keys; and to validate the form
+// methods to add form validation info for the different types of keys
 - (void)addValidator:(RZValidator *)validator forFieldWithTag:(int)tag;
 - (void)addValidator:(RZValidator *)validator forFieldWithPlaceholderText:(NSString *)text;
 
-- (NSDictionary *)validateForm;
+// Method to validate the entire form. If the form is valid, returns null.
+// If any fields are invalid, returns the first validator that failed.
+- (RZValidator *)validateForm;
+
+// returns a dictionary of all form-field keys and their corresponding values
+- (NSDictionary *)formKeysAndValues;
 
 @end

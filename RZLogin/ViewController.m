@@ -133,11 +133,7 @@
 // optional validator for email-address field on login form
 - (RZValidator *)loginEmailAddressFieldValidator {
     
-    ValidationBlock validationBlock = ^BOOL(NSString *str) {
-        
-        return YES; 
-    };
-    return [RZValidator validatorWithBlock:validationBlock];
+    return [RZValidator isValidEmailAddress];
 }
 
 // optional validator for password field on login form

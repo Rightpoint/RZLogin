@@ -37,18 +37,16 @@
 
 - (IBAction)signUpPressed
 {
-    // validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
-    // text in the fields. It returns nil if the form is not valid.
-    NSDictionary *formDict = [self validateForm];
-    if(formDict != nil)
+    RZValidator *failedValidator = [self validateForm];
+    if(failedValidator == nil)
     {
-        // form fields are valid: so notify the delegate that it should process the login information
-        [self.loginDelegate signUpPressedWithFormInformation:formDict];
-    }
-    else
-    {
+        // ok, valid form, so call the delegate method to check login info
+        [self.loginDelegate signUpPressedWithFormInformation:[self formKeysAndValues]];
+        
+    } else {
+        NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid sign-up information.");
         [[[UIAlertView alloc] initWithTitle:@"Error"
-                                    message:@"Invalid sign up information."
+                                    message:msg
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];

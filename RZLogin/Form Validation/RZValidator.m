@@ -115,7 +115,9 @@ typedef enum {
                             @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
                             @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     
-    return [[self alloc] initWithValidationInfo:@{kFieldValidationRegexKey : emailRegEx}];
+    RZValidator *validator = [[self alloc] initWithValidationInfo:@{kFieldValidationRegexKey: emailRegEx}];
+    validator.localizedViolationString = @"Email address does not appear to be in the correct format."; // RZValidatorLocalizedString(@"invalid email address", @"Email address does not appear to be in the correct format.");
+    return validator;
 }
 
 + (RZValidator *)isNotEmpty
