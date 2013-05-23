@@ -303,8 +303,8 @@
     
     [[RZSocialLoginManager defaultManager] getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierTwitter
                                                                        options:0
-                                                               completionBlock:^(NSArray *accounts, NSError *error) {
-        
+                                                               completionBlock:^(NSArray *accounts, NSError *error)
+    {
         // if there is more than one Twitter account, present an action sheet
         // for the user to choose the account they would like to sign in with
         if(accounts.count > 1)
