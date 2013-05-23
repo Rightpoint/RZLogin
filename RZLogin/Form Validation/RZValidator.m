@@ -18,7 +18,7 @@ typedef enum {
 
 //Store the validation type and the info dictionary or block.
 @property (nonatomic, assign) RZValidationType validationType;
-@property (nonatomic, strong) NSDictionary *validationInfo;
+@property (nonatomic, strong) NSDictionary *validationConditions;
 @property (strong) ValidationBlock validationBlock;
 
 @end
@@ -26,12 +26,12 @@ typedef enum {
 @implementation RZValidator
 
 // constructor that accepts a dictionary of validation information
-- (id)initWithValidationInfo:(NSDictionary *)validationInfo
+- (id)initWithValidationConditions:(NSDictionary *)validationConditions
 {
     if(self = [super init])
     {
         self.validationType = RZValidationTypeDictionary;
-        self.validationInfo = validationInfo;
+        self.validationConditions = validationConditions;
     }
     
     return self;
@@ -50,17 +50,17 @@ typedef enum {
 }
 
 // validates a given string against the receiver (validator)
-- (BOOL)validateWithString:(NSString *)str
+- (BOOL)isValidForString:(NSString *)str
 {
     // if validation type is a dictionary, iterate through the keys and validate appropriately...
     if(self.validationType == RZValidationTypeDictionary)
     {
-        NSArray *allKeys = [self.validationInfo allKeys];
+        NSArray *allKeys = [self.validationConditions allKeys];
         for(NSString *key in allKeys)
         {
             if([key isEqualToString:kFieldValidationRegexKey]) //Regex case. Use NSPredicate to validate.
             {
-                NSPredicate *regexPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", [self.validationInfo objectForKey:key]];
+                NSPredicate *regexPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", [self.validationConditions objectForKey:key]];
                 if(![regexPredicate evaluateWithObject:str])
                 {
                     return NO;
@@ -68,7 +68,7 @@ typedef enum {
             }
             else if([key isEqualToString:kFieldValidationMinCharsKey]) //Min chars case. Check length of string.
             {
-                int minChars = [[self.validationInfo objectForKey:key] intValue];
+                int minChars = [[self.validationConditions objectForKey:key] intValue];
                 if(str.length < minChars)
                 {
                     return NO;
@@ -76,7 +76,7 @@ typedef enum {
             }
             else if([key isEqualToString:kFieldValidationMaxCharsKey]) //Max chars case. Check length of string.
             {
-                int maxChars = [[self.validationInfo objectForKey:key] intValue];
+                int maxChars = [[self.validationConditions objectForKey:key] intValue];
                 if(str.length > maxChars)
                 {
                     return NO;
@@ -94,9 +94,9 @@ typedef enum {
 
 #pragma mark - Convenience constructors
 
-+ (RZValidator *)validatorWithInfo:(NSDictionary *)validationInfo
++ (RZValidator *)validatorWithConditions:(NSDictionary *)validationConditions
 {
-    return [[self alloc] initWithValidationInfo:validationInfo];
+    return [[self alloc] initWithValidationConditions:validationConditions];
 }
 
 + (RZValidator *)validatorWithBlock:(ValidationBlock)validationBlock
@@ -104,7 +104,7 @@ typedef enum {
     return [[self alloc] initWithValidationBlock:validationBlock];
 }
 
-+ (RZValidator *)isValidEmailAddress
++ (RZValidator *)emailAddressValidator
 {
     //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
     NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -115,14 +115,14 @@ typedef enum {
                             @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
                             @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     
-    RZValidator *validator = [[self alloc] initWithValidationInfo:@{kFieldValidationRegexKey: emailRegEx}];
+    RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationRegexKey: emailRegEx}];
     validator.localizedViolationString = @"Email address does not appear to be in the correct format."; // RZValidatorLocalizedString(@"invalid email address", @"Email address does not appear to be in the correct format.");
     return validator;
 }
 
-+ (RZValidator *)isNotEmpty
++ (RZValidator *)notEmptyValidator
 {
-    return [[self alloc] initWithValidationInfo:@{kFieldValidationMinCharsKey : @"1"}];
+    return [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
 }
 
 @end

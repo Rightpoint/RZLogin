@@ -28,7 +28,7 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 @interface RZValidator : NSObject
 
 // initialize with either a validation-info dictionary or a block
-- (id)initWithValidationInfo:(NSDictionary *)validationInfo;
+- (id)initWithValidationConditions:(NSDictionary *)validationConditions;
 - (id)initWithValidationBlock:(ValidationBlock)validationBlock;
 
 // a localized message describing the reason for failure
@@ -36,14 +36,14 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 @property (copy, nonatomic) NSString *localizedViolationString;
 
 // method to validate a string.
-- (BOOL)validateWithString:(NSString *)str;
+- (BOOL)isValidForString:(NSString *)str;
 
 // convenience constructors
-+ (RZValidator *)validatorWithInfo:(NSDictionary *)validationInfo;
++ (RZValidator *)validatorWithConditions:(NSDictionary *)validationConditions;
 + (RZValidator *)validatorWithBlock:(ValidationBlock)validationBlock;
 
 // some standard validators
-+ (RZValidator *)isValidEmailAddress;
-+ (RZValidator *)isNotEmpty;
++ (RZValidator *)emailAddressValidator;
++ (RZValidator *)notEmptyValidator;
 
 @end

@@ -133,7 +133,7 @@
 // optional validator for email-address field on login form
 - (RZValidator *)loginEmailAddressFieldValidator {
     
-    return [RZValidator isValidEmailAddress];
+    return [RZValidator emailAddressValidator];
 }
 
 // optional validator for password field on login form
@@ -177,8 +177,10 @@
 // optional validator for password field on sign-up form
 - (RZValidator *)signUpPasswordFieldValidator {
     
-    // this example: password must be between 4 and 8 digits long and include at least one numeric digit
-    return [RZValidator validatorWithInfo:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
+    // this example: password must be between 4 and 8 digits long and include at least one numeric digit    
+    RZValidator *validator = [[RZValidator alloc] initWithValidationConditions:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
+    validator.localizedViolationString = @"Password must be between 4 and 8 digits long, and include at least one numeric digit."; // RZValidatorLocalizedString(@"invalid email address", @"Email address does not appear to be in the correct format.");
+    return validator;
 }
 
 

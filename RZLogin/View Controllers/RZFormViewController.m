@@ -78,7 +78,7 @@
         // Look-up the validation info for this field. If the string is not valid, return nil.
         // If the validation info for this field does not exist, it does not need to be validated.
         validator = [self.fieldValidators objectForKey:key];
-        if(validator != nil && ![validator validateWithString:field.text])
+        if(validator != nil && ![validator isValidForString:field.text])
         {
             return validator; // invalid, we're done
         }
