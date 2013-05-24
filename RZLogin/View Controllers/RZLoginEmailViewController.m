@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Any custom initialization goes here.
+        self.presentSignUpFormAsModal = YES;    // by default, let's present the sign-up form modally
     }
     return self;
 }
@@ -32,8 +32,11 @@
         [self.signUpButton removeFromSuperview];
     }
     
-    // FIXME: determine whether or not we were presented 'modally'...
-    // and remove the 'cancel' button if we were not (since we have 'back' button)
+    // determine whether or not we were presented 'modally'...
+    if( self.presentingViewController == nil ) {
+        // if we were NOT presented modally, remove the (unnecessary) 'cancel' button
+        [self.cancelButton removeFromSuperview];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,7 +45,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)loginPressed
+- (IBAction)loginButtonAction:(id)sender
 {
     RZValidator *failedValidator = [self validateForm];
     if(failedValidator == nil)
@@ -60,18 +63,23 @@
     }
 }
 
-// A cancel button will only be present and connected to this outlet if this controller is presented modally.
-- (IBAction)cancelPressed
-{
-    [self dismissViewControllerAnimated:YES completion:nil]; // note FIXME above, in viewDidLoad
-}
-
-- (IBAction)signUpPressed
+- (IBAction)signupButtonAction:(id)sender
 {
     if(self.signUpController != nil)
     {
-        [self presentViewController:self.signUpController animated:YES completion:nil];
+        if( self.shouldPresentSignupFormAsModal ) {
+            [self presentViewController:self.signUpController animated:YES completion:nil];
+        } else {
+            [self.navigationController pushViewController:self.signUpController animated:YES];
+        }
     }
+}
+
+- (IBAction)cancelButtonAction:(id)sender
+{
+    // note a cancel button will only be present if this controller was presented modally...
+    // so we can simply dismiss ourselves here :)
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

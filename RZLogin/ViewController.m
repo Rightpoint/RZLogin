@@ -50,8 +50,6 @@
     loginController.delegate = self;
         
     // ok, simply present our login view-controller...
-    // note for the 'default' example here, we'll present views *modally* (since our default email-login XIB shows a 'cancel' button)
-    loginController.presentViewsAsModal = YES;
     [self.navigationController pushViewController:loginController animated:YES];
 }
 
@@ -65,7 +63,6 @@
     // for this example, let's also use a customized email-login view controller (and XIB) too ;)
     loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
 
-    loginController.presentViewsAsModal = NO; // note present views with 'push' instead, since there's no 'cancel' button in our (custom) email-login form
     [self.navigationController pushViewController:loginController animated:YES];
 }
 

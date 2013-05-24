@@ -38,7 +38,8 @@
         // set defaults for login-options
         self.signupAllowed = YES;
         self.forgotPasswordAllowed = NO;
-        self.presentViewsAsModal = NO;
+        self.presentEmailLoginFormAsModal = NO; // by default, let's 'push' the email-login form (i.e. not modally)
+        self.presentSignUpFormAsModal = YES;    // however, by default, let's present the sign-up form modally
     }
     return self;
 }
@@ -167,6 +168,7 @@
         if( self.emailLoginViewController == nil ) {
             // if no custom v/c has already been specified, allocate the 'default' login-with-email v/c
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
+            self.emailLoginViewController.presentSignUpFormAsModal = self.presentSignUpFormAsModal; // present sign-up in the same fashion
         }
         self.emailLoginViewController.loginDelegate = self.delegate; // in any case, use the same delegate
         
@@ -264,7 +266,7 @@
 // login with Email button action
 - (IBAction)loginWithEmailAction:(id)sender {
 
-    if( self.presentViewsAsModal ) {
+    if( self.shouldPresentEmailLoginFormAsModal ) {
         [self presentViewController:self.emailLoginViewController animated:YES completion:nil];
     } else {
         [self.navigationController pushViewController:self.emailLoginViewController animated:YES];
@@ -274,7 +276,7 @@
 // signup with email button action
 - (IBAction)signupWithEmailAction:(id)sender {
 
-    if( self.presentViewsAsModal ) {
+    if( self.shouldPresentSignupFormAsModal ) {
         [self presentViewController:self.signUpViewController animated:YES completion:nil];
     } else {
         [self.navigationController pushViewController:self.signUpViewController animated:YES];

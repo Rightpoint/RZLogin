@@ -93,8 +93,9 @@
 
 // properties for various login options; note some apply to only certain login-types
 @property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
+@property (nonatomic, assign, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
 @property (nonatomic, assign, getter=isForgotPasswordAllowed) BOOL forgotPasswordAllowed;
-@property (nonatomic, assign, getter=shouldPresentViewsAsModal) BOOL presentViewsAsModal; // else, present via 'push' onto nav-controller
+@property (nonatomic, assign, getter=shouldPresentEmailLoginFormAsModal) BOOL presentEmailLoginFormAsModal; 
 
 // the delegate (see above for details) must conform to one or more of the following protocols:
 //  RZLoginEmailViewControllerDelegate, RZFacebookViewControllerDelegate, RZTwitterViewControllerDelegate
