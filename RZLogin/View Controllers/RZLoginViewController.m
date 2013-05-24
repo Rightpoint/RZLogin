@@ -235,6 +235,14 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    if( self.navigationController.viewControllers[0] == self ) {
+        // if we're at the bottom of the nav-stack... hide the nav-bar
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+    }
+    [super viewWillAppear:animated];
+}
 
 #pragma mark - error alert
 

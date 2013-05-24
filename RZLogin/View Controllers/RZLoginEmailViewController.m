@@ -18,6 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"Login";
         self.presentSignUpFormAsModal = YES;    // by default, let's present the sign-up form modally
     }
     return self;
@@ -37,6 +38,12 @@
         // if we were NOT presented modally, remove the (unnecessary) 'cancel' button
         [self.cancelButton removeFromSuperview];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated]; // show the nav-bar
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning

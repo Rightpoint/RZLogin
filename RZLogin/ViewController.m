@@ -30,6 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // any custom initialization goes here...
+        self.title = @"Demo";
     }
     return self;
 }
