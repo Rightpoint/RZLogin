@@ -52,6 +52,15 @@
 //
 //  @end
 //
+//  Also note there are various LOGIN OPTIONS properties, which have typical default values; currently these options
+//  apply only to the email-login form and it's (optional) sign-up form:
+// 
+//      signupAllowed                : if true, show the 'sign-up' button, both from main view as well as from the email-login form itself
+//      presentSignUpFormAsModal     : if true (and if sign-up is allowed), present the sign-up form modally (the default behavior)
+//      forgotPasswordAllowed        : if true, show a 'forgot password' button from the email-login form (default is: false)
+//      presentEmailLoginFormAsModal : defaults to false; but if true, we present the email-login form modally
+//                                     (note you must add a 'cancel' button to your custom form in this case; wired up to |cancelButtonAction|)
+//
 //  ---------------------------------------------------------------------------------
 //  Further notes on the RZLoginEmailViewController and RZSignUpViewController forms:
 //
@@ -65,6 +74,8 @@
 //     since these are used by the form-field validators (RZValidator).
 //  4. The 'sign-up' form requires that the first password field has a 'tag' of '2'; and the second a tag of '3'
 //     (used by the validator to ensure that the password is correctly entered twice by the user).
+//  5. Note that the 'cancel' button is optional; it is required only if you intend to present either
+//     form 'modally' -- see login-options |presentEmailLoginFormAsModal| and |presentSignUpFormAsModal|.
 //
 //  Created by Joshua Leibsly on 3/18/13. Contributions and refactor by Daniel Kopyc on 5/20/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
