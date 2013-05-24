@@ -30,6 +30,12 @@ typedef void (^AccountsRequestCompletionBlock)(NSArray *accounts, NSError *error
 //  facebookAppID: The Facebook application ID.
 - (void)loginToFacebookWithAppID:(NSString *)facebookAppID completion:(FacebookLoginCompletionBlock)completionBlock;
 
+//Method to retrieve a Facebook oAuth token with custom permissions. Parameters:
+//  facebookAppID: The Facebook application ID.
+//  permissions: An array of requested Facebook permissions. You can find the list of permissions in RZLoginStringCibsta=
+//  audience: Only requred if RZFBPermissionPublishToFeed is a requested permission. Possible values are: ACFacebookAudienceEveryone, ACFacebookAudienceFriends, ACFacebookAudienceOnlyMe.
+- (void)loginToFacebookWithAppID:(NSString *)facebookAppID withPermissions:(NSArray *)permissions audience:(NSString *)audience completion:(FacebookLoginCompletionBlock)completionBlock;
+
 //Method to retrieve a Twitter oAuth token. Parameters:
 //  consumerKey: The Twitter application consumer key.
 //  consumerSecret: The twitter application consumer secret.

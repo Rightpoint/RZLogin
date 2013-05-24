@@ -9,6 +9,7 @@
 #import "RZSocialLoginManager.h"
 #import "TWAPIManager.h"
 #import "TWSignedRequest.h"
+#import "RZLoginStringConstants.h"
 #import <Accounts/Accounts.h>
 
 #define kTwitterReverseAuthResponseTokenIndex       0
@@ -37,12 +38,33 @@
     return _defaultManager;
 }
 
-//Method to login via Facebook and retrieve an oAuth token. 
+//Default Facebook login method that only asks for the user's email
 - (void)loginToFacebookWithAppID:(NSString *)facebookAppID completion:(FacebookLoginCompletionBlock)completionBlock
 {
+    [self loginToFacebookWithAppID:facebookAppID
+                   withPermissions:[NSArray arrayWithObject:kRZFBPermissionEmail]
+                          audience:nil
+                        completion:completionBlock];
+}
+
+//Method to login via Facebook and retrieve an oAuth token. 
+- (void)loginToFacebookWithAppID:(NSString *)facebookAppID withPermissions:(NSArray *)permissions audience:(NSString *)audience completion:(FacebookLoginCompletionBlock)completionBlock
+{
     //Dictionary of Facebook requestion options that includes the facebook app ID as well as the permissions we would like access to.
-    //TODO: customize permissions.
-    NSDictionary *options = @{ACFacebookAppIdKey : facebookAppID, ACFacebookPermissionsKey : @[@"email"]};
+    
+    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithObjectsAndKeys:facebookAppID, ACFacebookAppIdKey, permissions, ACFacebookPermissionsKey, nil];
+    
+    if([permissions containsObject:kRZFBPermissionPublishToFeed])
+    {
+        if(audience != nil)
+        {
+            [options setObject:audience forKey:ACFacebookAudienceKey];
+        }
+        else
+        {
+            [NSException raise:NSInvalidArgumentException format:@"You must provide an audience to loginToFacebookWithAppId when requesting permission to publish to a feed."];
+        }
+    }
     
     [self getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierFacebook options:options completionBlock:^(NSArray *accounts, NSError *error) {
         
