@@ -34,6 +34,7 @@
 		0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D916FB79A6003D314D /* RZSignUpViewController.m */; };
 		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
 		03D4AE70174FD74C00FEAF7A /* RZLoginStringConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D4AE6F174FD74C00FEAF7A /* RZLoginStringConstants.m */; };
+		03D4AE87174FE72D00FEAF7A /* GoogleAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D4AE86174FE72D00FEAF7A /* GoogleAuthView.m */; };
 		6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65295669174ABDA8000CFA32 /* RZLoginViewController.xib */; };
 		6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */; };
 		65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */; };
@@ -89,6 +90,8 @@
 		0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZSignUpViewController.xib; path = "View Controllers/RZSignUpViewController.xib"; sourceTree = "<group>"; };
 		03D4AE6E174FBEDB00FEAF7A /* RZLoginStringConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZLoginStringConstants.h; sourceTree = "<group>"; };
 		03D4AE6F174FD74C00FEAF7A /* RZLoginStringConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZLoginStringConstants.m; sourceTree = "<group>"; };
+		03D4AE85174FE72D00FEAF7A /* GoogleAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAuthView.h; sourceTree = "<group>"; };
+		03D4AE86174FE72D00FEAF7A /* GoogleAuthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAuthView.m; sourceTree = "<group>"; };
 		65295668174AB65A000CFA32 /* RZLoginFacebookViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginFacebookViewControllerDelegate.h; path = "View Controllers/RZLoginFacebookViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295669174ABDA8000CFA32 /* RZLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginViewController.xib; path = "View Controllers/RZLoginViewController.xib"; sourceTree = "<group>"; };
 		6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginViewController.xib; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 				6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */,
 				6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */,
 				65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */,
+				03D4AE88174FE73300FEAF7A /* Views */,
 				0383A5BE16FB76C0003D314D /* View Controllers */,
 				0383A5C216FB7748003D314D /* Managers */,
 				0383A5D716FB7818003D314D /* Form Validation */,
@@ -253,6 +257,15 @@
 				0383A5D516FB7814003D314D /* RZValidator.m */,
 			);
 			name = "Form Validation";
+			sourceTree = "<group>";
+		};
+		03D4AE88174FE73300FEAF7A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				03D4AE85174FE72D00FEAF7A /* GoogleAuthView.h */,
+				03D4AE86174FE72D00FEAF7A /* GoogleAuthView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +359,7 @@
 				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
 				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
 				03D4AE70174FD74C00FEAF7A /* RZLoginStringConstants.m in Sources */,
+				03D4AE87174FE72D00FEAF7A /* GoogleAuthView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
