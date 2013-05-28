@@ -2,6 +2,8 @@
 //  RZLoginEmailViewControllerDelegate.h
 //  RZLogin
 //
+//  To support login with email-address/password, implement the following protocol in the 'delegate' for RZLoginViewController.
+//
 //  Created by Daniel Kopyc on 5/20/13.
 //  Copyright (c) 2013 Raizlabs. All rights reserved.
 //
@@ -9,16 +11,30 @@
 #import "RZValidator.h"
 #import <Foundation/Foundation.h>
 
-// RZLogin: to add support for login via email (with optional sign-up form),
-// simply implement the following protocol in the 'delegate' for RZLoginViewController
-//
+@class RZLoginViewController;
+
 @protocol RZLoginEmailViewControllerDelegate <NSObject>
 
-- (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;       // auth the entered email-address/password here in your delegate
+@required
+
+// this method is called when an email-address/password is submitted; authenticate the formInfo in your delegate
+- (void)loginViewController:(RZLoginViewController *)lvc loginButtonClickedWithFormInfo:(NSDictionary *)formInfo;
 
 @optional
 
-- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo;      // if sign-up is allowed, also impl this method in your delegate
+// properties for login-options for 'sign-up' form
+@property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
+@property (nonatomic, assign, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
+
+// this method is called when an email-address / password is submitted for 'sign-up'
+// if sign-up is allowed (see above property), you must also implement this method in your delegate
+- (void)loginViewController:(RZLoginViewController *)lvc signUpButtonClickedWithFormInfo:(NSDictionary *)formInfo;
+
+// return true if you'd like to support 'forgot password' functionality (default is 'false' if unimplemented)
+@property (nonatomic, assign, getter=isForgotPasswordAllowed) BOOL forgotPasswordAllowed;
+
+// return true if email-login form should be presented modally (default is 'false' if unimplemented)
+@property (nonatomic, assign, getter=shouldPresentAsModal) BOOL presentAsModal;
 
 // optional validators for email-address and password fields on login form
 @property (nonatomic, readonly, strong) RZValidator *loginEmailAddressFieldValidator;  // default validator: 'is a valid email address'

@@ -34,12 +34,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {        
-        // set defaults for login-options
-        self.signupAllowed = YES;
-        self.forgotPasswordAllowed = NO;
-        self.presentEmailLoginFormAsModal = NO; // by default, let's 'push' the email-login form (i.e. not modally)
-        self.presentSignUpFormAsModal = YES;    // however, by default, let's present the sign-up form modally
+    if (self) {
+        // add any additional init stuff here...
     }
     return self;
 }
@@ -51,15 +47,15 @@
 // i.e. for each 'type' of login the client-application wants to support
 //
 - (BOOL)supportsLoginTypeEmail {
-    return [self.delegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
+    return [self.emailLoginDelegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeFacebook {
-    return [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)];
+    return [self.facebookLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeTwitter {
-    return [self.delegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
+    return [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
 }
 
 
@@ -70,8 +66,8 @@
 //
 - (NSString *)facebookAppId {
     
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginFacebookViewControllerDelegate>) self.delegate).facebookAppId;
+    if( [self.facebookLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginFacebookViewControllerDelegate>) self.facebookLoginDelegate).facebookAppId;
     } else {
         return nil;
     }
@@ -79,57 +75,26 @@
 
 - (NSString *)twitterConsumerKey {
     
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerKey;
+    if( [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.twitterLoginDelegate).twitterConsumerKey;
     } else {
         return nil;
     }
 }
 
 - (NSString *)twitterConsumerSecret {
-    if( [self.delegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
-        return ((id<RZLoginTwitterViewControllerDelegate>) self.delegate).twitterConsumerSecret;
+    if( [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
+        return ((id<RZLoginTwitterViewControllerDelegate>) self.twitterLoginDelegate).twitterConsumerSecret;
     } else {
         return nil;
     }
 }
 
-
-#pragma mark - validators for login with email and signup forms
-
-// since these RZLoginEmailViewControllerDelegate properties are optional,
-// these local convenience getters check if implemented; else return nil
-//
-- (RZValidator *)loginEmailAddressFieldValidator {
-    if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
-        return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginEmailAddressFieldValidator;
-    } else {
-        return nil;
-    }
-}
-
-- (RZValidator *)loginPasswordFieldValidator {
-    if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
-        return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).loginPasswordFieldValidator;
-    } else {
-        return nil;
-    }
-}
-
-- (RZValidator *)signUpEmailAddressFieldValidator {
-    if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
-        return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpEmailAddressFieldValidator;
-    } else {
-        return nil;
-    }
-}
-
-- (RZValidator *)signUpPasswordFieldValidator {
-    if( [((id<RZLoginEmailViewControllerDelegate>) self.delegate) respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
-        return ((id<RZLoginEmailViewControllerDelegate>) self.delegate).signUpPasswordFieldValidator;
-    } else {
-        return nil;
-    }
+- (void)setEmailLoginViewController:(RZLoginEmailViewController *)emailLoginViewController {
+    _emailLoginViewController = emailLoginViewController;
+    
+    // and stash a reference (for RZLoginEmailViewControllerDelegate delegate callbacks)
+    _emailLoginViewController.loginViewController = self;
 }
 
 
@@ -142,7 +107,6 @@
     if( ![self supportsLoginTypeFacebook] ) {
         // client doesn't want facebook login support, so remove its button...
         [self.facebookLoginButton removeFromSuperview];
-        
     }
     if( ![self supportsLoginTypeTwitter] ) {
         // client doesn't want twitter login support, so remove its button...
@@ -168,63 +132,8 @@
         if( self.emailLoginViewController == nil ) {
             // if no custom v/c has already been specified, allocate the 'default' login-with-email v/c
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
-            self.emailLoginViewController.presentSignUpFormAsModal = self.presentSignUpFormAsModal; // present sign-up in the same fashion
         }
-        self.emailLoginViewController.loginDelegate = self.delegate; // in any case, use the same delegate
-        
-        // setup email login form validation (note we're using each field's placeholder-text as keys)
-        [self.emailLoginViewController setFormKeyType:RZFormFieldKeyTypePlaceholderText];
-        
-        // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
-        if( [self loginEmailAddressFieldValidator] != nil ) {
-            [self.emailLoginViewController addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
-        } else {
-            [self.emailLoginViewController addValidator:[RZValidator emailAddressValidator] forFieldWithPlaceholderText:@"Email"];
-        }
-        
-        // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
-        if( [self loginPasswordFieldValidator] != nil ) {
-            [self.emailLoginViewController addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:@"Password"];
-        } else {
-            [self.emailLoginViewController addValidator:[RZValidator notEmptyValidator] forFieldWithPlaceholderText:@"Password"];
-        }
-
-        if( self.isSignupAllowed ) {
-            // if sign-up is allowed, create and configure its view-controller too; note also it shares the same delegate
-            self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
-            self.signUpViewController.loginDelegate = self.delegate;
-            
-            // setup sign-up form validation (note we're using each field's 'tag' as the key)
-            [self.signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
-            
-            // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
-            if( [self signUpEmailAddressFieldValidator] != nil ) {
-                [self.signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithTag:1];
-            } else {
-                [self.signUpViewController addValidator:[RZValidator emailAddressValidator] forFieldWithTag:1];
-            }
-            
-            // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
-            if( [self signUpPasswordFieldValidator] != nil ) {
-                [self.signUpViewController addValidator:[self signUpPasswordFieldValidator] forFieldWithTag:2];
-            } else {
-                [self.signUpViewController addValidator:[RZValidator notEmptyValidator] forFieldWithTag:2];
-            }
-            
-            // and finally, validate that the (two) password fields match
-            // (note first password field has a view-tag of '2' and second has tag of '3')
-            ValidationBlock validationBlock = ^BOOL(NSString *str) {
-                NSString *prevPasswordFieldText = [(UITextField *)[self.signUpViewController.view viewWithTag:2] text];
-                return [str isEqualToString:prevPasswordFieldText];
-            };
-            RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
-            validator.localizedViolationString = RZValidatorLocalizedString(@"passwords must match", @"Passwords must match.");
-            [self.signUpViewController addValidator:validator forFieldWithTag:3]; // add validator to second 'password' field
-
-        } else {
-            self.signUpViewController = nil;
-        }
-        self.emailLoginViewController.signUpController = self.signUpViewController; // finally, attach it
+        self.emailLoginViewController.delegate = self.emailLoginDelegate; // in any case, use the same delegate
         
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
             // if we're ONLY supporting login via email...
@@ -274,7 +183,7 @@
 // login with Email button action
 - (IBAction)loginWithEmailAction:(id)sender {
 
-    if( self.shouldPresentEmailLoginFormAsModal ) {
+    if( self.emailLoginViewController.shouldPresentAsModal ) {
         [self presentViewController:self.emailLoginViewController animated:YES completion:nil];
     } else {
         [self.navigationController pushViewController:self.emailLoginViewController animated:YES];
@@ -284,10 +193,10 @@
 // signup with email button action
 - (IBAction)signupWithEmailAction:(id)sender {
 
-    if( self.shouldPresentSignupFormAsModal ) {
-        [self presentViewController:self.signUpViewController animated:YES completion:nil];
+    if( self.emailLoginViewController.shouldPresentSignupFormAsModal ) {
+        [self presentViewController:self.emailLoginViewController.signUpViewController animated:YES completion:nil];
     } else {
-        [self.navigationController pushViewController:self.signUpViewController animated:YES];
+        [self.navigationController pushViewController:self.emailLoginViewController.signUpViewController animated:YES];
     }
 }
 
@@ -299,10 +208,10 @@
     {
         if(token)
         {
-            [((NSObject<RZLoginFacebookViewControllerDelegate> *) self.delegate) didLoginWithFacebookWithToken:token
-                                                                                                      fullName:fullName
-                                                                                                        userId:userId];
-        } else {       
+            [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
+        }
+        else
+        {
             [self showAlertForError:error socialNetwork:@"Facebook"];
         }
     }];
@@ -360,13 +269,12 @@
                                                                  account:account
         completion:^(NSString *token, NSString *tokenSecret, NSString *username, NSString *userId, NSError *error) {
             
-            if((token && token.length > 0) && (tokenSecret && tokenSecret.length > 0)) {
-
-                [((NSObject<RZLoginTwitterViewControllerDelegate> *) self.delegate) didLoginWithTwitterWithToken:token
-                                                                                                      tokenSecret:tokenSecret
-                                                                                                         username:username
-                                                                                                           userId:userId];
-            } else {
+            if((token && token.length > 0) && (tokenSecret && tokenSecret.length > 0))
+            {
+                [self.twitterLoginDelegate loginViewController:self didLoginWithTwitterWithToken:token tokenSecret:tokenSecret username:username userId:userId];
+            }
+            else
+            {
                 [self showAlertForError:error socialNetwork:@"Twitter"];
             }
     }];

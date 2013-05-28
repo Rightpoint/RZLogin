@@ -52,7 +52,7 @@
     if(failedValidator == nil)
     {
         // ok, valid form, so call the delegate method to check login info
-        [self.loginDelegate signUpPressedWithFormInformation:[self formKeysAndValues]];
+        [self.delegate loginViewController:self.loginViewController signUpButtonClickedWithFormInfo:[self formKeysAndValues]];
         
     } else {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid sign-up information.");

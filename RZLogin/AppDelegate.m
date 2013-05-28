@@ -15,21 +15,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    
-#if exampleShowLoginViewControllerAsRootVC
-    self.loginController = [[RZLoginViewController alloc] init];
-    self.loginController.delegate = self.viewController; // note we use this here as our delegate, even though we're not displaying it
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.loginController];
-    
-#elif exampleShowCustomLoginViewControllerAsRootVC
-    self.loginController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
-    self.loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
-    self.loginController.delegate = self.viewController; // note we use this here as our delegate, even though we're not displaying it
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.loginController];
-    
-#else // normal demo, with both custom and standard login-views (i.e. choose via buttons in ViewController.xib)
+       
+    // show demo view, with both custom and standard login-views (i.e. choose via buttons in ViewController.xib)
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
-#endif
     self.window.rootViewController = self.navigationController;
     
     [self.window makeKeyAndVisible];

@@ -16,13 +16,24 @@
 @property (nonatomic, strong) IBOutlet UIButton *signUpButton;
 @property (nonatomic, strong) IBOutlet UIButton *cancelButton; // this button is optional (only for modal presentation)
 
-// reference to the sign-up form view-controller that we (optionally) present when 'sign-up' button is clicked
-@property (nonatomic, weak) RZSignUpViewController *signUpController;
+// a (weak) reference to the RZLoginViewController that's presenting us (either modally or on nav-stack)
+@property (nonatomic, weak) RZLoginViewController *loginViewController;
 
-// whether or not we should present the sign-up form modally
-@property (nonatomic, assign, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
+// whether or not we should present the email-login form modally (as specified by delegate)
+@property (nonatomic, readonly, getter=shouldPresentAsModal) BOOL presentAsModal;
 
-@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> loginDelegate;
+// whether or not we should allow sign-up (as specified by delegate)
+@property (nonatomic, readonly, getter=isSignupAllowed) BOOL signupAllowed;
+
+// whether or not we should present the sign-up form modally (as specified by delegate)
+@property (nonatomic, readonly, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
+
+// the sign-up form view-controller that we (optionally) present when 'sign-up' button is clicked
+// (note if not explicitly set, and isSignupAllow is true, uses default instance of a simple RZSignUpViewController)
+@property (nonatomic, strong) RZSignUpViewController *signUpViewController;
+
+// the delegate
+@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> delegate;
 
 - (IBAction)loginButtonAction:(id)sender;
 - (IBAction)signupButtonAction:(id)sender;

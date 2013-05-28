@@ -16,10 +16,6 @@
 // example: to support all three login-types, implement all three protocols
 @interface ViewController () <RZLoginEmailViewControllerDelegate, RZLoginFacebookViewControllerDelegate, RZLoginTwitterViewControllerDelegate>
 
-// alternately, to support email-login only... implement only the single protocol, for example:
-//
-// @interface ViewController () <RZLoginEmailViewControllerDelegate>
-
 @end
 
 
@@ -30,7 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // any custom initialization goes here...
-        self.title = @"Demo";
+        self.title = @"Choose Demo";
     }
     return self;
 }
@@ -46,25 +42,39 @@
 - (IBAction)loginUsingDefaultXIB:(id)sender
 {
     // create a login view-controller (with default configuration)
-    // note the supported login-types depend on which protocol(s) are implemented by the delegate (self)
-    RZLoginViewController *loginController = [[RZLoginViewController alloc] init];
-    loginController.delegate = self;
-        
+    // note delegate methods implemented below for the protocol used for each login-type
+    RZLoginViewController *loginViewController = [[RZLoginViewController alloc] init];
+    loginViewController.emailLoginDelegate = self;
+    loginViewController.facebookLoginDelegate = self;
+    loginViewController.twitterLoginDelegate = self;
+    
     // ok, simply present our login view-controller...
-    [self.navigationController pushViewController:loginController animated:YES];
+    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
-// display another sample login controller;
-// using a custom XIB with a background image (and no 'twitter' button)
+// display sample login controller; using the default, included XIBs with plain buttons; allow login via email ONLY
+- (IBAction)loginViaEmailOnlyUsingDefaultXIB:(id)sender
+{
+    // create a login view-controller (with default configuration); with only email-login supported
+    RZLoginViewController *loginViewController = [[RZLoginViewController alloc] init];
+    loginViewController.emailLoginDelegate = self; // note no other delegates (just email-login :)
+    
+    // ok, simply present our login view-controller...
+    [self.navigationController pushViewController:loginViewController animated:YES];
+}
+
+// display another sample login controller, with only email-login and Facebook login supported (no twitter)
+// so we use a custom XIB with a background image, and no twitter button (and, naturally, no twitterLoginDelegate is specified)
 - (IBAction)loginUsingCustomXIB:(id)sender
 {
-    MyCustomLoginViewController *loginController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
-    loginController.delegate = self;
+    MyCustomLoginViewController *loginViewController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
+    loginViewController.emailLoginDelegate = self;
+    loginViewController.facebookLoginDelegate = self;
     
     // for this example, let's also use a customized email-login view controller (and XIB) too ;)
-    loginController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
+    loginViewController.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
 
-    [self.navigationController pushViewController:loginController animated:YES];
+    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,9 +90,17 @@
     return @"351055245000574";
 }
 
-- (void)didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId
+- (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId
 {
     NSLog(@"%s: %@ - %@", __FUNCTION__, fullName, fbToken);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIAlertView alloc] initWithTitle:@"Login Succeeded"
+                                    message:[NSString stringWithFormat:@"You have successfully logged-in with Facebook as: %@", fullName]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    });
 }
 
 
@@ -98,9 +116,17 @@
     return @"wSF4V5MO1hMzJiANpBbUTh3diIuadtEihfjYYTC6Y";
 }
 
-- (void)didLoginWithTwitterWithToken:(NSString *)twitterToken tokenSecret:(NSString *)tokenSecret username:(NSString *)username userId:(NSString *)userId
+- (void)loginViewController:(RZLoginViewController *)lvc didLoginWithTwitterWithToken:(NSString *)twitterToken tokenSecret:(NSString *)tokenSecret username:(NSString *)username userId:(NSString *)userId
 {
     NSLog(@"%s: %@ - %@ : %@", __FUNCTION__, username, twitterToken, tokenSecret);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIAlertView alloc] initWithTitle:@"Login Succeeded"
+                                    message:[NSString stringWithFormat:@"You have successfully logged-in with Twitter as: %@", username]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    });
 }
 
 
@@ -108,16 +134,56 @@
 
 // Invoked when the 'login' button is pressed, so you would authenticate
 // the username/email-address and password values from the formInfo here.
-- (void)loginPressedWithFormInformation:(NSDictionary *)formInfo
+- (void)loginViewController:(RZLoginEmailViewController *)loginViewController loginButtonClickedWithFormInfo:(NSDictionary *)formInfo
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
+    
+    // example: show alert-view with username that we logged-in
+    //
+    // note normally we would validate the submitted email-address/password against our backend/web-service here...
+    // and either dismiss the emailLoginController or show error-alert accordingly
+    //
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIAlertView alloc] initWithTitle:@"Login Succeeded"
+                                    message:[NSString stringWithFormat:@"You have successfully logged-in with username: %@", [formInfo objectForKey:@"Email"]]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+        
+        // ok, dismiss our email-login view (note it might have been modal or on nav-stack)
+        if( loginViewController.presentedViewController != nil ) {
+            [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self.navigationController popToViewController:loginViewController animated:YES]; // pop back to main view
+        }
+    });
 }
 
 // Invoked when the 'sign-up' button is pressed from the (optional) sign-up form, so you would
 // implement here whatever business-logic is required to sign-up a new user for your application.
-- (void)signUpPressedWithFormInformation:(NSDictionary *)formInfo
+- (void)loginViewController:(RZLoginViewController *)loginViewController signUpButtonClickedWithFormInfo:(NSDictionary *)formInfo
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
+
+    // example: show alert-view with email-address and password that we want to 'sign-up'
+    //
+    // note normally we would validate the submitted email-address / password against our backend/web-service here...
+    // and either dismiss the view-controller or show error-alert accordingly
+    //
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIAlertView alloc] initWithTitle:@"Sign-up Succeeded"
+                                    message:[NSString stringWithFormat:@"You have successfully signed-up with username: %@ and password: %@",
+                                             [formInfo objectForKey:@"Email"], [formInfo objectForKey:@"Password"]]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+        
+        // ok, dismiss our sign-up view (note it might have been modal or on nav-stack)
+        if( loginViewController.presentedViewController != nil ) {
+            [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        [self.navigationController popToViewController:loginViewController animated:YES]; // and pop back to main view
+    });
 }
 
 

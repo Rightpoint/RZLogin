@@ -3,36 +3,37 @@
 //  RZLogin
 //
 //  RZLoginViewController is a UIViewController that encapsulates functionality for a "user login" experience, and allows them
-//  to choose between several supported login 'types' (e.g. login with an email-address/password; login with Facebook or Twitter, etc.)
+//  to choose between several supported login 'types'; for example login with an email-address/password,
+//  or login with Facebook or Twitter, etc.
 //
 //  This class can be sub-classed to override defaults or implement custom functionality;
-//  the use of alternate NIB/XIB files also allows for complete customization of all of the login views.
+//  note the use of alternate NIB/XIB files also allows for complete customization of all of the login views.
 //  Please also refer to the examples in this project for details.
 //
-//  The delegate, which (depending on which login-types your app wishes to support),
-//  must conform to one or more of the following protocols:
+//  Depending on which login-types your app wishes to support, you must provide one or more delegates for each type,
+//  and which conform, respectively, to protocols listed:
 //
-//      RZLoginEmailViewControllerDelegate -- for login with an email-address and password,
-//      RZFacebookViewControllerDelegate   -- for login via Facebook account,
-//      RZTwitterViewControllerDelegate    -- for login via Twitter account.
+//      emailLoginDelgate     : for login w/ email-address and password; must implement the protocol RZLoginEmailViewControllerDelegate
+//      facebookLoginDelegate : for login via Facebook account; must implement the protocol RZLoginFacebookViewControllerDelegate
+//      twitterLoginDelegate  : for login via Twitter account; must implement the protocol RZLoginTwitterViewControllerDelegate
 //
-//  In the simplest use case, one can simply create a (default) instance of RZLoginViewController,
-//  and push it onto the current nav-stack, for example like so:
+//  To illustrate the simplest use-case, we can create a (default) instance of RZLoginViewController,
+//  and push it onto the current nav-stack; and handle login via Facebook, for example like so:
 //
 //  @implementation MyRootViewController
 //     ...
 //
 //  - (void) doLogin {
 //
-//      RZLoginViewController *loginController = [[RZLoginViewController alloc] init];
-//      loginController.delegate = self;
+//      RZLoginViewController *loginViewController = [[RZLoginViewController alloc] init];
+//      loginViewController.facebookLoginDelegate = self;
 //
-//      [self.navigationController pushViewController:loginController animated:YES];
+//      [self.navigationController pushViewController:loginViewController animated:YES];
 //  }
 //
-//  The delegate (typically 'self') can then simply implement the various properties and methods
-//  required by each of the login-type protocols that it chooses to  support. For example, to support
-//  login via Facebook, we would implement the protocol for RZLoginFacebookViewControllerDelegate, like so:
+//  The delegate (typically 'self') then simply implements the various properties and methods required
+//  by the login-type protocol(s) that support. For example, to support login via Facebook, we would simply
+//  implement the protocol for RZLoginFacebookViewControllerDelegate, like so:
 //
 //  @interface MyRootViewController () <RZLoginFacebookViewControllerDelegate>
 //     ...
@@ -52,8 +53,11 @@
 //
 //  @end
 //
-//  Also note there are various LOGIN OPTIONS properties, which have typical default values; currently these options
-//  apply only to the email-login form and it's (optional) sign-up form:
+//  Also note for certain login-types, there are various LOGIN OPTIONS properties, which default to typical values.
+//  These values can be overridden via the delegate for a given login-type.
+//
+//  As part of RZLoginEmailViewControllerDelegate, the following options properties can be specified
+//  for the email-login form, and it's (optional) sign-up form:
 // 
 //      signupAllowed                : if true, show the 'sign-up' button, both from main view as well as from the email-login form itself
 //      presentSignUpFormAsModal     : if true (and if sign-up is allowed), present the sign-up form modally (the default behavior)
@@ -102,17 +106,12 @@
 @property (nonatomic, readonly) BOOL supportsLoginTypeFacebook;
 @property (nonatomic, readonly) BOOL supportsLoginTypeTwitter;
 
-// properties for various login options; note some apply to only certain login-types
-@property (nonatomic, assign, getter=isSignupAllowed) BOOL signupAllowed;
-@property (nonatomic, assign, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
-@property (nonatomic, assign, getter=isForgotPasswordAllowed) BOOL forgotPasswordAllowed;
-@property (nonatomic, assign, getter=shouldPresentEmailLoginFormAsModal) BOOL presentEmailLoginFormAsModal; 
+// delegates for each of the (optionally) supported login-types
+@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> emailLoginDelegate;
+@property (nonatomic, weak) id<RZLoginFacebookViewControllerDelegate> facebookLoginDelegate;
+@property (nonatomic, weak) id<RZLoginTwitterViewControllerDelegate> twitterLoginDelegate;
 
-// the delegate (see above for details) must conform to one or more of the following protocols:
-//  RZLoginEmailViewControllerDelegate, RZFacebookViewControllerDelegate, RZTwitterViewControllerDelegate
-@property (nonatomic, weak) id delegate; 
-
+// set this property to specify a customized email-login form
 @property (nonatomic, strong) RZLoginEmailViewController *emailLoginViewController;
-@property (nonatomic, strong) RZSignUpViewController *signUpViewController;
 
 @end
