@@ -32,7 +32,7 @@ typedef void (^AccountsRequestCompletionBlock)(NSArray *accounts, NSError *error
 
 //Method to retrieve a Facebook oAuth token with custom permissions. Parameters:
 //  facebookAppID: The Facebook application ID.
-//  permissions: An array of requested Facebook permissions. You can find the list of permissions in RZLoginStringCibsta=
+//  permissions: An array of requested Facebook permissions. You can find the list of permissions on: https://developers.facebook.com/docs/reference/login/
 //  audience: Only requred if RZFBPermissionPublishToFeed is a requested permission. Possible values are: ACFacebookAudienceEveryone, ACFacebookAudienceFriends, ACFacebookAudienceOnlyMe.
 - (void)loginToFacebookWithAppID:(NSString *)facebookAppID withPermissions:(NSArray *)permissions audience:(NSString *)audience completion:(FacebookLoginCompletionBlock)completionBlock;
 

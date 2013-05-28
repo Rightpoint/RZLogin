@@ -9,8 +9,9 @@
 #import "RZSocialLoginManager.h"
 #import "TWAPIManager.h"
 #import "TWSignedRequest.h"
-#import "RZLoginStringConstants.h"
 #import <Accounts/Accounts.h>
+
+#define kRZFBPermissionPublishToFeed                @"publish_actions"
 
 #define kTwitterReverseAuthResponseTokenIndex       0
 #define kTwitterReverseAuthResponseTokenSecretIndex 1
@@ -42,7 +43,7 @@
 - (void)loginToFacebookWithAppID:(NSString *)facebookAppID completion:(FacebookLoginCompletionBlock)completionBlock
 {
     [self loginToFacebookWithAppID:facebookAppID
-                   withPermissions:[NSArray arrayWithObject:kRZFBPermissionEmail]
+                   withPermissions:[NSArray arrayWithObject:@"email"]
                           audience:nil
                         completion:completionBlock];
 }
