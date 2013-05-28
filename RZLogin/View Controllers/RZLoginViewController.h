@@ -46,7 +46,9 @@
 //        return @"351055245000574";
 //    }
 //
-//    - (void)didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId
+//    - (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken
+//                                                                                  fullName:(NSString *)fullName
+//                                                                                    userId:(NSString *)userId
 //    {
 //        NSLog(@"%s: %@ - %@", __FUNCTION__, fullName, fbToken);
 //    }
