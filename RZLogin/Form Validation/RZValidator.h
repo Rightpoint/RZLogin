@@ -43,7 +43,8 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 + (RZValidator *)validatorWithBlock:(ValidationBlock)validationBlock;
 
 // some standard validators
-+ (RZValidator *)emailAddressValidator;
++ (RZValidator *)emailAddressLooseValidator;
++ (RZValidator *)emailAddressStrictValidator; //Based on RFC 2822
 + (RZValidator *)notEmptyValidator;
 + (RZValidator *)notEmptyValidatorForFieldName:(NSString *)fieldName;
 
