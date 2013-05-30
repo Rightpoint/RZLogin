@@ -104,7 +104,16 @@ typedef enum {
     return [[self alloc] initWithValidationBlock:validationBlock];
 }
 
-+ (RZValidator *)emailAddressValidator
++ (RZValidator *)emailAddressLooseValidator
+{
+    NSString *emailRegEx =  @"[\\w-]+@([\\w-]+\\.)+[\\w-]+";
+    
+    RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationRegexKey: emailRegEx}];
+    validator.localizedViolationString = RZValidatorLocalizedString(@"invalid email address", @"Please enter a valid email address.");
+    return validator;
+}
+
++ (RZValidator *)emailAddressStrictValidator
 {
     //Regex expression from: http://www.cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
     NSString *emailRegEx =  @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"

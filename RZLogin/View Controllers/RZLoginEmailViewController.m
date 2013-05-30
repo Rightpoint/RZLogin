@@ -147,7 +147,7 @@
     if( [self loginEmailAddressFieldValidator] != nil ) {
         [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
     } else {
-        [self addValidator:[RZValidator emailAddressValidator] forFieldWithPlaceholderText:@"Email"];
+        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:@"Email"];
     }
     
     // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator

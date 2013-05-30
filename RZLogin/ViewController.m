@@ -202,10 +202,10 @@
     return validator;
 }
 
-// Optional validator for email-address field on sign-up form
-- (RZValidator *)signUpEmailAddressFieldValidator
-{
-    return [RZValidator emailAddressValidator];
+// optional validator for email-address field on sign-up form
+- (RZValidator *)signUpEmailAddressFieldValidator {
+    
+    return [RZValidator emailAddressLooseValidator];
 }
 
 // Optional validator for password field on sign-up form
