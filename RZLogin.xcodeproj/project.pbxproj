@@ -33,7 +33,6 @@
 		0383A5D616FB7815003D314D /* RZValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D516FB7814003D314D /* RZValidator.m */; };
 		0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D916FB79A6003D314D /* RZSignUpViewController.m */; };
 		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
-		03D4AE70174FD74C00FEAF7A /* RZLoginStringConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D4AE6F174FD74C00FEAF7A /* RZLoginStringConstants.m */; };
 		6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65295669174ABDA8000CFA32 /* RZLoginViewController.xib */; };
 		6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */; };
 		65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */; };
@@ -87,8 +86,6 @@
 		0383A5D816FB79A6003D314D /* RZSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZSignUpViewController.h; path = "View Controllers/RZSignUpViewController.h"; sourceTree = "<group>"; };
 		0383A5D916FB79A6003D314D /* RZSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZSignUpViewController.m; path = "View Controllers/RZSignUpViewController.m"; sourceTree = "<group>"; };
 		0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZSignUpViewController.xib; path = "View Controllers/RZSignUpViewController.xib"; sourceTree = "<group>"; };
-		03D4AE6E174FBEDB00FEAF7A /* RZLoginStringConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZLoginStringConstants.h; sourceTree = "<group>"; };
-		03D4AE6F174FD74C00FEAF7A /* RZLoginStringConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZLoginStringConstants.m; sourceTree = "<group>"; };
 		65295668174AB65A000CFA32 /* RZLoginFacebookViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginFacebookViewControllerDelegate.h; path = "View Controllers/RZLoginFacebookViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295669174ABDA8000CFA32 /* RZLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginViewController.xib; path = "View Controllers/RZLoginViewController.xib"; sourceTree = "<group>"; };
 		6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginViewController.xib; sourceTree = "<group>"; };
@@ -215,8 +212,6 @@
 				0383A5C916FB7757003D314D /* Twitter */,
 				0383A5BF16FB7744003D314D /* RZSocialLoginManager.h */,
 				0383A5C016FB7744003D314D /* RZSocialLoginManager.m */,
-				03D4AE6E174FBEDB00FEAF7A /* RZLoginStringConstants.h */,
-				03D4AE6F174FD74C00FEAF7A /* RZLoginStringConstants.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -345,7 +340,6 @@
 				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
 				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
 				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
-				03D4AE70174FD74C00FEAF7A /* RZLoginStringConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
