@@ -115,7 +115,7 @@
     if( [self loginEmailAddressFieldValidator] != nil ) {
         [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
     } else {
-        [self addValidator:[RZValidator emailAddressValidator] forFieldWithPlaceholderText:@"Email"];
+        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:@"Email"];
     }
     
     // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
@@ -133,7 +133,7 @@
         if( [self signUpEmailAddressFieldValidator] != nil ) {
             [self.signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithTag:1];
         } else {
-            [self.signUpViewController addValidator:[RZValidator emailAddressValidator] forFieldWithTag:1];
+            [self.signUpViewController addValidator:[RZValidator emailAddressLooseValidator] forFieldWithTag:1];
         }
         
         // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator

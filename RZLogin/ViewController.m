@@ -209,7 +209,7 @@
 // optional validator for email-address field on sign-up form
 - (RZValidator *)signUpEmailAddressFieldValidator {
     
-    return [RZValidator emailAddressValidator];
+    return [RZValidator emailAddressLooseValidator];
 }
 
 // optional validator for password field on sign-up form
