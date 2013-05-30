@@ -26,7 +26,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    // Determine whether or not we were presented modally
+    if( self.presentingViewController == nil ) {
+        // If NOT presented modally, remove the 'cancel' button
+        [self.cancelButton removeFromSuperview];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,25 +46,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)signUpPressed
+- (IBAction)signupButtonAction:(id)sender
 {
-    //validateForm returns a dictionary of keys corresponding to each field and values corresponding to the
-    //text in the fields. It returns nil if the form is not valid.
-    NSDictionary *formDict = [self validateForm];
-    if(formDict != nil)
+    RZValidator *failedValidator = [self validateForm];
+    if(failedValidator == nil)
     {
-        //Notify the delegate that it should process the login information.
-        [self.loginDelegate signUpPressedWithFormInformation:formDict];
-    }
-    else
-    {
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Invalid sign up information." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        // ok, valid form, so call the delegate method to check login info
+        [self.delegate loginViewController:self.loginViewController signUpButtonClickedWithFormInfo:[self formKeysAndValues]];
+        
+    } else {
+        NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid sign-up information.");
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:msg
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
     }
 }
 
-//A cancel button will only be present and connected to this outlet if this controller is presented modally.
-- (IBAction)cancelPressed
+- (IBAction)cancelButtonAction:(id)sender
 {
+    // Should only be called when presented modally
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

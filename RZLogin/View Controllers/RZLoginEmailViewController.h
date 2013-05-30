@@ -9,26 +9,34 @@
 #import <UIKit/UIKit.h>
 #import "RZFormViewController.h"
 #import "RZSignUpViewController.h"
-
-//This protocol is implemented by the class which will handle logins.
-@protocol RZLoginEmailViewControllerDelegate
-
-//This method will be called when the login form is submitted with valid information.
-- (void)loginPressedWithFormInformation:(NSDictionary *)formInfo;
-
-@end
+#import "RZLoginEmailViewControllerDelegate.h"
 
 @interface RZLoginEmailViewController : RZFormViewController
 
 @property (nonatomic, strong) IBOutlet UIButton *signUpButton;
+@property (nonatomic, strong) IBOutlet UIButton *cancelButton; // this button is optional (only for modal presentation)
 
-//Reference to the sign up controller we may present.
-@property (nonatomic, weak) RZSignUpViewController *signUpController;
+// a (weak) reference to the RZLoginViewController that's presenting us (either modally or on nav-stack)
+@property (nonatomic, weak) RZLoginViewController *loginViewController;
 
-@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate, RZSignUpViewControllerDelegate> loginDelegate;
+// whether or not we should present the email-login form modally (as specified by delegate)
+@property (nonatomic, readonly, getter=shouldPresentAsModal) BOOL presentAsModal;
 
-- (IBAction)loginPressed;
-- (IBAction)cancelPressed;
-- (IBAction)signUpPressed;
+// whether or not we should allow sign-up (as specified by delegate)
+@property (nonatomic, readonly, getter=isSignupAllowed) BOOL signupAllowed;
+
+// whether or not we should present the sign-up form modally (as specified by delegate)
+@property (nonatomic, readonly, getter=shouldPresentSignupFormAsModal) BOOL presentSignUpFormAsModal;
+
+// the sign-up form view-controller that we (optionally) present when 'sign-up' button is clicked
+// (note if not explicitly set, and isSignupAllow is true, uses default instance of a simple RZSignUpViewController)
+@property (nonatomic, strong) RZSignUpViewController *signUpViewController;
+
+// the delegate
+@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> delegate;
+
+- (IBAction)loginButtonAction:(id)sender;
+- (IBAction)signupButtonAction:(id)sender;
+- (IBAction)cancelButtonAction:(id)sender;
 
 @end
