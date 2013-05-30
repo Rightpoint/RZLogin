@@ -87,11 +87,43 @@
 }
 
 - (RZSignUpViewController *)signUpViewController {
-    if( (_signUpViewController == nil)  && self.isSignupAllowed ) {
-        // if sign-up is allowed, create and configure its view-controller too; note also it shares the same delegate
-        self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
-        self.signUpViewController.delegate = self.delegate;
-    }
+    
+    // if sign-up is allowed, create and/or configure its view-controller too; note it shares the same delegate
+    if( self.isSignupAllowed ) {
+        
+        if( _signUpViewController == nil ) {
+            // create the default sign-up form
+            self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
+            _signUpViewController.delegate = self.delegate;
+        }
+    
+        // setup sign-up form validation (note we're using each field's 'tag' as the key)
+        [_signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
+        
+        // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
+        if( [self signUpEmailAddressFieldValidator] != nil ) {
+            [_signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithTag:1];
+        } else {
+            [_signUpViewController addValidator:[RZValidator emailAddressValidator] forFieldWithTag:1];
+        }
+        
+        // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
+        if( [self signUpPasswordFieldValidator] != nil ) {
+            [_signUpViewController addValidator:[self signUpPasswordFieldValidator] forFieldWithTag:2];
+        } else {
+            [_signUpViewController addValidator:[RZValidator notEmptyValidator] forFieldWithTag:2];
+        }
+        
+        // and finally, validate that the (two) password fields match
+        // (note first password field has a view-tag of '2' and second has tag of '3')
+        ValidationBlock validationBlock = ^BOOL(NSString *str) {
+            NSString *prevPasswordFieldText = [(UITextField *)[self.signUpViewController.view viewWithTag:2] text];
+            return [str isEqualToString:prevPasswordFieldText];
+        };
+        RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
+        validator.localizedViolationString = RZValidatorLocalizedString(@"passwords must match", @"Passwords must match.");
+        [_signUpViewController addValidator:validator forFieldWithTag:3]; // add validator to second 'password' field
+    } 
     return _signUpViewController;
 }
 
@@ -123,38 +155,6 @@
         [self addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:@"Password"];
     } else {
         [self addValidator:[RZValidator notEmptyValidator] forFieldWithPlaceholderText:@"Password"];
-    }
-
-    if( self.isSignupAllowed ) {
-        // setup sign-up form validation (note we're using each field's 'tag' as the key)
-        [self.signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
-        
-        // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
-        if( [self signUpEmailAddressFieldValidator] != nil ) {
-            [self.signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithTag:1];
-        } else {
-            [self.signUpViewController addValidator:[RZValidator emailAddressValidator] forFieldWithTag:1];
-        }
-        
-        // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
-        if( [self signUpPasswordFieldValidator] != nil ) {
-            [self.signUpViewController addValidator:[self signUpPasswordFieldValidator] forFieldWithTag:2];
-        } else {
-            [self.signUpViewController addValidator:[RZValidator notEmptyValidator] forFieldWithTag:2];
-        }
-        
-        // and finally, validate that the (two) password fields match
-        // (note first password field has a view-tag of '2' and second has tag of '3')
-        ValidationBlock validationBlock = ^BOOL(NSString *str) {
-            NSString *prevPasswordFieldText = [(UITextField *)[self.signUpViewController.view viewWithTag:2] text];
-            return [str isEqualToString:prevPasswordFieldText];
-        };
-        RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
-        validator.localizedViolationString = RZValidatorLocalizedString(@"passwords must match", @"Passwords must match.");
-        [self.signUpViewController addValidator:validator forFieldWithTag:3]; // add validator to second 'password' field
-        
-    } else {
-        self.signUpViewController = nil;
     }
 
     // remove the sign-up button depending on options
