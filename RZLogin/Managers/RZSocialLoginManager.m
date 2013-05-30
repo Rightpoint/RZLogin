@@ -12,6 +12,7 @@
 #import <Accounts/Accounts.h>
 
 #define kRZFBPermissionPublishToFeed                @"publish_actions"
+#define kRZFBPermissionEmail                        @"email"
 
 #define kTwitterReverseAuthResponseTokenIndex       0
 #define kTwitterReverseAuthResponseTokenSecretIndex 1
@@ -43,7 +44,7 @@
 - (void)loginToFacebookWithAppID:(NSString *)facebookAppID completion:(FacebookLoginCompletionBlock)completionBlock
 {
     [self loginToFacebookWithAppID:facebookAppID
-                   withPermissions:[NSArray arrayWithObject:@"email"]
+                   withPermissions:[NSArray arrayWithObject:kRZFBPermissionEmail]
                           audience:nil
                         completion:completionBlock];
 }
