@@ -12,9 +12,14 @@
 
 @interface RZSignUpViewController : RZFormViewController
 
-@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> loginDelegate;
+@property (nonatomic, strong) IBOutlet UIButton *cancelButton; // this button is optional (only for modal presentation)
 
-- (IBAction)signUpPressed;
-- (IBAction)cancelPressed;
+// a (weak) reference to the RZLoginViewController that's presenting us (either modally or via an RZEmailLoginViewController)
+@property (nonatomic, weak) RZLoginViewController *loginViewController;
+
+@property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> delegate;
+
+- (IBAction)signupButtonAction:(id)sender;
+- (IBAction)cancelButtonAction:(id)sender;
 
 @end

@@ -26,7 +26,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    // determine whether or not we were presented 'modally'...
+    if( self.presentingViewController == nil ) {
+        // if we were NOT presented modally, remove the (unnecessary) 'cancel' button
+        [self.cancelButton removeFromSuperview];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated]; // show the nav-bar
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,13 +46,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)signUpPressed
+- (IBAction)signupButtonAction:(id)sender
 {
     RZValidator *failedValidator = [self validateForm];
     if(failedValidator == nil)
     {
         // ok, valid form, so call the delegate method to check login info
-        [self.loginDelegate signUpPressedWithFormInformation:[self formKeysAndValues]];
+        [self.delegate loginViewController:self.loginViewController signUpButtonClickedWithFormInfo:[self formKeysAndValues]];
         
     } else {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid sign-up information.");
@@ -53,9 +64,10 @@
     }
 }
 
-// A cancel button will only be present and connected to this outlet if this controller is presented modally.
-- (IBAction)cancelPressed
+- (IBAction)cancelButtonAction:(id)sender
 {
+    // note a cancel button will only be present if this controller was presented modally...
+    // so we can simply dismiss ourselves here :)
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
