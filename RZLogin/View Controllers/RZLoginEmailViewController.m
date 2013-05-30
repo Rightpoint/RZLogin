@@ -104,7 +104,7 @@
         if( [self signUpEmailAddressFieldValidator] != nil ) {
             [_signUpViewController addValidator:[self signUpEmailAddressFieldValidator] forFieldWithTag:1];
         } else {
-            [_signUpViewController addValidator:[RZValidator emailAddressValidator] forFieldWithTag:1];
+            [_signUpViewController addValidator:[RZValidator emailAddressLooseValidator] forFieldWithTag:1];
         }
         
         // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
