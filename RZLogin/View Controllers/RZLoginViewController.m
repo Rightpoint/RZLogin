@@ -12,17 +12,15 @@
 
 @interface RZLoginViewController () <UIActionSheetDelegate>
 
-// stores the list of Twitter accounts on the device for use with the account selection action sheet
+// A list of Twitter accounts on the device for use with the account selection action sheet
 @property (nonatomic, strong) NSArray *twitterAccounts;
 
-// note these properties are all fetched from the delegate
-// (i.e. per protocols that it implements for each login-type supported)
+// Properties are all fetched from the delegate
 @property (nonatomic, readonly, strong) NSString *facebookAppId; 
 @property (nonatomic, readonly, strong) NSString *twitterConsumerKey;
 @property (nonatomic, readonly, strong) NSString *twitterConsumerSecret;
 
 @end
-
 
 @implementation RZLoginViewController
 
@@ -31,40 +29,32 @@
     return [self initWithNibName:@"RZLoginViewController" bundle:nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // add any additional init stuff here...
-    }
-    return self;
-}
-
-
 #pragma mark - login type properties
 
-// note these properties are readonly, since they're based on which protocol(s) our delegate chooses to implement
+// These properties are readonly, since they're based on which protocol(s) our delegate chooses to implement
 // i.e. for each 'type' of login the client-application wants to support
-//
-- (BOOL)supportsLoginTypeEmail {
+- (BOOL)supportsLoginTypeEmail
+{
     return [self.emailLoginDelegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
-- (BOOL)supportsLoginTypeFacebook {
+- (BOOL)supportsLoginTypeFacebook
+{
     return [self.facebookLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)];
 }
 
-- (BOOL)supportsLoginTypeTwitter {
+- (BOOL)supportsLoginTypeTwitter
+{
     return [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginTwitterViewControllerDelegate)];
 }
 
 
 #pragma mark - login info properties
 
-// note we defer to the delegate's impl for each of these properties,
+// Defer to the delegate's impl for each of these properties,
 // depending on which login-type protocol(s) it chooses to implement.
-//
-- (NSString *)facebookAppId {
+- (NSString *)facebookAppId
+{
     
     if( [self.facebookLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
         return ((id<RZLoginFacebookViewControllerDelegate>) self.facebookLoginDelegate).facebookAppId;
@@ -73,7 +63,8 @@
     }
 }
 
-- (NSString *)twitterConsumerKey {
+- (NSString *)twitterConsumerKey
+{
     
     if( [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
         return ((id<RZLoginTwitterViewControllerDelegate>) self.twitterLoginDelegate).twitterConsumerKey;
@@ -82,7 +73,8 @@
     }
 }
 
-- (NSString *)twitterConsumerSecret {
+- (NSString *)twitterConsumerSecret
+{
     if( [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
         return ((id<RZLoginTwitterViewControllerDelegate>) self.twitterLoginDelegate).twitterConsumerSecret;
     } else {
@@ -90,30 +82,28 @@
     }
 }
 
-- (void)setEmailLoginViewController:(RZLoginEmailViewController *)emailLoginViewController {
+- (void)setEmailLoginViewController:(RZLoginEmailViewController *)emailLoginViewController
+{
     _emailLoginViewController = emailLoginViewController;
-    
-    // and stash a reference (for RZLoginEmailViewControllerDelegate delegate callbacks)
     _emailLoginViewController.loginViewController = self;
 }
 
 
 #pragma mark - UIViewController methods
 
-- (void)configureView {
-    //
-    // configure view appropriately, depending on which login-types we support...
-    //
+- (void)configureView
+{
+    // Configure view appropriately, depending on which login-types we support
     if( ![self supportsLoginTypeFacebook] ) {
-        // client doesn't want facebook login support, so remove its button...
+        // Client doesn't want facebook login support, so remove its button
         [self.facebookLoginButton removeFromSuperview];
     }
     if( ![self supportsLoginTypeTwitter] ) {
-        // client doesn't want twitter login support, so remove its button...
+        // Client doesn't want twitter login support, so remove its button
         [self.twitterLoginButton removeFromSuperview];
     }
     if( ![self supportsLoginTypeEmail] ) {
-        // client doesn't want email login support, so remove its button(s)...
+        // Client doesn't want email login support, so remove its button(s)
         [self.emailLoginButton removeFromSuperview];
         [self.emailSignUpButton removeFromSuperview];
     }
@@ -125,19 +115,17 @@
     [self configureView];
     
     if( [self supportsLoginTypeEmail] ) {
-        //
-        // if we're supporting login via email, init our email-login and sign-up view-controllers
-        // note we also wire-up any form field validators (optionally specified by our delegate)
-        //
+        // If login is supported via email, init our email-login and sign-up view-controllers
+        // Also connect any form field validators (specified by the delegate)
         if( self.emailLoginViewController == nil ) {
-            // if no custom v/c has already been specified, allocate the 'default' login-with-email v/c
+            // If no custom VC has already been specified, allocate the 'default' login-with-email VC
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
         }
         self.emailLoginViewController.delegate = self.emailLoginDelegate; // in any case, use the same delegate
         
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
-            // if we're ONLY supporting login via email...
-            // immediately present the email login v/c (i.e. skip our own view with facebook/twitter/email buttons)
+            // If ONLY login via email is supported, immediately present the email login VC
+            // (i.e. skip our own view with facebook/twitter/email buttons)
             [self addChildViewController:self.emailLoginViewController];
             [self.view addSubview:self.emailLoginViewController.view];
         }
@@ -147,7 +135,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     if( self.navigationController.viewControllers[0] == self ) {
-        // if we're at the bottom of the nav-stack... hide the nav-bar
+        // If we're at the bottom of the nav-stack, hide the nav-bar
         [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
     [super viewWillAppear:animated];
@@ -157,8 +145,7 @@
 
 - (void)showAlertForError:(NSError *)error socialNetwork:(NSString *)socialNetworkName
 {
-    // this method is called from completion blocks that may not be on the main thread,
-    // so note we dispatch the UIAlertView to the main thread here
+    // This method is called from completion blocks that may not be on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error.code == 6 || error.code == 7 || error == nil)
         {
@@ -177,12 +164,10 @@
     });
 }
 
-
 #pragma mark - button actions
 
-// login with Email button action
-- (IBAction)loginWithEmailAction:(id)sender {
-
+- (IBAction)loginWithEmailAction:(id)sender
+{
     if( self.emailLoginViewController.shouldPresentAsModal ) {
         [self presentViewController:self.emailLoginViewController animated:YES completion:nil];
     } else {
@@ -190,9 +175,8 @@
     }
 }
 
-// signup with email button action
-- (IBAction)signupWithEmailAction:(id)sender {
-
+- (IBAction)signupWithEmailAction:(id)sender
+{
     if( self.emailLoginViewController.shouldPresentSignupFormAsModal ) {
         [self presentViewController:self.emailLoginViewController.signUpViewController animated:YES completion:nil];
     } else {
@@ -200,9 +184,8 @@
     }
 }
 
-// login with Facebook button action
-- (IBAction)loginWithFacebookAction:(id)sender {
-    
+- (IBAction)loginWithFacebookAction:(id)sender
+{    
     [[RZSocialLoginManager defaultManager] loginToFacebookWithAppID:self.facebookAppId
                                                          completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error)
     {
@@ -217,21 +200,20 @@
     }];
 }
 
-// login with Twitter button action
-- (IBAction)loginWithTwitterAction:(id)sender {
-    
+- (IBAction)loginWithTwitterAction:(id)sender
+{    
     [[RZSocialLoginManager defaultManager] getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierTwitter
                                                                        options:0
                                                                completionBlock:^(NSArray *accounts, NSError *error)
     {
-        // if there is more than one Twitter account, present an action sheet
+        // If there is more than one Twitter account, present an action sheet
         // for the user to choose the account they would like to sign in with
         if(accounts.count > 1)
         {
-            // store the array of account objects to retrieve one later when the user selects one from the action sheet
+            // Store the array of account objects to retrieve one later when the user selects one from the action sheet
             self.twitterAccounts = accounts;
             
-            // setup the action sheet
+            // Setup the action sheet
             UIActionSheet *accountsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account"
                                                                              delegate:self
                                                                     cancelButtonTitle:nil
@@ -242,7 +224,6 @@
                 [accountsActionSheet addButtonWithTitle:[account username]];
             }
             
-            // add a "Cancel" button to the action sheet.
             [accountsActionSheet addButtonWithTitle:@"Cancel"];
             accountsActionSheet.cancelButtonIndex = accounts.count;
             
@@ -261,9 +242,8 @@
     }];
 }
 
-// login to a specific Twitter account
-- (void)loginToTwitterWithAccount:(ACAccount *)account {
-
+- (void)loginToTwitterWithAccount:(ACAccount *)account
+{
     [[RZSocialLoginManager defaultManager] loginToTwitterWithConsumerKey:self.twitterConsumerKey
                                                           consumerSecret:self.twitterConsumerSecret
                                                                  account:account
@@ -283,7 +263,7 @@
 
 #pragma mark - UIActionSheetDelegate
 
-// called when the user selects a Twitter account to sign-in with from the action sheet
+// Called when the user selects a Twitter account to sign-in with from the action sheet
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex != actionSheet.cancelButtonIndex)
@@ -291,6 +271,5 @@
         [self loginToTwitterWithAccount:[self.twitterAccounts objectAtIndex:buttonIndex]];
     }
 }
-
 
 @end

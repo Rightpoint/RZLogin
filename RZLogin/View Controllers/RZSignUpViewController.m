@@ -27,16 +27,16 @@
 {
     [super viewDidLoad];
 
-    // determine whether or not we were presented 'modally'...
+    // Determine whether or not we were presented modally
     if( self.presentingViewController == nil ) {
-        // if we were NOT presented modally, remove the (unnecessary) 'cancel' button
+        // If NOT presented modally, remove the 'cancel' button
         [self.cancelButton removeFromSuperview];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:NO animated:animated]; // show the nav-bar
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillAppear:animated];
 }
 
@@ -66,8 +66,7 @@
 
 - (IBAction)cancelButtonAction:(id)sender
 {
-    // note a cancel button will only be present if this controller was presented modally...
-    // so we can simply dismiss ourselves here :)
+    // Should only be called when presented modally
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

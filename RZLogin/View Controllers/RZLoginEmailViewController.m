@@ -27,9 +27,9 @@
 
 #pragma mark - validators for login with email and signup forms
 
-// since these RZLoginEmailViewControllerDelegate properties are optional,
+// Because the RZLoginEmailViewControllerDelegate properties are optional,
 // these local convenience getters check if implemented; else return nil (or a default value)
-//
+
 - (RZValidator *)loginEmailAddressFieldValidator {
     if( [self.delegate respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
         return self.delegate.loginEmailAddressFieldValidator;

@@ -38,12 +38,12 @@
 
 #pragma mark - example usage
 
-// display sample login controller; using the default, included XIBs with plain buttons
+// Display sample login controller and use the default XIB
 - (IBAction)loginUsingDefaultXIB:(id)sender
 {
-    // create a login view-controller (with default configuration)
-    // note delegate methods implemented below for the protocol used for each login-type
+    // Create a login view-controller (with default configuration)
     RZLoginViewController *loginViewController = [[RZLoginViewController alloc] init];
+    // Implement delegate methods for the protocol for each login-type you want to support
     loginViewController.emailLoginDelegate = self;
     loginViewController.facebookLoginDelegate = self;
     loginViewController.twitterLoginDelegate = self;
@@ -52,7 +52,7 @@
     [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
-// display sample login controller; using the default, included XIBs with plain buttons; allow login via email ONLY
+// Display sample login controller; using the default, included XIBs with plain buttons; allow login via email ONLY
 - (IBAction)loginViaEmailOnlyUsingDefaultXIB:(id)sender
 {
     // create a login view-controller (with default configuration); with only email-login supported
@@ -63,7 +63,7 @@
     [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
-// display another sample login controller, with only email-login and Facebook login supported (no twitter)
+// Display another sample login controller, with only email-login and Facebook login supported (no twitter)
 // so we use a custom XIB with a background image, and no twitter button (and, naturally, no twitterLoginDelegate is specified)
 - (IBAction)loginUsingCustomXIB:(id)sender
 {
@@ -85,8 +85,8 @@
 
 #pragma mark - RZLoginFacebookViewControllerDelegate
 
-- (NSString *)facebookAppId {
-    
+- (NSString *)facebookAppId
+{    
     return @"351055245000574";
 }
 
@@ -106,13 +106,13 @@
 
 #pragma mark - RZLoginTwitterViewControllerDelegate
 
-- (NSString *)twitterConsumerKey {
-    
+- (NSString *)twitterConsumerKey
+{
     return @"oZfeQ3lZtezzTqRWzjG0A";
 }
 
-- (NSString *)twitterConsumerSecret {
-    
+- (NSString *)twitterConsumerSecret
+{    
     return @"wSF4V5MO1hMzJiANpBbUTh3diIuadtEihfjYYTC6Y";
 }
 
@@ -138,9 +138,8 @@
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
     
-    // example: show alert-view with username that we logged-in
-    //
-    // note normally we would validate the submitted email-address/password against our backend/web-service here...
+    // Show alert-view with username that we logged-in
+    // Normally you will validate the submitted email-address/password against a backend/web-service
     // and either dismiss the emailLoginController or show error-alert accordingly
     //
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -165,11 +164,9 @@
 {
     NSLog(@"%s: %@", __FUNCTION__, formInfo);
 
-    // example: show alert-view with email-address and password that we want to 'sign-up'
-    //
-    // note normally we would validate the submitted email-address / password against our backend/web-service here...
-    // and either dismiss the view-controller or show error-alert accordingly
-    //
+    // Show alert-view with email-address and password that we want to 'sign-up'
+    // Normally you will validate the submitted email-address / password against a backend/web-service
+    // and either dismiss the view-controller or show an error-alert accordingly
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[UIAlertView alloc] initWithTitle:@"Sign-up Succeeded"
                                     message:[NSString stringWithFormat:@"You have successfully signed-up with username: %@ and password: %@",
@@ -187,19 +184,18 @@
 }
 
 
-// optional validator for email-address field on login form
-- (RZValidator *)loginEmailAddressFieldValidator {
-    
+// Optional validator for email-address field on login form
+- (RZValidator *)loginEmailAddressFieldValidator
+{    
     return [RZValidator notEmptyValidatorForFieldName:@"Email address"];
 }
 
-// optional validator for password field on login form
-- (RZValidator *)loginPasswordFieldValidator {
-    
-    // example usage of a custom validation-block (and failure message) when specifying a validator
+// Optional validator for password field on login form
+- (RZValidator *)loginPasswordFieldValidator
+{    
+    // Example usage of a custom validation-block (and failure message) when specifying a validator
     ValidationBlock validationBlock = ^BOOL(NSString *str) {
-        
-        return ([str length] > 0); // any *attempted* password is okay, if not empty
+        return ([str length] > 0); // any attempted password is okay if not empty
     };
     RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
     validator.localizedViolationString = RZValidatorLocalizedString(@"password field must not be empty", @"Password field must not be empty.");
@@ -212,10 +208,10 @@
     return [RZValidator emailAddressLooseValidator];
 }
 
-// optional validator for password field on sign-up form
-- (RZValidator *)signUpPasswordFieldValidator {
-    
-    // this example: password must be between 4 and 8 digits long and include at least one numeric digit    
+// Optional validator for password field on sign-up form
+- (RZValidator *)signUpPasswordFieldValidator
+{    
+    // Password must be between 4 and 8 digits long and include at least one numeric digit    
     RZValidator *validator = [[RZValidator alloc] initWithValidationConditions:@{kFieldValidationRegexKey: @"^(?=.*\\d).{4,8}$"}];
     validator.localizedViolationString = RZValidatorLocalizedString(@"password strength:4-8/1",
                                                                     @"Password must be between 4 and 8 digits long, and include at least one numeric digit.");

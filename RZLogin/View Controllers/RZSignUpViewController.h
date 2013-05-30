@@ -12,7 +12,8 @@
 
 @interface RZSignUpViewController : RZFormViewController
 
-@property (nonatomic, strong) IBOutlet UIButton *cancelButton; // this button is optional (only for modal presentation)
+// this button is optional (only for modal presentation)
+@property (nonatomic, strong) IBOutlet UIButton *cancelButton;
 
 // a (weak) reference to the RZLoginViewController that's presenting us (either modally or via an RZEmailLoginViewController)
 @property (nonatomic, weak) RZLoginViewController *loginViewController;
