@@ -9,29 +9,35 @@
 
 #import <UIKit/UIKit.h>
 
-//Typedef to tell us the type of key we are using to uniquely identify text fields in the form.
+// the type of key we are using to uniquely identify text fields in the form
 typedef enum {
     RZFormFieldKeyTypeTag,
     RZFormFieldKeyTypePlaceholderText
 } RZFormFieldKeyType;
 
-@class RZValidationInfo;
+@class RZValidator;
 
 @interface RZFormViewController : UIViewController
 
-//Property to store the type of key we are using to identify text fields.
+// the type of key we are using to identify text fields.
 @property (nonatomic, assign) RZFormFieldKeyType formKeyType;
 
-//Property to store the validation information for each field. The keys are the unique text field keys and the objects
-//are RZValidationInfo objects.
-@property (nonatomic, strong) NSMutableDictionary *fieldValidationInfo;
+// The validation information for each field.
+// Note the keys are the unique text-field keys and the objects are RZValidator objects.
+@property (nonatomic, strong) NSMutableDictionary *fieldValidators;
 
-//Outlet collection of all the text fields in the form.
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *loginFields;
+// an outlet-collection of all the text fields in the form
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *formFields;
 
-//Functions to add form validation info for the different types of keys and to validate the form.
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forTag:(int)tag;
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forPlaceholderText:(NSString *)text;
-- (NSDictionary *)validateForm;
+// methods to add form validation info for the different types of keys
+- (void)addValidator:(RZValidator *)validator forFieldWithTag:(int)tag;
+- (void)addValidator:(RZValidator *)validator forFieldWithPlaceholderText:(NSString *)text;
+
+// Method to validate the entire form. If the form is valid, returns null.
+// If any fields are invalid, returns the first validator that failed.
+- (RZValidator *)validateForm;
+
+// returns a dictionary of all form-field keys and their corresponding values
+- (NSDictionary *)formKeysAndValues;
 
 @end

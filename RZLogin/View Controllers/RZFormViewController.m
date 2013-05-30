@@ -7,7 +7,7 @@
 //
 
 #import "RZFormViewController.h"
-#import "RZValidationInfo.h"
+#import "RZValidator.h"
 
 #define kDefaultFormKeyType RZFormFieldKeyTypePlaceholderText
 
@@ -22,10 +22,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        //Initialize the validation info dictionary.
-        self.fieldValidationInfo = [[NSMutableDictionary alloc] init];
+        // Initialize the validation info dictionary.
+        self.fieldValidators = [[NSMutableDictionary alloc] init];
         
-        //Set the default form key type.
+        // Set the default form key type.
         self.formKeyType = kDefaultFormKeyType;
     }
     return self;
@@ -36,38 +36,36 @@
     [super viewDidLoad];
 }
 
-//Function to add form validation info for a text field with a given tag.
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forTag:(int)tag
+// add form validation info for a text-field with a given tag
+- (void)addValidator:(RZValidator *)validator forFieldWithTag:(int)tag
 {
     //Only add the info if it exists.
-    if(validationInfo != nil)
+    if(validator != nil)
     {
-        [self.fieldValidationInfo setObject:validationInfo forKey:[NSNumber numberWithInt:tag]];
+        [self.fieldValidators setObject:validator forKey:[NSNumber numberWithInt:tag]];
     }
 }
 
-//Function to add form validation info for a text field with given placeholder text.
-- (void)addFormValidationInfo:(RZValidationInfo *)validationInfo forPlaceholderText:(NSString *)text
+// add form validation info for a text-field with given placeholder text
+- (void)addValidator:(RZValidator *)validator forFieldWithPlaceholderText:(NSString *)text
 {
-    if(text != nil && validationInfo != nil)
+    if(text != nil && validator != nil)
     {
-        [self.fieldValidationInfo setObject:validationInfo forKey:text];
+        [self.fieldValidators setObject:validator forKey:text];
     }
 }
 
-//Function to validate the entire form. Returns the key-value dictionary of form keys and their corresponding
-//text field text if the form is valid. If the form is invalid, it returns nil.
-- (NSDictionary *)validateForm
-{
-    NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
-    
-    //Iterate through the text fields.
-    for (UITextField *field in self.loginFields)
+// Method to validate the entire form. If the form is valid, returns null.
+// If any fields are invalid, returns the first validator that failed.
+- (RZValidator *)validateForm
+{    
+    // iterate through the text-fields...
+    for (UITextField *field in self.formFields)
     {
-        RZValidationInfo *validationInfo = nil;
+        RZValidator *validator = nil;
         id key = nil;
         
-        //Get the text field key.
+        // get the key for the text-field
         if(self.formKeyType == RZFormFieldKeyTypeTag)
         {
             key = [NSNumber numberWithInt:field.tag];
@@ -77,19 +75,25 @@
             key = field.placeholder;
         }
         
-        //Look up the validation info. If the string is not valid, return nil.
-        //If the validation info for this field does not exist, it does not need to be validated.
-        validationInfo = [self.fieldValidationInfo objectForKey:key];
-        if(validationInfo != nil && ![validationInfo validateWithString:field.text])
+        // Look-up the validation info for this field. If the string is not valid, return nil.
+        // If the validation info for this field does not exist, it does not need to be validated.
+        validator = [self.fieldValidators objectForKey:key];
+        if(validator != nil && ![validator isValidForString:field.text])
         {
-            return nil;
-        }
-        else
-        {
-            [formDict setObject:field.text forKey:key];
+            return validator; // invalid, we're done
         }
     }
-    
+    return nil; // ok, everything's valid
+}
+
+// returns a dictionary of all form-field keys and their corresponding values
+- (NSDictionary *)formKeysAndValues
+{
+    // iterate through the text-fields and build a dictionary
+    NSMutableDictionary *formDict = [[NSMutableDictionary alloc] init];
+    for (UITextField *field in self.formFields) {
+        [formDict setObject:field.text forKey:field.placeholder];
+    }
     return formDict;
 }
 
