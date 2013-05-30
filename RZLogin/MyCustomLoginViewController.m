@@ -28,10 +28,9 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-
-    // animate the background-image
-    // (i.e. as an 'example' of a customization in our login view-controller ;)    
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Animate the background-image
     [UIView animateWithDuration:6.0f
                           delay:0.1f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
