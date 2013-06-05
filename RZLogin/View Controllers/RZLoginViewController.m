@@ -35,7 +35,7 @@
 // i.e. for each 'type' of login the client-application wants to support
 - (BOOL)supportsLoginTypeEmail
 {
-    return [self.emailLoginDelegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
+    return [self conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeFacebook
@@ -121,7 +121,7 @@
             // If no custom VC has already been specified, allocate the 'default' login-with-email VC
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
         }
-        self.emailLoginViewController.delegate = self.emailLoginDelegate; // in any case, use the same delegate
+        self.emailLoginDelegate = self.emailLoginViewController.delegate; // in any case, use the same delegate
         
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
             // If ONLY login via email is supported, immediately present the email login VC

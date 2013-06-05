@@ -8,7 +8,7 @@
 
 #import "RZLoginEmailViewController.h"
 
-@interface RZLoginEmailViewController ()
+@interface RZLoginEmailViewController ()<RZLoginEmailViewControllerDelegate>
 
 @end
 
@@ -201,8 +201,8 @@
     {
         // ok, valid form, so call the delegate method to check login info
         [self.delegate loginViewController:self.loginViewController loginButtonClickedWithFormInfo:[self formKeysAndValues]];
-        
-    } else {
+    }
+    else {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid login information.");
         [[[UIAlertView alloc] initWithTitle:@"Error"
                                     message:msg
@@ -236,4 +236,10 @@
     NSLog(@"Adjust view to display only email field");
 }
 
+#pragma mark - RZLoginEmailViewController delegate
+
+- (void)loginViewController:(RZLoginViewController *)lvc loginButtonClickedWithFormInfo:(NSDictionary *)formInfo
+{   
+    NSLog(@"login button clicked with form info %@", formInfo);
+}
 @end
