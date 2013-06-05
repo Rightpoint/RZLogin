@@ -79,11 +79,13 @@
 }
 
 - (BOOL)shouldPresentAsModal {
-    if( [self.delegate respondsToSelector:@selector(shouldPresentAsModal)] ) {
-        return [self.delegate shouldPresentAsModal]; // defer to (optional) delegate property
-    } else {
+    if ([self isEqual:self.delegate]) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
+    if( [self.delegate respondsToSelector:@selector(shouldPresentAsModal)] ) {
+        return [self.delegate shouldPresentAsModal]; // defer to (optional) delegate property
+    }
+    return NO;
 }
 
 - (BOOL)shouldPresentSignupFormAsModal {
