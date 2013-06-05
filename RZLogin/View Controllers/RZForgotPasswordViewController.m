@@ -51,7 +51,7 @@
     {
         [self.delegate loginEmailViewController:self.loginEmailViewController forgotPasswordEnteredWithFormInfo:[self formKeysAndValues]];
         
-        //[[self.formFields objectAtIndex:0] resignFirstResponder];
+        [[self.formFields objectAtIndex:0] resignFirstResponder];
     }
     else
     {
