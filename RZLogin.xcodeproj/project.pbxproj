@@ -43,6 +43,8 @@
 		65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */; };
 		FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */; };
 		FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */; };
+		FCDA37E7175F9668002AEE67 /* MyCustomForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */; };
+		FCDA37E8175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +107,9 @@
 		FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZForgotPasswordViewController.h; path = "View Controllers/RZForgotPasswordViewController.h"; sourceTree = "<group>"; };
 		FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZForgotPasswordViewController.m; path = "View Controllers/RZForgotPasswordViewController.m"; sourceTree = "<group>"; };
 		FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZForgotPasswordViewController.xib; path = "View Controllers/RZForgotPasswordViewController.xib"; sourceTree = "<group>"; };
+		FCDA37E4175F9668002AEE67 /* MyCustomForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomForgotPasswordViewController.h; sourceTree = "<group>"; };
+		FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomForgotPasswordViewController.m; sourceTree = "<group>"; };
+		FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomForgotPasswordViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +171,9 @@
 				65295678174BF6A5000CFA32 /* MyCustomLoginEmailViewController.h */,
 				65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */,
 				6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */,
+				FCDA37E4175F9668002AEE67 /* MyCustomForgotPasswordViewController.h */,
+				FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */,
+				FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */,
 				6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */,
 				65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */,
 				0383A5BE16FB76C0003D314D /* View Controllers */,
@@ -325,6 +333,7 @@
 				65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */,
 				65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */,
 				FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */,
+				FCDA37E8175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +361,7 @@
 				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
 				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
 				FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */,
+				FCDA37E7175F9668002AEE67 /* MyCustomForgotPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

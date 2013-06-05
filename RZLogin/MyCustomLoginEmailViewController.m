@@ -7,25 +7,22 @@
 //
 
 #import "MyCustomLoginEmailViewController.h"
+#import "MyCustomForgotPasswordViewController.h"
+#import "RZLoginEmailViewControllerDelegate.h"
 
-@interface MyCustomLoginEmailViewController ()
+@interface MyCustomLoginEmailViewController ()<RZLoginEmailViewControllerDelegate>
 
 @end
 
 @implementation MyCustomLoginEmailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // any custom initialization here
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.forgotPasswordViewController = [[MyCustomForgotPasswordViewController alloc] initWithNibName:@"MyCustomForgotPasswordViewController" bundle:nil];
+    self.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -33,5 +30,24 @@
     [super didReceiveMemoryWarning];
     // dispose of any resources that can be recreated
 }
+
+- (BOOL)isSignupAllowed
+{
+    return NO;
+}
+
+- (BOOL)isForgotPasswordAllowed
+{
+    return YES;
+}
+
+#pragma mark - RZLoginEmailViewControllerDelegate
+
+- (void)loginViewController:(RZLoginEmailViewController *)loginViewController loginButtonClickedWithFormInfo:(NSDictionary *)formInfo
+{
+    NSLog(@"Attempt to login with %@", formInfo);
+}
+
+
 
 @end
