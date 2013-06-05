@@ -10,6 +10,7 @@
 #import "RZFormViewController.h"
 #import "RZSignUpViewController.h"
 #import "RZLoginEmailViewControllerDelegate.h"
+#import "RZForgotPasswordViewController.h"
 
 @interface RZLoginEmailViewController : RZFormViewController
 
@@ -36,6 +37,9 @@
 // (note if not explicitly set, and isSignupAllow is true, uses default instance of a simple RZSignUpViewController)
 @property (nonatomic, strong) RZSignUpViewController *signUpViewController;
 
+@property (nonatomic, strong) RZForgotPasswordViewController *forgotPasswordViewController;
+
+
 // the delegate
 @property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> delegate;
 
@@ -44,3 +48,5 @@
 - (IBAction)cancelButtonAction:(id)sender;
 
 @end
+
+// test

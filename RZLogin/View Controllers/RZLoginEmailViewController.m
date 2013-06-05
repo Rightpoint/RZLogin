@@ -233,7 +233,7 @@
 
 - (IBAction)forgotPasswordButtonAction:(id)sender
 {
-    NSLog(@"Adjust view to display only email field");
+    [self.navigationController pushViewController:self.forgotPasswordViewController animated:YES];
 }
 
 #pragma mark - RZLoginEmailViewController delegate

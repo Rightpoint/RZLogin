@@ -47,20 +47,14 @@
 - (IBAction)emailEnteredButtonAction:(id)sender
 {
     RZValidator *failedValidator = [self validateForm];
-    if (failedValidator == nil) {
-        
+    if (failedValidator == nil)
+    {
         [self.delegate loginEmailViewController:self.loginEmailViewController forgotPasswordEnteredWithFormInfo:[self formKeysAndValues]];
         
-        NSLog(@"Successful forgot password entry in RZForgotPasswordViewController");
-        
         //[[self.formFields objectAtIndex:0] resignFirstResponder];
-        [self.navigationController popViewControllerAnimated:YES];
-        
     }
-    else {
-        
-        NSLog(@"Unsuccessful forgot password entry");
-
+    else
+    {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid email.");
         [[[UIAlertView alloc] initWithTitle:@"Error"
                                     message:msg
