@@ -70,6 +70,14 @@
     }
 }
 
+- (BOOL)isForgotPasswordAllowed {
+    if( [self.delegate respondsToSelector:@selector(isForgotPasswordAllowed)] ) {
+        return [self.delegate isForgotPasswordAllowed]; // defer to (optional) delegate property
+    } else {
+        return NO; // by default, we allow forgot password
+    }
+}
+
 - (BOOL)shouldPresentAsModal {
     if( [self.delegate respondsToSelector:@selector(shouldPresentAsModal)] ) {
         return [self.delegate shouldPresentAsModal]; // defer to (optional) delegate property
@@ -162,6 +170,11 @@
         [self.signUpButton removeFromSuperview];
     }
     
+    // remove the sign-up button depending on options
+    if( self.isForgotPasswordAllowed == NO ) {
+        [self.forgotPasswordButton removeFromSuperview];
+    }
+    
     // determine whether or not we were presented 'modally'...
     if( self.presentingViewController == nil ) {
         // if we were NOT presented modally, remove the (unnecessary) 'cancel' button
@@ -216,6 +229,11 @@
     // note a cancel button will only be present if this controller was presented modally...
     // so we can simply dismiss ourselves here :)
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)forgotPasswordButtonAction:(id)sender
+{
+    NSLog(@"Adjust view to display only email field");
 }
 
 @end
