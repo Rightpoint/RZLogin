@@ -7,6 +7,7 @@
 //
 
 #import "RZForgotPasswordViewController.h"
+#import "RZValidator.h"
 
 @interface RZForgotPasswordViewController () <RZForgotPasswordViewConrollerDelegate>
 

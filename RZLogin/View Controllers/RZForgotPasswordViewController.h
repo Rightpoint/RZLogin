@@ -20,6 +20,4 @@
 // the delegate
 @property (nonatomic, weak) id<RZForgotPasswordViewConrollerDelegate> delegate;
 
-
-
 @end

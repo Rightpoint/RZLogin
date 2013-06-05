@@ -41,6 +41,8 @@
 		65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */; };
 		65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */; };
 		65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */; };
+		FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */; };
+		FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +101,10 @@
 		6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_1.jpg; sourceTree = "<group>"; };
 		65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_2.jpg; sourceTree = "<group>"; };
 		65295687174E910E000CFA32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RZValidatorLocalizable.strings; sourceTree = "<group>"; };
+		FC4D09CC175F7B8200CAB557 /* RZForgotPasswordViewConrollerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZForgotPasswordViewConrollerDelegate.h; path = "View Controllers/RZForgotPasswordViewConrollerDelegate.h"; sourceTree = "<group>"; };
+		FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZForgotPasswordViewController.h; path = "View Controllers/RZForgotPasswordViewController.h"; sourceTree = "<group>"; };
+		FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZForgotPasswordViewController.m; path = "View Controllers/RZForgotPasswordViewController.m"; sourceTree = "<group>"; };
+		FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZForgotPasswordViewController.xib; path = "View Controllers/RZForgotPasswordViewController.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,9 @@
 		0383A5BE16FB76C0003D314D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */,
+				FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */,
+				FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */,
 				0383A5B616FB76BB003D314D /* RZLoginViewController.h */,
 				0383A5B716FB76BB003D314D /* RZLoginViewController.m */,
 				65295669174ABDA8000CFA32 /* RZLoginViewController.xib */,
@@ -199,6 +208,7 @@
 				0383A5D816FB79A6003D314D /* RZSignUpViewController.h */,
 				0383A5D916FB79A6003D314D /* RZSignUpViewController.m */,
 				0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */,
+				FC4D09CC175F7B8200CAB557 /* RZForgotPasswordViewConrollerDelegate.h */,
 				65295670174BC128000CFA32 /* RZLoginEmailViewControllerDelegate.h */,
 				65295668174AB65A000CFA32 /* RZLoginFacebookViewControllerDelegate.h */,
 				6529566F174AD0C9000CFA32 /* RZLoginTwitterViewControllerDelegate.h */,
@@ -314,6 +324,7 @@
 				65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */,
 				65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */,
 				65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */,
+				FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +351,7 @@
 				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
 				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
 				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
+				FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
