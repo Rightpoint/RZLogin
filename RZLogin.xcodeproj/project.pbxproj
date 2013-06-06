@@ -202,9 +202,6 @@
 		0383A5BE16FB76C0003D314D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */,
-				FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */,
-				FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */,
 				0383A5B616FB76BB003D314D /* RZLoginViewController.h */,
 				0383A5B716FB76BB003D314D /* RZLoginViewController.m */,
 				65295669174ABDA8000CFA32 /* RZLoginViewController.xib */,
@@ -213,6 +210,9 @@
 				0383A5B316FB76BA003D314D /* RZLoginEmailViewController.h */,
 				0383A5B416FB76BB003D314D /* RZLoginEmailViewController.m */,
 				0383A5B516FB76BB003D314D /* RZLoginEmailViewController.xib */,
+				FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */,
+				FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */,
+				FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */,
 				0383A5D816FB79A6003D314D /* RZSignUpViewController.h */,
 				0383A5D916FB79A6003D314D /* RZSignUpViewController.m */,
 				0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */,

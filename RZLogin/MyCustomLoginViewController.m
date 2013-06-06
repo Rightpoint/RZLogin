@@ -21,7 +21,6 @@
     if (self) {
         self.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
         self.emailLoginDelegate = self.emailLoginViewController.delegate;
-
     }
     return self;
 }
@@ -49,7 +48,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // dispose of any resources that can be recreated
 }
 
 

@@ -9,6 +9,7 @@
 #import "MyCustomLoginEmailViewController.h"
 #import "MyCustomForgotPasswordViewController.h"
 #import "RZLoginEmailViewControllerDelegate.h"
+#import "RZSignUpViewController.h"
 
 @interface MyCustomLoginEmailViewController ()<RZLoginEmailViewControllerDelegate>
 
@@ -33,7 +34,7 @@
 
 - (BOOL)isSignupAllowed
 {
-    return NO;
+    return YES;
 }
 
 - (BOOL)isForgotPasswordAllowed

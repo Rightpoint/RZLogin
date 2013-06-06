@@ -44,6 +44,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)supportsLoginTypeEmail
+{
+    return YES;
+}
+
+- (BOOL)supportsLoginTypeFacebook
+{
+    return YES;
+}
+
+- (BOOL)supportsLoginTypeTwitter
+{
+    return NO;
+}
+
 - (IBAction)emailEnteredButtonAction:(id)sender
 {
     RZValidator *failedValidator = [self validateForm];

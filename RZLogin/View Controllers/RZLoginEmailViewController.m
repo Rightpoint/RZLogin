@@ -31,22 +31,29 @@
 // these local convenience getters check if implemented; else return nil (or a default value)
 
 - (RZValidator *)loginEmailAddressFieldValidator {
-    if( [self.delegate respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
-        return self.delegate.loginEmailAddressFieldValidator;
-    } else {
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
+    if( [self.delegate respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
+        return self.delegate.loginEmailAddressFieldValidator;
+    }
+    return nil;
 }
 
 - (RZValidator *)loginPasswordFieldValidator {
-    if( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
-        return self.delegate.loginPasswordFieldValidator;
-    } else {
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
+    if( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
+        return self.delegate.loginPasswordFieldValidator;
+    }
+    return nil; 
 }
 
 - (RZValidator *)signUpEmailAddressFieldValidator {
+    if ([self isEqual:self.delegate]) {
+        return nil;
+    }
     if( [self.delegate respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
         return self.delegate.signUpEmailAddressFieldValidator;
     } else {
@@ -55,6 +62,9 @@
 }
 
 - (RZValidator *)signUpPasswordFieldValidator {
+    if ([self isEqual:self.delegate]) {
+        return nil;
+    }
     if( [self.delegate respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
         return self.delegate.signUpPasswordFieldValidator;
     } else {
@@ -63,6 +73,9 @@
 }
 
 - (BOOL)isSignupAllowed {
+    if ([self isEqual:self.delegate]) {
+        return YES;
+    }
     if( [self.delegate respondsToSelector:@selector(isSignupAllowed)] ) {
         return [self.delegate isSignupAllowed]; // defer to (optional) delegate property
     } else {
@@ -89,11 +102,14 @@
 }
 
 - (BOOL)shouldPresentSignupFormAsModal {
+    
+    if ([self isEqual:self.delegate]) {
+        return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
+    }
     if( [self.delegate respondsToSelector:@selector(shouldPresentSignupFormAsModal)] ) {
         return [self.delegate shouldPresentSignupFormAsModal]; // defer to (optional) delegate property
-    } else {
-        return YES; // by default, let's present the sign-up form modally
     }
+    return NO;
 }
 
 - (RZSignUpViewController *)signUpViewController {
@@ -241,7 +257,7 @@
 #pragma mark - RZLoginEmailViewController delegate
 
 - (void)loginViewController:(RZLoginViewController *)lvc loginButtonClickedWithFormInfo:(NSDictionary *)formInfo
-{   
+{
     NSLog(@"login button clicked with form info %@", formInfo);
 }
 @end

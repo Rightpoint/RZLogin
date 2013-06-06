@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSArray *twitterAccounts;
 
 // Properties are all fetched from the delegate
-@property (nonatomic, readonly, strong) NSString *facebookAppId; 
+@property (nonatomic, readonly, strong) NSString *facebookAppId;
 @property (nonatomic, readonly, strong) NSString *twitterConsumerKey;
 @property (nonatomic, readonly, strong) NSString *twitterConsumerSecret;
 
@@ -35,7 +35,7 @@
 // i.e. for each 'type' of login the client-application wants to support
 - (BOOL)supportsLoginTypeEmail
 {
-    return [self conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
+    return [self.emailLoginDelegate conformsToProtocol:@protocol(RZLoginEmailViewControllerDelegate)];
 }
 
 - (BOOL)supportsLoginTypeFacebook
@@ -65,7 +65,6 @@
 
 - (NSString *)twitterConsumerKey
 {
-    
     if( [self.twitterLoginDelegate conformsToProtocol:@protocol(RZLoginFacebookViewControllerDelegate)] ) {
         return ((id<RZLoginTwitterViewControllerDelegate>) self.twitterLoginDelegate).twitterConsumerKey;
     } else {
@@ -102,10 +101,12 @@
         // Client doesn't want twitter login support, so remove its button
         [self.twitterLoginButton removeFromSuperview];
     }
+    if (!self.emailLoginViewController.isSignupAllowed) {
+        [self.emailSignUpButton removeFromSuperview];
+    }
     if( ![self supportsLoginTypeEmail] ) {
         // Client doesn't want email login support, so remove its button(s)
         [self.emailLoginButton removeFromSuperview];
-        [self.emailSignUpButton removeFromSuperview];
     }
 }
 
@@ -113,15 +114,15 @@
 {
     [super viewDidLoad];
     [self configureView];
-    
+
     if( [self supportsLoginTypeEmail] ) {
         // If login is supported via email, init our email-login and sign-up view-controllers
         // Also connect any form field validators (specified by the delegate)
         if( self.emailLoginViewController == nil ) {
             // If no custom VC has already been specified, allocate the 'default' login-with-email VC
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
+            NSLog(@"Created emailLoginViewController");
         }
-        self.emailLoginDelegate = self.emailLoginViewController.delegate; // in any case, use the same delegate
         
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
             // If ONLY login via email is supported, immediately present the email login VC
@@ -185,61 +186,61 @@
 }
 
 - (IBAction)loginWithFacebookAction:(id)sender
-{    
+{
     [[RZSocialLoginManager defaultManager] loginToFacebookWithAppID:self.facebookAppId
                                                          completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error)
-    {
-        if(token)
-        {
-            [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
-        }
-        else
-        {
-            [self showAlertForError:error socialNetwork:@"Facebook"];
-        }
-    }];
+     {
+         if(token)
+         {
+             [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
+         }
+         else
+         {
+             [self showAlertForError:error socialNetwork:@"Facebook"];
+         }
+     }];
 }
 
 - (IBAction)loginWithTwitterAction:(id)sender
-{    
+{
     [[RZSocialLoginManager defaultManager] getListOfAccountsWithTypeIdentifier:ACAccountTypeIdentifierTwitter
                                                                        options:0
                                                                completionBlock:^(NSArray *accounts, NSError *error)
-    {
-        // If there is more than one Twitter account, present an action sheet
-        // for the user to choose the account they would like to sign in with
-        if(accounts.count > 1)
-        {
-            // Store the array of account objects to retrieve one later when the user selects one from the action sheet
-            self.twitterAccounts = accounts;
-            
-            // Setup the action sheet
-            UIActionSheet *accountsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account"
-                                                                             delegate:self
-                                                                    cancelButtonTitle:nil
-                                                               destructiveButtonTitle:nil
-                                                                    otherButtonTitles:nil];
-            for(ACAccount *account in accounts)
-            {
-                [accountsActionSheet addButtonWithTitle:[account username]];
-            }
-            
-            [accountsActionSheet addButtonWithTitle:@"Cancel"];
-            accountsActionSheet.cancelButtonIndex = accounts.count;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [accountsActionSheet showInView:self.view];
-            });
-        }
-        else if(accounts.count == 1) // if there is only one account, login with it
-        {
-            [self loginToTwitterWithAccount:[accounts lastObject]];
-        }
-        else // if there are no accounts, present an error to the user
-        {
-            [self showAlertForError:error socialNetwork:@"Twitter"];
-        }
-    }];
+     {
+         // If there is more than one Twitter account, present an action sheet
+         // for the user to choose the account they would like to sign in with
+         if(accounts.count > 1)
+         {
+             // Store the array of account objects to retrieve one later when the user selects one from the action sheet
+             self.twitterAccounts = accounts;
+             
+             // Setup the action sheet
+             UIActionSheet *accountsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Twitter Account"
+                                                                              delegate:self
+                                                                     cancelButtonTitle:nil
+                                                                destructiveButtonTitle:nil
+                                                                     otherButtonTitles:nil];
+             for(ACAccount *account in accounts)
+             {
+                 [accountsActionSheet addButtonWithTitle:[account username]];
+             }
+             
+             [accountsActionSheet addButtonWithTitle:@"Cancel"];
+             accountsActionSheet.cancelButtonIndex = accounts.count;
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [accountsActionSheet showInView:self.view];
+             });
+         }
+         else if(accounts.count == 1) // if there is only one account, login with it
+         {
+             [self loginToTwitterWithAccount:[accounts lastObject]];
+         }
+         else // if there are no accounts, present an error to the user
+         {
+             [self showAlertForError:error socialNetwork:@"Twitter"];
+         }
+     }];
 }
 
 - (void)loginToTwitterWithAccount:(ACAccount *)account
@@ -247,17 +248,17 @@
     [[RZSocialLoginManager defaultManager] loginToTwitterWithConsumerKey:self.twitterConsumerKey
                                                           consumerSecret:self.twitterConsumerSecret
                                                                  account:account
-        completion:^(NSString *token, NSString *tokenSecret, NSString *username, NSString *userId, NSError *error) {
-            
-            if((token && token.length > 0) && (tokenSecret && tokenSecret.length > 0))
-            {
-                [self.twitterLoginDelegate loginViewController:self didLoginWithTwitterWithToken:token tokenSecret:tokenSecret username:username userId:userId];
-            }
-            else
-            {
-                [self showAlertForError:error socialNetwork:@"Twitter"];
-            }
-    }];
+                                                              completion:^(NSString *token, NSString *tokenSecret, NSString *username, NSString *userId, NSError *error) {
+                                                                  
+                                                                  if((token && token.length > 0) && (tokenSecret && tokenSecret.length > 0))
+                                                                  {
+                                                                      [self.twitterLoginDelegate loginViewController:self didLoginWithTwitterWithToken:token tokenSecret:tokenSecret username:username userId:userId];
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                      [self showAlertForError:error socialNetwork:@"Twitter"];
+                                                                  }
+                                                              }];
 }
 
 
