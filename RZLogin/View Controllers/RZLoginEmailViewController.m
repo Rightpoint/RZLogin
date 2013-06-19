@@ -22,7 +22,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         self.title = @"Login";
     }
     return self;
@@ -34,7 +35,8 @@
 // these local convenience getters check if implemented; else return nil (or a default value)
 
 - (RZValidator *)loginEmailAddressFieldValidator {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] )
+    {
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
@@ -44,28 +46,29 @@
 }
 
 - (RZValidator *)loginPasswordFieldValidator {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ) {
         return nil;
     }
-    if( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
+    if ( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
         return self.delegate.loginPasswordFieldValidator;
     }
     return nil;
 }
 
 - (RZValidator *)signUpEmailAddressFieldValidator {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ){
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
         return self.delegate.signUpEmailAddressFieldValidator;
-    } else {
+    }
+    else {
         return nil;
     }
 }
 
 - (RZValidator *)signUpPasswordFieldValidator {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ) {
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
@@ -76,7 +79,7 @@
 }
 
 - (BOOL)isSignupAllowed {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ) {
         return YES;
     }
     if( [self.delegate respondsToSelector:@selector(isSignupAllowed)] ) {
@@ -95,7 +98,7 @@
 }
 
 - (BOOL)shouldPresentAsModal {
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
     if( [self.delegate respondsToSelector:@selector(shouldPresentAsModal)] ) {
@@ -106,7 +109,7 @@
 
 - (BOOL)shouldPresentSignupFormAsModal {
     
-    if ([self isEqual:self.delegate]) {
+    if( [self isEqual:self.delegate] ) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
     if( [self.delegate respondsToSelector:@selector(shouldPresentSignupFormAsModal)] ) {
@@ -127,8 +130,8 @@
 - (RZSignUpViewController *)signUpViewController {
     
     // if sign-up is allowed, create and/or configure its view-controller too; note it shares the same delegate
-    if( self.isSignupAllowed ) {
-        
+    if( self.isSignupAllowed )
+    {
         if( _signUpViewController == nil ) {
             // create the default sign-up form
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];

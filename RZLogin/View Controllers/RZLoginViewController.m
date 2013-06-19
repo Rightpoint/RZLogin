@@ -155,7 +155,8 @@
                                        delegate:nil
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil] show];
-        } else {
+        }
+        else {
             [[[UIAlertView alloc] initWithTitle:@"Login Failed"
                                         message:[NSString stringWithFormat:@"There was a problem loggin in with %@.", socialNetworkName]
                                        delegate:nil
@@ -190,12 +191,9 @@
     [[RZSocialLoginManager defaultManager] loginToFacebookWithAppID:self.facebookAppId
                                                          completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error)
      {
-         if(token)
-         {
+         if(token) {
              [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
-         }
-         else
-         {
+         } else {
              [self showAlertForError:error socialNetwork:@"Facebook"];
          }
      }];
@@ -248,27 +246,22 @@
     [[RZSocialLoginManager defaultManager] loginToTwitterWithConsumerKey:self.twitterConsumerKey
                                                           consumerSecret:self.twitterConsumerSecret
                                                                  account:account
-                                                              completion:^(NSString *token, NSString *tokenSecret, NSString *username, NSString *userId, NSError *error) {
+        completion:^(NSString *token, NSString *tokenSecret, NSString *username, NSString *userId, NSError *error) {
                                                                   
-                                                                  if((token && token.length > 0) && (tokenSecret && tokenSecret.length > 0))
-                                                                  {
-                                                                      [self.twitterLoginDelegate loginViewController:self didLoginWithTwitterWithToken:token tokenSecret:tokenSecret username:username userId:userId];
-                                                                  }
-                                                                  else
-                                                                  {
-                                                                      [self showAlertForError:error socialNetwork:@"Twitter"];
-                                                                  }
-                                                              }];
+                    if( (token && token.length > 0) && (tokenSecret && tokenSecret.length > 0) ) {
+                        [self.twitterLoginDelegate loginViewController:self didLoginWithTwitterWithToken:token tokenSecret:tokenSecret username:username userId:userId];
+                    } else {
+                        [self showAlertForError:error socialNetwork:@"Twitter"];
+                    }
+    }];
 }
-
 
 #pragma mark - UIActionSheetDelegate
 
 // Called when the user selects a Twitter account to sign-in with from the action sheet
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex != actionSheet.cancelButtonIndex)
-    {
+    if(buttonIndex != actionSheet.cancelButtonIndex) {
         [self loginToTwitterWithAccount:[self.twitterAccounts objectAtIndex:buttonIndex]];
     }
 }

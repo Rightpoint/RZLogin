@@ -31,9 +31,7 @@
 
 - (void)loginEmailViewController:(RZLoginEmailViewController *)lvc forgotPasswordEnteredWithFormInfo:(NSDictionary *)formInfo
 {
-    
     NSLog(@"Attempt password reset with info%@", formInfo);
-    
 }
 
 

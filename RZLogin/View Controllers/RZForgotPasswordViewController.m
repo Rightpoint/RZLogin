@@ -85,9 +85,11 @@
 
 - (RZValidator *)forgotPasswordEmailAddressFieldValidator
 {    
-    if( [self.delegate respondsToSelector:@selector(forgotPasswordEmailAddressFieldValidator)] ) {
+    if( [self.delegate respondsToSelector:@selector(forgotPasswordEmailAddressFieldValidator)] )
+    {
         return self.delegate.forgotPasswordEmailAddressFieldValidator;
-    } else {
+    }
+    else {
         return nil;
     }
 }
@@ -98,7 +100,5 @@
 {
     NSLog(@"in RZForgot forgotPasswordEnteredWithFormInfo called");
 }
-
-
 
 @end
