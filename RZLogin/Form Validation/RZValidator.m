@@ -109,7 +109,7 @@ typedef enum {
     NSString *emailRegEx =  @"[\\w-]+@([\\w-]+\\.)+[\\w-]+";
     
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationRegexKey: emailRegEx}];
-    validator.localizedViolationString = RZValidatorLocalizedString(@"invalid email address", @"Please enter a valid email address.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"Invalid email address", @"Please enter a valid email address.");
     return validator;
 }
 
@@ -125,14 +125,14 @@ typedef enum {
                             @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationRegexKey: emailRegEx}];
-    validator.localizedViolationString = RZValidatorLocalizedString(@"invalid email address", @"Please enter a valid email address.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"Invalid email address", @"Please enter a valid email address.");
     return validator;
 }
 
 + (RZValidator *)notEmptyValidator
 {
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
-    validator.localizedViolationString = RZValidatorLocalizedString(@"field must not be empty", @"Field must not be empty.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"Field required", @"Field cannot be empty, please try again.");
     return validator;
 }
 
@@ -140,7 +140,7 @@ typedef enum {
 {
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
     validator.localizedViolationString = [NSString stringWithFormat:
-                                          RZValidatorLocalizedString(@"%@ must not be empty", @"%@ must not be empty."), fieldName];
+                                          RZValidatorLocalizedString(@"%@ required", @"%@ cannot be empty, please try again."), fieldName];
     return validator;
 }
                                       

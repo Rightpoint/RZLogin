@@ -202,8 +202,8 @@
 }
 
 // optional validator for email-address field on sign-up form
-- (RZValidator *)signUpEmailAddressFieldValidator {
-    
+- (RZValidator *)signUpEmailAddressFieldValidator
+{    
     return [RZValidator emailAddressLooseValidator];
 }
 
