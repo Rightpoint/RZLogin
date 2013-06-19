@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self addValidator:[self forgotPasswordEmailAddressFieldValidator] forFieldWithPlaceholderText:@"EMAIL"];
+    [self addValidator:[self forgotPasswordEmailAddressFieldValidator] forFieldWithPlaceholderText:((UITextField *)self.formFields[0]).placeholder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,8 +70,8 @@
     }
     else
     {
-        NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid email.");
-        [[[UIAlertView alloc] initWithTitle:@"Email not valid."
+        NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"invalid email address");
+        [[[UIAlertView alloc] initWithTitle:@"Invalid Email Adresss"
                                     message:msg
                                    delegate:nil
                           cancelButtonTitle:@"OK"
@@ -84,12 +84,10 @@
 // this local convenience getter checks if implemented; else return nil (or a default value)
 
 - (RZValidator *)forgotPasswordEmailAddressFieldValidator
-{    
-    if( [self.delegate respondsToSelector:@selector(forgotPasswordEmailAddressFieldValidator)] )
-    {
+{
+    if( [self.delegate respondsToSelector:@selector(forgotPasswordEmailAddressFieldValidator)] ) {
         return self.delegate.forgotPasswordEmailAddressFieldValidator;
-    }
-    else {
+    } else {
         return nil;
     }
 }

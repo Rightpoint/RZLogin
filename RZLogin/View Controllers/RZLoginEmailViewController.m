@@ -8,9 +8,6 @@
 
 #import "RZLoginEmailViewController.h"
 
-#define kEmailPlaceholderText @"Email"
-#define kPasswordPlaceholderText @"Password"
-
 @interface RZLoginEmailViewController ()<RZLoginEmailViewControllerDelegate>
 
 @end
@@ -22,8 +19,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
+    if (self) {
         self.title = @"Login";
     }
     return self;
@@ -35,8 +31,7 @@
 // these local convenience getters check if implemented; else return nil (or a default value)
 
 - (RZValidator *)loginEmailAddressFieldValidator {
-    if( [self isEqual:self.delegate] )
-    {
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(loginEmailAddressFieldValidator)] ) {
@@ -46,29 +41,28 @@
 }
 
 - (RZValidator *)loginPasswordFieldValidator {
-    if( [self isEqual:self.delegate] ) {
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
-    if ( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
+    if( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
         return self.delegate.loginPasswordFieldValidator;
     }
     return nil;
 }
 
 - (RZValidator *)signUpEmailAddressFieldValidator {
-    if( [self isEqual:self.delegate] ){
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(signUpEmailAddressFieldValidator)] ) {
         return self.delegate.signUpEmailAddressFieldValidator;
-    }
-    else {
+    } else {
         return nil;
     }
 }
 
 - (RZValidator *)signUpPasswordFieldValidator {
-    if( [self isEqual:self.delegate] ) {
+    if ([self isEqual:self.delegate]) {
         return nil;
     }
     if( [self.delegate respondsToSelector:@selector(signUpPasswordFieldValidator)] ) {
@@ -79,7 +73,7 @@
 }
 
 - (BOOL)isSignupAllowed {
-    if( [self isEqual:self.delegate] ) {
+    if ([self isEqual:self.delegate]) {
         return YES;
     }
     if( [self.delegate respondsToSelector:@selector(isSignupAllowed)] ) {
@@ -98,7 +92,7 @@
 }
 
 - (BOOL)shouldPresentAsModal {
-    if( [self isEqual:self.delegate] ) {
+    if ([self isEqual:self.delegate]) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
     if( [self.delegate respondsToSelector:@selector(shouldPresentAsModal)] ) {
@@ -109,7 +103,7 @@
 
 - (BOOL)shouldPresentSignupFormAsModal {
     
-    if( [self isEqual:self.delegate] ) {
+    if ([self isEqual:self.delegate]) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
     if( [self.delegate respondsToSelector:@selector(shouldPresentSignupFormAsModal)] ) {
@@ -118,20 +112,11 @@
     return NO;
 }
 
-- (NSString *)emailPlaceholderString
-{
-    return kEmailPlaceholderText;
-}
-- (NSString *)passwordPlaceholderString
-{
-    return kPasswordPlaceholderText;
-}
-
 - (RZSignUpViewController *)signUpViewController {
     
     // if sign-up is allowed, create and/or configure its view-controller too; note it shares the same delegate
-    if( self.isSignupAllowed )
-    {
+    if( self.isSignupAllowed ) {
+        
         if( _signUpViewController == nil ) {
             // create the default sign-up form
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
@@ -186,16 +171,16 @@
     
     // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
     if( [self loginEmailAddressFieldValidator] != nil ) {
-        [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:self.emailPlaceholderString];
+        [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:((UITextField *)self.formFields[0]).placeholder];
     } else {
-        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:self.emailPlaceholderString];
+        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:((UITextField *)self.formFields[0]).placeholder];
     }
     
     // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
     if( [self loginPasswordFieldValidator] != nil ) {
-        [self addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:self.passwordPlaceholderString];
+        [self addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:((UITextField *)self.formFields[1]).placeholder];
     } else {
-        [self addValidator:[RZValidator notEmptyValidator] forFieldWithPlaceholderText:self.passwordPlaceholderString];
+        [self addValidator:[RZValidator notEmptyValidatorForFieldName:@"Password field"] forFieldWithPlaceholderText:((UITextField *)self.formFields[1]).placeholder];
     }
     
     // remove the sign-up button depending on options
@@ -268,7 +253,6 @@
 {
     [self.navigationController pushViewController:self.forgotPasswordViewController animated:YES];
 }
-
 
 #pragma mark - RZLoginEmailViewController delegate
 
