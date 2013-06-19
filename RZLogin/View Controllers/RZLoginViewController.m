@@ -114,7 +114,7 @@
 {
     [super viewDidLoad];
     [self configureView];
-
+    
     if( [self supportsLoginTypeEmail] ) {
         // If login is supported via email, init our email-login and sign-up view-controllers
         // Also connect any form field validators (specified by the delegate)

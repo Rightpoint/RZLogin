@@ -8,6 +8,9 @@
 
 #import "RZLoginEmailViewController.h"
 
+#define kEmailPlaceholderText @"Email"
+#define kPasswordPlaceholderText @"Password"
+
 @interface RZLoginEmailViewController ()<RZLoginEmailViewControllerDelegate>
 
 @end
@@ -47,7 +50,7 @@
     if( [self.delegate respondsToSelector:@selector(loginPasswordFieldValidator)] ) {
         return self.delegate.loginPasswordFieldValidator;
     }
-    return nil; 
+    return nil;
 }
 
 - (RZValidator *)signUpEmailAddressFieldValidator {
@@ -112,6 +115,15 @@
     return NO;
 }
 
+- (NSString *)emailPlaceholderString
+{
+    return kEmailPlaceholderText;
+}
+- (NSString *)passwordPlaceholderString
+{
+    return kPasswordPlaceholderText;
+}
+
 - (RZSignUpViewController *)signUpViewController {
     
     // if sign-up is allowed, create and/or configure its view-controller too; note it shares the same delegate
@@ -122,7 +134,7 @@
             self.signUpViewController = [[RZSignUpViewController alloc] initWithNibName:@"RZSignUpViewController" bundle:nil];
             _signUpViewController.delegate = self.delegate;
         }
-    
+        
         // setup sign-up form validation (note we're using each field's 'tag' as the key)
         [_signUpViewController setFormKeyType:RZFormFieldKeyTypeTag];
         
@@ -149,7 +161,7 @@
         RZValidator *validator = [[RZValidator alloc] initWithValidationBlock:validationBlock];
         validator.localizedViolationString = RZValidatorLocalizedString(@"passwords must match", @"Passwords must match.");
         [_signUpViewController addValidator:validator forFieldWithTag:3]; // add validator to second 'password' field
-    } 
+    }
     return _signUpViewController;
 }
 
@@ -171,18 +183,18 @@
     
     // validate email-address field using a validator provided by the delegate; else default to a standard email-validator
     if( [self loginEmailAddressFieldValidator] != nil ) {
-        [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:@"Email"];
+        [self addValidator:[self loginEmailAddressFieldValidator] forFieldWithPlaceholderText:self.emailPlaceholderString];
     } else {
-        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:@"Email"];
+        [self addValidator:[RZValidator emailAddressLooseValidator] forFieldWithPlaceholderText:self.emailPlaceholderString];
     }
     
     // validate password field using a validator provided by the delegate; else default to a 'isNotEmpty' validator
     if( [self loginPasswordFieldValidator] != nil ) {
-        [self addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:@"Password"];
+        [self addValidator:[self loginPasswordFieldValidator] forFieldWithPlaceholderText:self.passwordPlaceholderString];
     } else {
-        [self addValidator:[RZValidator notEmptyValidator] forFieldWithPlaceholderText:@"Password"];
+        [self addValidator:[RZValidator notEmptyValidator] forFieldWithPlaceholderText:self.passwordPlaceholderString];
     }
-
+    
     // remove the sign-up button depending on options
     if( self.signUpViewController == nil ) {
         [self.signUpButton removeFromSuperview];
@@ -253,6 +265,7 @@
 {
     [self.navigationController pushViewController:self.forgotPasswordViewController animated:YES];
 }
+
 
 #pragma mark - RZLoginEmailViewController delegate
 
