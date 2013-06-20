@@ -43,7 +43,7 @@
 //
 //    - (NSString *)facebookAppId {
 //
-//        return @"351055245000574";
+//        return @"555555555555555";
 //    }
 //
 //    - (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken
