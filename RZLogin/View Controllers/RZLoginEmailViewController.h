@@ -39,9 +39,6 @@
 
 @property (nonatomic, strong) RZForgotPasswordViewController *forgotPasswordViewController;
 
-@property (nonatomic, readonly) NSString *emailPlaceholderString;
-@property (nonatomic, readonly) NSString *passwordPlaceholderString;
-
 // the delegate
 @property (nonatomic, weak) id<RZLoginEmailViewControllerDelegate> delegate;
 
