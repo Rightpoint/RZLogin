@@ -42,8 +42,8 @@
 //     ...
 //
 //    - (NSString *)facebookAppId {
-//        
-//        return @"351055245000574";
+//
+//        return @"555555555555555";
 //    }
 //
 //    - (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken
@@ -60,7 +60,7 @@
 //
 //  As part of RZLoginEmailViewControllerDelegate, the following options properties can be specified
 //  for the email-login form, and it's (optional) sign-up form:
-// 
+//
 //      signupAllowed                : if true, show the 'sign-up' button, both from main view as well as from the email-login form itself
 //      presentSignUpFormAsModal     : if true (and if sign-up is allowed), present the sign-up form modally (the default behavior)
 //      forgotPasswordAllowed        : if true, show a 'forgot password' button from the email-login form (default is: false)
@@ -97,7 +97,7 @@
 
 @interface RZLoginViewController : UIViewController
 
-// outlets to login and sign-up buttons 
+// outlets to login and sign-up buttons
 @property (nonatomic, strong) IBOutlet UIButton *facebookLoginButton;
 @property (nonatomic, strong) IBOutlet UIButton *twitterLoginButton;
 @property (nonatomic, strong) IBOutlet UIButton *emailSignUpButton;

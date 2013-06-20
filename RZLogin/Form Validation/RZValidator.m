@@ -132,7 +132,7 @@ typedef enum {
 + (RZValidator *)notEmptyValidator
 {
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
-    validator.localizedViolationString = RZValidatorLocalizedString(@"field must not be empty", @"Field must not be empty.");
+    validator.localizedViolationString = RZValidatorLocalizedString(@"field required", @"Field cannot be empty, please try again.");
     return validator;
 }
 
@@ -140,7 +140,7 @@ typedef enum {
 {
     RZValidator *validator = [[self alloc] initWithValidationConditions:@{kFieldValidationMinCharsKey : @"1"}];
     validator.localizedViolationString = [NSString stringWithFormat:
-                                          RZValidatorLocalizedString(@"%@ must not be empty", @"%@ must not be empty."), fieldName];
+                                          RZValidatorLocalizedString(@"%@ field must not be empty", @"%@ cannot be empty, please try again."), fieldName];
     return validator;
 }
                                       
