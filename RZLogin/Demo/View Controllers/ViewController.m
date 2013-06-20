@@ -25,7 +25,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // any custom initialization goes here...
         self.title = @"Choose Demo";
     }
     return self;
@@ -68,7 +67,7 @@
 - (IBAction)loginUsingCustomXIB:(id)sender
 {
     MyCustomLoginViewController *loginViewController = [[MyCustomLoginViewController alloc] initWithNibName:@"MyCustomLoginViewController" bundle:nil];
-    loginViewController.emailLoginDelegate = self;
+    // For this example, our custom emailLoginViewController will be its own delegate
     loginViewController.facebookLoginDelegate = self;
     
     // for this example, let's also use a customized email-login view controller (and XIB) too ;)
@@ -86,8 +85,8 @@
 #pragma mark - RZLoginFacebookViewControllerDelegate
 
 - (NSString *)facebookAppId
-{    
-    return @"351055245000574";
+{
+    return @"5555555555555555";
 }
 
 - (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId
@@ -203,8 +202,8 @@
 }
 
 // optional validator for email-address field on sign-up form
-- (RZValidator *)signUpEmailAddressFieldValidator {
-    
+- (RZValidator *)signUpEmailAddressFieldValidator
+{    
     return [RZValidator emailAddressLooseValidator];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "MyCustomLoginViewController.h"
+#import "MyCustomLoginEmailViewController.h"
 
 @interface MyCustomLoginViewController ()
 
@@ -18,7 +19,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // any custom initialization here
+        self.emailLoginViewController = [[MyCustomLoginEmailViewController alloc] initWithNibName:@"MyCustomLoginEmailViewController" bundle:nil];
+        self.emailLoginDelegate = self.emailLoginViewController.delegate;
     }
     return self;
 }
@@ -46,7 +48,22 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // dispose of any resources that can be recreated
+}
+
+
+- (BOOL)supportsLoginTypeEmail
+{
+    return YES;
+}
+
+- (BOOL)supportsLoginTypeFacebook
+{
+    return YES;
+}
+
+- (BOOL)supportsLoginTypeTwitter
+{
+    return NO;
 }
 
 @end
