@@ -30,7 +30,8 @@
 // Because the RZLoginEmailViewControllerDelegate properties are optional,
 // these local convenience getters check if implemented; else return nil (or a default value)
 
-- (RZValidator *)loginEmailAddressFieldValidator {
+- (RZValidator *)loginEmailAddressFieldValidator
+{
     if ([self isEqual:self.delegate]) {
         return nil;
     }
@@ -40,7 +41,8 @@
     return nil;
 }
 
-- (RZValidator *)loginPasswordFieldValidator {
+- (RZValidator *)loginPasswordFieldValidator
+{
     if ([self isEqual:self.delegate]) {
         return nil;
     }
@@ -50,7 +52,8 @@
     return nil;
 }
 
-- (RZValidator *)signUpEmailAddressFieldValidator {
+- (RZValidator *)signUpEmailAddressFieldValidator
+{
     if ([self isEqual:self.delegate]) {
         return nil;
     }
@@ -61,7 +64,8 @@
     }
 }
 
-- (RZValidator *)signUpPasswordFieldValidator {
+- (RZValidator *)signUpPasswordFieldValidator
+{
     if ([self isEqual:self.delegate]) {
         return nil;
     }
@@ -72,7 +76,8 @@
     }
 }
 
-- (BOOL)isSignupAllowed {
+- (BOOL)isSignupAllowed
+{
     if ([self isEqual:self.delegate]) {
         return YES;
     }
@@ -83,15 +88,20 @@
     }
 }
 
-- (BOOL)isForgotPasswordAllowed {
+- (BOOL)isForgotPasswordAllowed
+{
+    if ([self isEqual:self.delegate]) {
+        return YES;
+    }
     if( [self.delegate respondsToSelector:@selector(isForgotPasswordAllowed)] ) {
         return [self.delegate isForgotPasswordAllowed]; // defer to (optional) delegate property
     } else {
-        return NO; // by default, we allow forgot password
+        return NO; // by default, we will not allow forgot password
     }
 }
 
-- (BOOL)shouldPresentAsModal {
+- (BOOL)shouldPresentAsModal
+{
     if ([self isEqual:self.delegate]) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
@@ -101,8 +111,8 @@
     return NO;
 }
 
-- (BOOL)shouldPresentSignupFormAsModal {
-    
+- (BOOL)shouldPresentSignupFormAsModal
+{    
     if ([self isEqual:self.delegate]) {
         return NO; // by default, let's have our nav-controller 'push' the email-login form (i.e. NOT modally)
     }
@@ -112,8 +122,8 @@
     return NO;
 }
 
-- (RZSignUpViewController *)signUpViewController {
-    
+- (RZSignUpViewController *)signUpViewController
+{    
     // if sign-up is allowed, create and/or configure its view-controller too; note it shares the same delegate
     if( self.isSignupAllowed ) {
         
@@ -190,6 +200,16 @@
     
     // remove the sign-up button depending on options
     if( self.isForgotPasswordAllowed == NO ) {
+        [self.forgotPasswordButton removeFromSuperview];
+    }
+    
+    if (self.isForgotPasswordAllowed)
+    {
+        if (self.forgotPasswordViewController == nil)
+        {
+            self.forgotPasswordViewController = [[RZForgotPasswordViewController alloc] initWithNibName:@"RZForgotPasswordViewController" bundle:nil];
+        } else {}
+    } else {
         [self.forgotPasswordButton removeFromSuperview];
     }
     

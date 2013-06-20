@@ -115,15 +115,14 @@
     [super viewDidLoad];
     [self configureView];
     
-    if( [self supportsLoginTypeEmail] ) {
+    if( [self supportsLoginTypeEmail] )
+    {
         // If login is supported via email, init our email-login and sign-up view-controllers
         // Also connect any form field validators (specified by the delegate)
         if( self.emailLoginViewController == nil ) {
             // If no custom VC has already been specified, allocate the 'default' login-with-email VC
             self.emailLoginViewController = [[RZLoginEmailViewController alloc] initWithNibName:@"RZLoginEmailViewController" bundle:nil];
-            NSLog(@"Created emailLoginViewController");
         }
-        
         if( ![self supportsLoginTypeFacebook] && ![self supportsLoginTypeTwitter] ) {
             // If ONLY login via email is supported, immediately present the email login VC
             // (i.e. skip our own view with facebook/twitter/email buttons)
@@ -135,7 +134,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if( self.navigationController.viewControllers[0] == self ) {
+    if( self.navigationController.viewControllers[0] == self )
+    {
         // If we're at the bottom of the nav-stack, hide the nav-bar
         [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
