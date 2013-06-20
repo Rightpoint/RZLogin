@@ -85,8 +85,8 @@
 #pragma mark - RZLoginFacebookViewControllerDelegate
 
 - (NSString *)facebookAppId
-{    
-    return @"351055245000574";
+{
+    return @"5555555555555555";
 }
 
 - (void)loginViewController:(RZLoginViewController *)lvc didLoginWithFacebookWithToken:(NSString *)fbToken fullName:(NSString *)fullName userId:(NSString *)userId

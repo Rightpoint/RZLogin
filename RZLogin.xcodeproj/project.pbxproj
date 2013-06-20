@@ -12,13 +12,10 @@
 		032212A716F79C740068A012 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212A616F79C740068A012 /* CoreGraphics.framework */; };
 		032212AD16F79C740068A012 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 032212AB16F79C740068A012 /* InfoPlist.strings */; };
 		032212AF16F79C740068A012 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212AE16F79C740068A012 /* main.m */; };
-		032212B316F79C740068A012 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212B216F79C740068A012 /* AppDelegate.m */; };
 		032212B516F79C740068A012 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B416F79C740068A012 /* Default.png */; };
 		032212B716F79C740068A012 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B616F79C740068A012 /* Default@2x.png */; };
 		032212B916F79C740068A012 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 032212B816F79C740068A012 /* Default-568h@2x.png */; };
 		032212C916F7A9980068A012 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032212C816F7A9980068A012 /* Accounts.framework */; };
-		032212CE16F7ED230068A012 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032212CC16F7ED220068A012 /* ViewController.m */; };
-		032212CF16F7ED230068A012 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032212CD16F7ED220068A012 /* ViewController.xib */; };
 		0383A58A16F9003E003D314D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0383A58916F9003E003D314D /* Social.framework */; };
 		0383A5B816FB76BB003D314D /* RZFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5AF16FB76BA003D314D /* RZFormViewController.m */; };
 		0383A5BB16FB76BB003D314D /* RZLoginEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5B416FB76BB003D314D /* RZLoginEmailViewController.m */; };
@@ -34,17 +31,20 @@
 		0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383A5D916FB79A6003D314D /* RZSignUpViewController.m */; };
 		0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */; };
 		6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65295669174ABDA8000CFA32 /* RZLoginViewController.xib */; };
-		6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */; };
-		65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */; };
-		6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */; };
-		6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */; };
-		65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */; };
-		65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */; };
 		65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65295686174E910E000CFA32 /* RZValidatorLocalizable.strings */; };
 		FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */; };
 		FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */; };
-		FCDA37E7175F9668002AEE67 /* MyCustomForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */; };
-		FCDA37E8175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */; };
+		FCBAC0FE17733EFF00A3CF54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAC0EE17733EFF00A3CF54 /* AppDelegate.m */; };
+		FCBAC0FF17733EFF00A3CF54 /* MyCustomForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAC0F117733EFF00A3CF54 /* MyCustomForgotPasswordViewController.m */; };
+		FCBAC10017733EFF00A3CF54 /* MyCustomForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0F217733EFF00A3CF54 /* MyCustomForgotPasswordViewController.xib */; };
+		FCBAC10117733EFF00A3CF54 /* MyCustomLoginEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAC0F417733EFF00A3CF54 /* MyCustomLoginEmailViewController.m */; };
+		FCBAC10217733EFF00A3CF54 /* MyCustomLoginEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0F517733EFF00A3CF54 /* MyCustomLoginEmailViewController.xib */; };
+		FCBAC10317733EFF00A3CF54 /* MyCustomLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAC0F717733EFF00A3CF54 /* MyCustomLoginViewController.m */; };
+		FCBAC10417733EFF00A3CF54 /* MyCustomLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0F817733EFF00A3CF54 /* MyCustomLoginViewController.xib */; };
+		FCBAC10517733EFF00A3CF54 /* parkconservancy_public_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0F917733EFF00A3CF54 /* parkconservancy_public_1.jpg */; };
+		FCBAC10617733EFF00A3CF54 /* parkconservancy_public_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0FA17733EFF00A3CF54 /* parkconservancy_public_2.jpg */; };
+		FCBAC10717733EFF00A3CF54 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAC0FC17733EFF00A3CF54 /* ViewController.m */; };
+		FCBAC10817733EFF00A3CF54 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBAC0FD17733EFF00A3CF54 /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,15 +56,10 @@
 		032212AC16F79C740068A012 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		032212AE16F79C740068A012 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		032212B016F79C740068A012 /* RZLogin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RZLogin-Prefix.pch"; sourceTree = "<group>"; };
-		032212B116F79C740068A012 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		032212B216F79C740068A012 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		032212B416F79C740068A012 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		032212B616F79C740068A012 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		032212B816F79C740068A012 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		032212C816F7A9980068A012 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		032212CB16F7ED220068A012 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		032212CC16F7ED220068A012 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		032212CD16F7ED220068A012 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		0383A58916F9003E003D314D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		0383A5AE16FB76BA003D314D /* RZFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZFormViewController.h; path = "View Controllers/RZFormViewController.h"; sourceTree = "<group>"; };
 		0383A5AF16FB76BA003D314D /* RZFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZFormViewController.m; path = "View Controllers/RZFormViewController.m"; sourceTree = "<group>"; };
@@ -92,24 +87,29 @@
 		0383A5DB16FB7A04003D314D /* RZSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZSignUpViewController.xib; path = "View Controllers/RZSignUpViewController.xib"; sourceTree = "<group>"; };
 		65295668174AB65A000CFA32 /* RZLoginFacebookViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginFacebookViewControllerDelegate.h; path = "View Controllers/RZLoginFacebookViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295669174ABDA8000CFA32 /* RZLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZLoginViewController.xib; path = "View Controllers/RZLoginViewController.xib"; sourceTree = "<group>"; };
-		6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginViewController.xib; sourceTree = "<group>"; };
 		6529566F174AD0C9000CFA32 /* RZLoginTwitterViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZLoginTwitterViewControllerDelegate.h; path = "View Controllers/RZLoginTwitterViewControllerDelegate.h"; sourceTree = "<group>"; };
 		65295670174BC128000CFA32 /* RZLoginEmailViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZLoginEmailViewControllerDelegate.h; path = "View Controllers/RZLoginEmailViewControllerDelegate.h"; sourceTree = "<group>"; };
-		65295671174BF0C0000CFA32 /* MyCustomLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginViewController.h; sourceTree = "<group>"; };
-		65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginViewController.m; sourceTree = "<group>"; };
-		65295678174BF6A5000CFA32 /* MyCustomLoginEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginEmailViewController.h; sourceTree = "<group>"; };
-		65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginEmailViewController.m; sourceTree = "<group>"; };
-		6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginEmailViewController.xib; sourceTree = "<group>"; };
-		6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_1.jpg; sourceTree = "<group>"; };
-		65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_2.jpg; sourceTree = "<group>"; };
 		65295687174E910E000CFA32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RZValidatorLocalizable.strings; sourceTree = "<group>"; };
 		FC4D09CC175F7B8200CAB557 /* RZForgotPasswordViewConrollerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZForgotPasswordViewConrollerDelegate.h; path = "View Controllers/RZForgotPasswordViewConrollerDelegate.h"; sourceTree = "<group>"; };
 		FC4D09CF175F7BDA00CAB557 /* RZForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZForgotPasswordViewController.h; path = "View Controllers/RZForgotPasswordViewController.h"; sourceTree = "<group>"; };
 		FC4D09D0175F7BDA00CAB557 /* RZForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZForgotPasswordViewController.m; path = "View Controllers/RZForgotPasswordViewController.m"; sourceTree = "<group>"; };
 		FC4D09D1175F7BDA00CAB557 /* RZForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RZForgotPasswordViewController.xib; path = "View Controllers/RZForgotPasswordViewController.xib"; sourceTree = "<group>"; };
-		FCDA37E4175F9668002AEE67 /* MyCustomForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomForgotPasswordViewController.h; sourceTree = "<group>"; };
-		FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomForgotPasswordViewController.m; sourceTree = "<group>"; };
-		FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		FCBAC0ED17733EFF00A3CF54 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FCBAC0EE17733EFF00A3CF54 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FCBAC0F017733EFF00A3CF54 /* MyCustomForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomForgotPasswordViewController.h; sourceTree = "<group>"; };
+		FCBAC0F117733EFF00A3CF54 /* MyCustomForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomForgotPasswordViewController.m; sourceTree = "<group>"; };
+		FCBAC0F217733EFF00A3CF54 /* MyCustomForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		FCBAC0F317733EFF00A3CF54 /* MyCustomLoginEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginEmailViewController.h; sourceTree = "<group>"; };
+		FCBAC0F417733EFF00A3CF54 /* MyCustomLoginEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginEmailViewController.m; sourceTree = "<group>"; };
+		FCBAC0F517733EFF00A3CF54 /* MyCustomLoginEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginEmailViewController.xib; sourceTree = "<group>"; };
+		FCBAC0F617733EFF00A3CF54 /* MyCustomLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomLoginViewController.h; sourceTree = "<group>"; };
+		FCBAC0F717733EFF00A3CF54 /* MyCustomLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomLoginViewController.m; sourceTree = "<group>"; };
+		FCBAC0F817733EFF00A3CF54 /* MyCustomLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomLoginViewController.xib; sourceTree = "<group>"; };
+		FCBAC0F917733EFF00A3CF54 /* parkconservancy_public_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_1.jpg; sourceTree = "<group>"; };
+		FCBAC0FA17733EFF00A3CF54 /* parkconservancy_public_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parkconservancy_public_2.jpg; sourceTree = "<group>"; };
+		FCBAC0FB17733EFF00A3CF54 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FCBAC0FC17733EFF00A3CF54 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FCBAC0FD17733EFF00A3CF54 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,22 +160,7 @@
 		032212A816F79C740068A012 /* RZLogin */ = {
 			isa = PBXGroup;
 			children = (
-				032212B116F79C740068A012 /* AppDelegate.h */,
-				032212B216F79C740068A012 /* AppDelegate.m */,
-				032212CB16F7ED220068A012 /* ViewController.h */,
-				032212CC16F7ED220068A012 /* ViewController.m */,
-				032212CD16F7ED220068A012 /* ViewController.xib */,
-				65295671174BF0C0000CFA32 /* MyCustomLoginViewController.h */,
-				65295672174BF0C1000CFA32 /* MyCustomLoginViewController.m */,
-				6529566B174AC9FD000CFA32 /* MyCustomLoginViewController.xib */,
-				65295678174BF6A5000CFA32 /* MyCustomLoginEmailViewController.h */,
-				65295679174BF6A5000CFA32 /* MyCustomLoginEmailViewController.m */,
-				6529567A174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib */,
-				FCDA37E4175F9668002AEE67 /* MyCustomForgotPasswordViewController.h */,
-				FCDA37E5175F9668002AEE67 /* MyCustomForgotPasswordViewController.m */,
-				FCDA37E6175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib */,
-				6529567F174C08C8000CFA32 /* parkconservancy_public_1.jpg */,
-				65295680174C08C8000CFA32 /* parkconservancy_public_2.jpg */,
+				FCBAC0EC17733EFF00A3CF54 /* Demo */,
 				0383A5BE16FB76C0003D314D /* View Controllers */,
 				0383A5C216FB7748003D314D /* Managers */,
 				0383A5D716FB7818003D314D /* Form Validation */,
@@ -268,6 +253,37 @@
 			name = "Form Validation";
 			sourceTree = "<group>";
 		};
+		FCBAC0EC17733EFF00A3CF54 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				FCBAC0ED17733EFF00A3CF54 /* AppDelegate.h */,
+				FCBAC0EE17733EFF00A3CF54 /* AppDelegate.m */,
+				FCBAC0EF17733EFF00A3CF54 /* View Controllers */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		FCBAC0EF17733EFF00A3CF54 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCBAC0F017733EFF00A3CF54 /* MyCustomForgotPasswordViewController.h */,
+				FCBAC0F117733EFF00A3CF54 /* MyCustomForgotPasswordViewController.m */,
+				FCBAC0F217733EFF00A3CF54 /* MyCustomForgotPasswordViewController.xib */,
+				FCBAC0F317733EFF00A3CF54 /* MyCustomLoginEmailViewController.h */,
+				FCBAC0F417733EFF00A3CF54 /* MyCustomLoginEmailViewController.m */,
+				FCBAC0F517733EFF00A3CF54 /* MyCustomLoginEmailViewController.xib */,
+				FCBAC0F617733EFF00A3CF54 /* MyCustomLoginViewController.h */,
+				FCBAC0F717733EFF00A3CF54 /* MyCustomLoginViewController.m */,
+				FCBAC0F817733EFF00A3CF54 /* MyCustomLoginViewController.xib */,
+				FCBAC0F917733EFF00A3CF54 /* parkconservancy_public_1.jpg */,
+				FCBAC0FA17733EFF00A3CF54 /* parkconservancy_public_2.jpg */,
+				FCBAC0FB17733EFF00A3CF54 /* ViewController.h */,
+				FCBAC0FC17733EFF00A3CF54 /* ViewController.m */,
+				FCBAC0FD17733EFF00A3CF54 /* ViewController.xib */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,17 +339,17 @@
 				032212B516F79C740068A012 /* Default.png in Resources */,
 				032212B716F79C740068A012 /* Default@2x.png in Resources */,
 				032212B916F79C740068A012 /* Default-568h@2x.png in Resources */,
-				032212CF16F7ED230068A012 /* ViewController.xib in Resources */,
 				0383A5BC16FB76BB003D314D /* RZLoginEmailViewController.xib in Resources */,
 				0383A5DC16FB7A04003D314D /* RZSignUpViewController.xib in Resources */,
 				6529566A174ABDA9000CFA32 /* RZLoginViewController.xib in Resources */,
-				6529566C174AC9FD000CFA32 /* MyCustomLoginViewController.xib in Resources */,
-				6529567C174BF6A6000CFA32 /* MyCustomLoginEmailViewController.xib in Resources */,
-				65295681174C08C9000CFA32 /* parkconservancy_public_1.jpg in Resources */,
-				65295682174C08C9000CFA32 /* parkconservancy_public_2.jpg in Resources */,
 				65295688174E910E000CFA32 /* RZValidatorLocalizable.strings in Resources */,
 				FC4D09D3175F7BDA00CAB557 /* RZForgotPasswordViewController.xib in Resources */,
-				FCDA37E8175F9668002AEE67 /* MyCustomForgotPasswordViewController.xib in Resources */,
+				FCBAC10017733EFF00A3CF54 /* MyCustomForgotPasswordViewController.xib in Resources */,
+				FCBAC10217733EFF00A3CF54 /* MyCustomLoginEmailViewController.xib in Resources */,
+				FCBAC10417733EFF00A3CF54 /* MyCustomLoginViewController.xib in Resources */,
+				FCBAC10517733EFF00A3CF54 /* parkconservancy_public_1.jpg in Resources */,
+				FCBAC10617733EFF00A3CF54 /* parkconservancy_public_2.jpg in Resources */,
+				FCBAC10817733EFF00A3CF54 /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,8 +361,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				032212AF16F79C740068A012 /* main.m in Sources */,
-				032212B316F79C740068A012 /* AppDelegate.m in Sources */,
-				032212CE16F7ED230068A012 /* ViewController.m in Sources */,
 				0383A5B816FB76BB003D314D /* RZFormViewController.m in Sources */,
 				0383A5BB16FB76BB003D314D /* RZLoginEmailViewController.m in Sources */,
 				0383A5BD16FB76BB003D314D /* RZLoginViewController.m in Sources */,
@@ -358,10 +372,12 @@
 				0383A5D216FB77C1003D314D /* OAuthCore.m in Sources */,
 				0383A5D616FB7815003D314D /* RZValidator.m in Sources */,
 				0383A5DA16FB79A6003D314D /* RZSignUpViewController.m in Sources */,
-				65295673174BF0C1000CFA32 /* MyCustomLoginViewController.m in Sources */,
-				6529567B174BF6A6000CFA32 /* MyCustomLoginEmailViewController.m in Sources */,
 				FC4D09D2175F7BDA00CAB557 /* RZForgotPasswordViewController.m in Sources */,
-				FCDA37E7175F9668002AEE67 /* MyCustomForgotPasswordViewController.m in Sources */,
+				FCBAC0FE17733EFF00A3CF54 /* AppDelegate.m in Sources */,
+				FCBAC0FF17733EFF00A3CF54 /* MyCustomForgotPasswordViewController.m in Sources */,
+				FCBAC10117733EFF00A3CF54 /* MyCustomLoginEmailViewController.m in Sources */,
+				FCBAC10317733EFF00A3CF54 /* MyCustomLoginViewController.m in Sources */,
+				FCBAC10717733EFF00A3CF54 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
