@@ -242,7 +242,9 @@
     }
     else {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"Invalid login information.");
-        [[[UIAlertView alloc] initWithTitle:@"Login unsuccessful"
+        NSString *title = (failedValidator.localizedViolationStringTitle ? failedValidator.localizedViolationStringTitle : @"Login unsuccessful");
+              
+        [[[UIAlertView alloc] initWithTitle:title
                                     message:msg
                                    delegate:nil
                           cancelButtonTitle:@"OK"

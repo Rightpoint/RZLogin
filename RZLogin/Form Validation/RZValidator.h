@@ -34,6 +34,7 @@ typedef BOOL (^ValidationBlock)(NSString *str);
 // a localized message describing the reason for failure
 // TODO: move this message to 'per-condition' that is checked
 @property (copy, nonatomic) NSString *localizedViolationString;
+@property (copy, nonatomic) NSString *localizedViolationStringTitle;
 
 // method to validate a string.
 - (BOOL)isValidForString:(NSString *)str;
