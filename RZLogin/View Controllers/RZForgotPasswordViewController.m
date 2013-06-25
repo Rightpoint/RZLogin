@@ -71,7 +71,9 @@
     else
     {
         NSString *msg = (failedValidator.localizedViolationString ? failedValidator.localizedViolationString : @"invalid email address");
-        [[[UIAlertView alloc] initWithTitle:@"Invalid Email Address"
+        NSString *title = (failedValidator.localizedViolationStringTitle ? failedValidator.localizedViolationStringTitle : @"invalid email address title");
+
+        [[[UIAlertView alloc] initWithTitle:title
                                     message:msg
                                    delegate:nil
                           cancelButtonTitle:@"OK"
