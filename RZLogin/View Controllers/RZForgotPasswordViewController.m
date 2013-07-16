@@ -11,6 +11,8 @@
 
 @interface RZForgotPasswordViewController () <RZForgotPasswordViewConrollerDelegate>
 
+- (IBAction)emailEnteredButtonAction:(id)sender;
+
 @end
 
 @implementation RZForgotPasswordViewController
