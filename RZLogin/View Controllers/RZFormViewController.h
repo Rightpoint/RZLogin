@@ -40,4 +40,8 @@ typedef enum {
 // returns a dictionary of all form-field keys and their corresponding values
 - (NSDictionary *)formKeysAndValues;
 
+// methods to return UITextField for a given placeholder text or tag, should one exist
+- (UITextField *)fieldForPlaceholderText:(NSString *)text;
+- (UITextField *)fieldForTag:(int)tag;
+
 @end

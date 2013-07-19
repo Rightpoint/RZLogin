@@ -97,10 +97,32 @@
     return formDict;
 }
 
-- (void)didReceiveMemoryWarning
+- (UITextField *)fieldForPlaceholderText:(NSString *)text
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // iterate through the text-fields...
+    for (UITextField *field in self.formFields)
+    {
+        if ([field.placeholder isEqualToString:text])
+        {
+            return field;
+        }
+    }
+    
+    return nil; //search was unsuccessful
+}
+
+- (UITextField *)fieldForTag:(int)tag
+{
+    // iterate through the text-fields...
+    for (UITextField *field in self.formFields)
+    {
+        if (field.tag == tag)
+        {
+            return field;
+        }
+    }
+    
+    return nil; //search was unsuccessful
 }
 
 @end
