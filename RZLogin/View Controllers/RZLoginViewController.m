@@ -188,14 +188,32 @@
 
 - (IBAction)loginWithFacebookAction:(id)sender
 {
+    if ([self.facebookLoginDelegate respondsToSelector:@selector(loginViewControllerWillBeginFacebookLogin:)])
+    {
+        [self.facebookLoginDelegate loginViewControllerWillBeginFacebookLogin:self];
+    }
+    
     [[RZSocialLoginManager defaultManager] loginToFacebookWithAppID:self.facebookAppId
                                                          completion:^(NSString *token, NSString *fullName, NSString *userId, NSError *error)
      {
-         if(token) {
-             [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
-         } else {
-             [self showAlertForError:error socialNetwork:@"Facebook"];
-         }
+         // This should ALWAYS be done on the main queue - it's a standard expectation for delegate callbacks.
+         dispatch_async(dispatch_get_main_queue(), ^{
+             if(token)
+             {
+                [self.facebookLoginDelegate loginViewController:self didLoginWithFacebookWithToken:token fullName:fullName userId:userId];
+             }
+            else
+             {
+                 if ([self.facebookLoginDelegate respondsToSelector:@selector(loginViewController:facebookLoginFailedWithError:)])
+                 {
+                    [self.facebookLoginDelegate loginViewController:self facebookLoginFailedWithError:error];
+                 }
+                 else
+                 {
+                     [self showAlertForError:error socialNetwork:@"Facebook"];
+                 }
+             }
+         });
      }];
 }
 
