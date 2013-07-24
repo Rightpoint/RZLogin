@@ -208,7 +208,10 @@
                  {
                     [self.facebookLoginDelegate loginViewController:self facebookLoginFailedWithError:error];
                  }
-                 [self showAlertForError:error socialNetwork:@"Facebook"];
+                 else
+                 {
+                     [self showAlertForError:error socialNetwork:@"Facebook"];
+                 }
              }
          });
      }];
