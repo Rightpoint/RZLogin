@@ -68,7 +68,7 @@
         // get the key for the text-field
         if(self.formKeyType == RZFormFieldKeyTypeTag)
         {
-            key = [NSNumber numberWithInt:field.tag];
+            key =  @(field.tag);
         }
         else if(self.formKeyType == RZFormFieldKeyTypePlaceholderText)
         {
